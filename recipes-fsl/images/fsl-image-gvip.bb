@@ -1,5 +1,5 @@
 #
-# Copyright 2020 NXP
+# Copyright 2020-2021 NXP
 #
 
 DESCRIPTION = "Gateway-VIP Image"
@@ -11,4 +11,8 @@ IMAGE_INSTALL += " \
     ${PACKAGES-CORE-benchmark} \
     python-pip \
     python3-pip \
+    python3-mmap \
+    python3-fcntl \
+    openjdk-8 \
+    greengrass \
 "
