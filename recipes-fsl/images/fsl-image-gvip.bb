@@ -16,3 +16,6 @@ IMAGE_INSTALL += " \
     openjdk-8 \
     greengrass \
 "
+
+SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
+SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
