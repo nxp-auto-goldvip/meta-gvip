@@ -18,7 +18,11 @@ IMAGE_INSTALL += " \
     gvip-apps \
 "
 
+# Add GVIP optional packages
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'gvip-can-gw', '', d)}"
+
+# add additional binaries in SD-card FAT partition
 SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
 SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
-
-COMPATIBLE_MACHINE = "s32g274ardb2"
+SDCARDIMAGE_BOOT_EXTRA2 = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'gvip-can-gw', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA2_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'can-gw.bin', '', d)}"
