@@ -15,7 +15,10 @@ IMAGE_INSTALL += " \
     python3-fcntl \
     openjdk-8 \
     greengrass \
+    gvip-apps \
 "
 
 SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
 SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
+
+COMPATIBLE_MACHINE = "s32g274ardb2"
