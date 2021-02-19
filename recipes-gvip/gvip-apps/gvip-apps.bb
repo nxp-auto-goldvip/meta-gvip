@@ -19,6 +19,7 @@ RDEPENDS_${PN} += "bash"
 do_install() {
 	install -d ${DESTDIR}/eth-gw
 	install -m 0755 ${S}/eth-gw/*-target.sh ${DESTDIR}/eth-gw
+	install -m 0755 ${S}/eth-gw/eth-common.sh ${DESTDIR}/eth-gw
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 }
