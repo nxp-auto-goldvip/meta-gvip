@@ -6,7 +6,7 @@ GVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/gvip/gvip;protocol=
 GVIP_BRANCH ?= "develop"
 
 SRC_URI = "${GVIP_URL};branch=${GVIP_BRANCH}"
-SRCREV = "5969e18f5d02ba3ceba99fd704a4fa34d9e0eee3"
+SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 DESTDIR="${D}/home/root"
