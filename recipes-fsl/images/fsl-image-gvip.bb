@@ -9,6 +9,7 @@ require recipes-fsl/images/fsl-image-auto.bb
 # Add GVIP required packages
 IMAGE_INSTALL += " \
     ${PACKAGES-CORE-benchmark} \
+    ntp ntpq \
     python-pip \
     python3-pip \
     python3-mmap \
