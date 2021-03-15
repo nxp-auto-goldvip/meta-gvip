@@ -8,7 +8,7 @@ GVIP_BRANCH ?= "develop"
 SRC_URI = "${GVIP_URL};branch=${GVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git"
+S = "${WORKDIR}/git/linux"
 DESTDIR="${D}/home/root"
 
 do_configure[noexec] = "1"
