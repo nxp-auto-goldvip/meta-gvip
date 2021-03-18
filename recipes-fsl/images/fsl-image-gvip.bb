@@ -27,3 +27,6 @@ SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
 SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
 SDCARDIMAGE_BOOT_EXTRA2 = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'gvip-can-gw', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA2_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'can-gw.bin', '', d)}"
+
+#add more 1GB free space for rootfs
+IMAGE_ROOTFS_EXTRA_SPACE = "1048576"
