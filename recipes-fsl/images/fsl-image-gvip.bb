@@ -14,6 +14,7 @@ IMAGE_INSTALL += " \
     python3-pip \
     python3-mmap \
     python3-fcntl \
+    python3-boto3 \
     openjdk-8 \
     greengrass \
     gvip-apps \
