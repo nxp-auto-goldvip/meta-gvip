@@ -22,7 +22,10 @@ do_install() {
 	install -m 0755 ${S}/eth-gw/eth-common.sh ${DESTDIR}/eth-gw
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
+	install -d ${DESTDIR}/cloud-gw
+	install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
 }
 
 FILES_${PN} += "/home/root/can-gw/*"
+FILES_${PN} += "/home/root/cloud-gw/*"
 FILES_${PN} += "/home/root/eth-gw/*"
