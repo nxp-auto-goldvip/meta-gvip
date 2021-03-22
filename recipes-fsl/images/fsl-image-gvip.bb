@@ -19,6 +19,9 @@ IMAGE_INSTALL += " \
     openjdk-8 \
     greengrass \
     gvip-apps \
+    packagegroup-base-wifi \
+    ifmetric \
+    linux-firmware-rtlwifi \
 "
 
 # Add GVIP optional packages
