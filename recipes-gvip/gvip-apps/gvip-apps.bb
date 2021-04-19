@@ -22,6 +22,8 @@ do_install() {
 	install -m 0755 ${S}/eth-gw/eth-common.sh ${DESTDIR}/eth-gw
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
+	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
+	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/m7_stats.py ${DESTDIR}/can-gw
 	install -d ${DESTDIR}/cloud-gw
 	install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
 }
