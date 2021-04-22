@@ -4,11 +4,11 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
 DELTA_KERNEL_DEFCONFIG_append = " \
 	greengrass.cfg \
 	gvip.cfg \
-	realtek_wifi.cfg \
+	usb_network.cfg \
 "
 
 SRC_URI_append = " \
 	file://build/greengrass.cfg \
 	file://build/gvip.cfg \
-	file://build/realtek_wifi.cfg \
+	file://build/usb_network.cfg \
 "
