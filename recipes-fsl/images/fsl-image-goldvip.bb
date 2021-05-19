@@ -2,11 +2,11 @@
 # Copyright 2020-2021 NXP
 #
 
-DESCRIPTION = "Gateway-VIP Image"
+DESCRIPTION = "GoldVIP Image"
 
 require recipes-fsl/images/fsl-image-auto.bb
 
-# Add GVIP required packages
+# Add GoldVIP required packages
 IMAGE_INSTALL += " \
     ${PACKAGES-CORE-benchmark} \
     iptables \
@@ -18,20 +18,20 @@ IMAGE_INSTALL += " \
     python3-boto3 \
     openjdk-8 \
     greengrass \
-    gvip-apps \
+    goldvip-apps \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
 "
 
-# Add GVIP optional packages
-IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'gvip-can-gw', '', d)}"
+# Add GoldVIP optional packages
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
 
 # add additional binaries in SD-card FAT partition
 SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
 SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
-SDCARDIMAGE_BOOT_EXTRA2 = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'gvip-can-gw', '', d)}"
-SDCARDIMAGE_BOOT_EXTRA2_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'gvip-can-gw', 'can-gw.bin', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA2 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA2_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'can-gw.bin', '', d)}"
 
 #add more 1GB free space for rootfs
 IMAGE_ROOTFS_EXTRA_SPACE = "1048576"
