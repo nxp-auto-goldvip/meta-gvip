@@ -26,12 +26,17 @@ IMAGE_INSTALL += " \
 
 # Add GoldVIP optional packages
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 
 # add additional binaries in SD-card FAT partition
-SDCARDIMAGE_BOOT_EXTRA1 = "u-boot"
-SDCARDIMAGE_BOOT_EXTRA1_FILE = "u-boot.bin"
-SDCARDIMAGE_BOOT_EXTRA2 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
-SDCARDIMAGE_BOOT_EXTRA2_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'can-gw.bin', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA3 = "u-boot"
+SDCARDIMAGE_BOOT_EXTRA3_FILE = "u-boot.bin"
+
+SDCARDIMAGE_BOOT_EXTRA4 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'can-gw.bin', '', d)}"
+
+SDCARDIMAGE_BOOT_EXTRA5 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA5_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'boot-loader', '', d)}"
 
 #add more 1GB free space for rootfs
 IMAGE_ROOTFS_EXTRA_SPACE = "1048576"
