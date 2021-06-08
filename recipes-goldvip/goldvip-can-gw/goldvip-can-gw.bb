@@ -1,6 +1,6 @@
 SUMMARY = "Gold VIP (Vehicle Integration Platform) CAN Gateway"
-LICENSE = "Proprietary"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/Proprietary;md5=0557f9d92cf58f2ccdd50f62f8ac0b28"
+LICENSE = "NXP-Binary-EULA"
+LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=7dbfb74206189d683981a89b8912ce5d"
 
 inherit deploy
 
@@ -17,7 +17,7 @@ do_compile[noexec] = "1"
 
 do_install() {
 	install -d ${D}/boot
-	install -m 0644 "${WORKDIR}/${GOLDVIP_CAN_GW_DIR}/${GOLDVIP_CAN_GW_BIN}" ${D}/boot
+	install -m 0644 "${GOLDVIP_CAN_GW_DIR}/${GOLDVIP_CAN_GW_BIN}" ${D}/boot
 }
 
 do_deploy() {
@@ -27,4 +27,4 @@ do_deploy() {
 
 addtask do_deploy after do_install
 
-FILES_${PN} += "/boot"
+FILES_${PN} += "/boot/${GOLDVIP_CAN_GW_BIN}"
