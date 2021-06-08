@@ -1,6 +1,6 @@
 SUMMARY = "Gold VIP (Vehicle Integration Platform)"
-LICENSE = "BSD-3-Clause"
-LIC_FILES_CHKSUM = "file://${COREBASE}/meta/files/common-licenses/BSD-3-Clause;md5=550794465ba0ec5312d6919e203a55f9"
+LICENSE = "LA_OPT_NXP_Software_License"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
 GOLDVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/gvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"

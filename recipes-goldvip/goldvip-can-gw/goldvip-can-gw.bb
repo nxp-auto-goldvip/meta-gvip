@@ -1,6 +1,6 @@
 SUMMARY = "Gold VIP (Vehicle Integration Platform) CAN Gateway"
-LICENSE = "NXP-Binary-EULA"
-LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=7dbfb74206189d683981a89b8912ce5d"
+LICENSE = "LA_OPT_NXP_Software_License"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
 inherit deploy
 
