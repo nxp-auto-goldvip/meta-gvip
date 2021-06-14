@@ -27,6 +27,7 @@ IMAGE_INSTALL += " \
 # Add GoldVIP optional packages
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)}"
 
 # add additional binaries in SD-card FAT partition
 SDCARDIMAGE_BOOT_EXTRA3 = "u-boot"
