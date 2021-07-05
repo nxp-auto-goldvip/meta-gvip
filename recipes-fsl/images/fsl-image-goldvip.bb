@@ -4,6 +4,8 @@
 
 DESCRIPTION = "GoldVIP Image"
 
+include ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'conf/machine/goldvip-${MACHINE}-domu.conf', '', d)}
+
 require recipes-fsl/images/fsl-image-auto.bb
 
 # Add GoldVIP required packages
@@ -15,14 +17,15 @@ IMAGE_INSTALL += " \
     python3-pip \
     python3-mmap \
     python3-fcntl \
-    python3-boto3 \
     openjdk-8 \
-    greengrass \
     goldvip-apps \
+    goldvip-cloud-gw-dom0 \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
 "
+
+do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${GOLDVIP_DOMU_ROOTFS_SOURCE}:do_image_complete', '', d)}"
 
 # Add GoldVIP optional packages
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
@@ -39,5 +42,3 @@ SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip
 SDCARDIMAGE_BOOT_EXTRA5 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA5_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'boot-loader', '', d)}"
 
-#add more 1GB free space for rootfs
-IMAGE_ROOTFS_EXTRA_SPACE = "1048576"

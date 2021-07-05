@@ -34,14 +34,10 @@ do_install() {
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
-	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/m7_stats.py ${DESTDIR}/can-gw
-
-	install -d ${DESTDIR}/cloud-gw
-	install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
+	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${DESTDIR}/can-gw
 }
 
 FILES_${PN} += "/home/root/can-gw/*"
-FILES_${PN} += "/home/root/cloud-gw/*"
 FILES_${PN} += "/home/root/eth-gw/*"
 FILES_${PN} += "${sysconfdir}/*"
 FILES_${PN} += "/usr/local/sbin/*"

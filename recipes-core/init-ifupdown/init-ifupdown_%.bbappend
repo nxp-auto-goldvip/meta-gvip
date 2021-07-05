@@ -1,2 +1,2 @@
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
-SRC_URI += " file://0001-add-xenbr-interface.patch;patch=1 "
+SRC_URI += " file://0001-add-goldvip-interfaces.patch;patch=1 "
