@@ -8,7 +8,7 @@ GOLDVIP_BRANCH ?= "develop"
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git/linux"
+S = "${WORKDIR}/git"
 DESTDIR = "${D}/etc/xen/auto"
 
 do_configure[noexec] = "1"

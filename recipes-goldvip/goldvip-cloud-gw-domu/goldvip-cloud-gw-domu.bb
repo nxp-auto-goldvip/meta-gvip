@@ -10,7 +10,7 @@ GOLDVIP_BINARIES_DIR ?= "."
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git/linux"
+S = "${WORKDIR}/git"
 DESTDIR = "${D}/home/root"
 
 do_configure[noexec] = "1"

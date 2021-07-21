@@ -12,7 +12,7 @@ GOLDVIP_BINARIES_DIR ?= "."
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
-S = "${WORKDIR}/git/linux/cloud-gw/aws-lambda-functions/telemetry-function"
+S = "${WORKDIR}/git/cloud-gw/aws-lambda-functions/telemetry-function"
 DESTDIR = "${D}/home/root/cloud-gw/telemetry-collector"
 
 do_configure[noexec] = "1"
