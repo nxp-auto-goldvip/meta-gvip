@@ -16,6 +16,7 @@ IMAGE_INSTALL += " \
     python3-mmap \
     python3-fcntl \
     python3-boto3 \
+    python3-scapy \
     openjdk-8 \
     greengrass \
     goldvip-cloud-gw-domu \
