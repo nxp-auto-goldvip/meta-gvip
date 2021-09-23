@@ -25,5 +25,8 @@ IMAGE_INSTALL += " \
     linux-firmware-rtlwifi \
 "
 
+# Add GoldVIP optional packages for domU image
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client', '', d)}"
+
 #add more 1GB free space for rootfs
 IMAGE_ROOTFS_EXTRA_SPACE = "1048576"
