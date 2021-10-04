@@ -17,12 +17,15 @@ IMAGE_INSTALL += " \
     python3-fcntl \
     python3-boto3 \
     python3-scapy \
+    python3-requests \
+    aws-iot-device-sdk-python-v2 \
     openjdk-8 \
-    greengrass \
+    greengrass-bin \
     goldvip-cloud-gw-domu \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
+    sudo \
 "
 
 # Add GoldVIP optional packages for domU image
