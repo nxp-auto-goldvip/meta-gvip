@@ -1,0 +1,18 @@
+Index: git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
+===================================================================
+--- git.orig/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
++++ git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
+@@ -297,11 +297,11 @@
+ 			compatible = "fsl,pfeng-logif";
+ 			#address-cells = <1>;
+ 			#size-cells = <0>;
+-			status = "disabled";
++			status = "okay";
+ 			local-mac-address = [ 00 04 9F BE EF 80 ];
+ 			fsl,pfeng-if-name = "aux0";
+ 			fsl,pfeng-logif-mode = <PFENG_LOGIF_MODE_AUX>;
+-			fsl,pfeng-hif-channels = <&pfe_hif1>;
++			fsl,pfeng-hif-channels = <&pfe_hif2>;
+ 		};
+ 	};
+ 

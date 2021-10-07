@@ -2,7 +2,7 @@ Index: s32g274ardb2/interfaces
 ===================================================================
 --- s32g274ardb2.orig/interfaces
 +++ s32g274ardb2/interfaces
-@@ -20,6 +20,32 @@ pre-up [ -L /sys/class/net/pfe2 ]
+@@ -20,6 +20,37 @@ pre-up [ -L /sys/class/net/pfe2 ]
  dhcpcd_opts -b
  
  auto eth0
@@ -36,4 +36,9 @@ Index: s32g274ardb2/interfaces
 +post-down brctl delbr v2xbr
 +address 10.0.100.10
 +netmask 255.255.255.0
++
++auto aux0
++iface aux0 inet dhcp 
++pre-up [ -L /sys/class/net/aux0 ]
++dhcpcd_opts -b
 +

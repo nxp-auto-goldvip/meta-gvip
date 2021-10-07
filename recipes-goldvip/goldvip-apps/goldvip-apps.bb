@@ -2,6 +2,8 @@ SUMMARY = "Gold VIP (Vehicle Integration Platform)"
 LICENSE = "LA_OPT_NXP_Software_License"
 LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
+inherit update-rc.d 
+
 GOLDVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 
@@ -32,9 +34,17 @@ do_install() {
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
 	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${DESTDIR}/can-gw
+	
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0755 ${S}/can-gw/service/avtp_listener ${D}${sysconfdir}/init.d/avtp_listener
 }
 
 FILES_${PN} += "/home/root/can-gw/*"
 FILES_${PN} += "/home/root/eth-gw/*"
 FILES_${PN} += "${sysconfdir}/*"
 FILES_${PN} += "/usr/local/sbin/*"
+FILES_${PN} += "${sysconfdir}/init.d/avtp_listener"
+
+# set update-rc.d parameters
+INITSCRIPT_NAME = "avtp_listener"
+INITSCRIPT_PARAMS = "defaults 90"
