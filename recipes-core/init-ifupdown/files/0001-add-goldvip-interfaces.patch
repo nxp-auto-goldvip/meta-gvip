@@ -2,7 +2,7 @@ Index: s32g274ardb2/interfaces
 ===================================================================
 --- s32g274ardb2.orig/interfaces
 +++ s32g274ardb2/interfaces
-@@ -20,6 +20,31 @@ pre-up [ -L /sys/class/net/pfe2 ]
+@@ -20,6 +20,32 @@ pre-up [ -L /sys/class/net/pfe2 ]
  dhcpcd_opts -b
  
  auto eth0
@@ -15,6 +15,7 @@ Index: s32g274ardb2/interfaces
 +iface xenbr0 inet dhcp
 +pre-up [ -L /sys/class/net/pfe2 ]
 +pre-up brctl addbr xenbr0
++pre-up echo 0 > /sys/class/net/xenbr0/bridge/default_pvid
 +pre-up brctl addif xenbr0 eth0
 +pre-up ip addr flush dev eth0 
 +pre-up ifconfig eth0 up
