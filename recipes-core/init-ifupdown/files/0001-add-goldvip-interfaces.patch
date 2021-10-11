@@ -2,7 +2,19 @@ Index: s32g274ardb2/interfaces
 ===================================================================
 --- s32g274ardb2.orig/interfaces
 +++ s32g274ardb2/interfaces
-@@ -20,6 +20,37 @@ pre-up [ -L /sys/class/net/pfe2 ]
+@@ -7,6 +7,7 @@ iface lo inet loopback
+ auto pfe0
+ iface pfe0 inet dhcp
+ pre-up [ -L /sys/class/net/pfe0 ]
++pre-up ethtool -K pfe0 tx off
+ dhcpcd_opts -b
+ 
+ auto pfe1
+@@ -17,9 +18,41 @@ dhcpcd_opts -b
+ auto pfe2
+ iface pfe2 inet dhcp
+ pre-up [ -L /sys/class/net/pfe2 ]
++pre-up ethtool -K pfe2 tx off
  dhcpcd_opts -b
  
  auto eth0
@@ -11,25 +23,25 @@ Index: s32g274ardb2/interfaces
  pre-up [ -L /sys/class/net/eth0 ]
  dhcpcd_opts -b
 +
-+auto xenbr0 
++auto xenbr0
 +iface xenbr0 inet dhcp
 +pre-up [ -L /sys/class/net/pfe2 ]
 +pre-up brctl addbr xenbr0
 +pre-up echo 0 > /sys/class/net/xenbr0/bridge/default_pvid
 +pre-up brctl addif xenbr0 eth0
-+pre-up ip addr flush dev eth0 
++pre-up ip addr flush dev eth0
 +pre-up ifconfig eth0 up
 +post-down brctl delif xenbr0 eth0
 +post-down brctl delbr xenbr0
 +dhcpcd_opts -b
 +
 +auto eth1
-+iface eth1 inet static 
++iface eth1 inet static
 +pre-up [ ! -L /sys/class/net/pfe2 ]
 +address 10.0.100.20
 +netmask 255.255.255.0
 +
-+auto v2xbr 
++auto v2xbr
 +iface v2xbr inet static
 +pre-up [ -L /sys/class/net/pfe2 ]
 +pre-up brctl addbr v2xbr
@@ -38,7 +50,7 @@ Index: s32g274ardb2/interfaces
 +netmask 255.255.255.0
 +
 +auto aux0
-+iface aux0 inet dhcp 
++iface aux0 inet dhcp
 +pre-up [ -L /sys/class/net/aux0 ]
 +dhcpcd_opts -b
 +
