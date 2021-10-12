@@ -13,6 +13,7 @@ require recipes-fsl/images/fsl-image-auto.bb
 IMAGE_INSTALL += " \
     ${PACKAGES-CORE-benchmark} \
     iptables \
+    dnsmasq  \
     ntp ntpq \
     python-pip \
     python3-pip \
