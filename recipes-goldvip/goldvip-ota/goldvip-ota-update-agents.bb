@@ -21,7 +21,7 @@ do_compile[noexec] = "1"
 do_install() {
     install -d ${D}/home/root/ota/
     install -m 0755 ${S}/goldvip_uas ${D}/home/root/ota/
-    install -m 0755 ${S}/linuxvm_ua.sh ${D}/home/root/ota/
+    install -m 0755 ${S}/*.sh ${D}/home/root/ota/
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${S}/service/goldvip-update-agents ${D}${sysconfdir}/init.d/
     install -d ${D}${sysconfdir}/ota
@@ -30,6 +30,10 @@ do_install() {
     # Copy Uptane initial data.
     install -d ${D}/data
     cp -R ${S}/abqdata/* ${D}/data/
+
+    for ua_defaults in ${D}/data/*_ua/factory_defaults; do
+        cp -R ${ua_defaults}/* $(dirname ${ua_defaults})/.
+    done
 }
 
 # set update-rc.d parameters
