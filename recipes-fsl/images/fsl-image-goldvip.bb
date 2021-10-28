@@ -44,5 +44,5 @@ SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip
 SDCARDIMAGE_BOOT_EXTRA5 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA5_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'boot-loader', '', d)}"
 
-# Reserve some extra space (300MB) for OTA updates.
-IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', '307200', '', d)}"
+# Reserve some extra space (400MB) for OTA updates.
+IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', '409600', '', d)}"
