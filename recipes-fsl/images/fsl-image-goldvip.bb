@@ -24,6 +24,8 @@ IMAGE_INSTALL += " \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
+    strongswan \
+    iperf3 \
 "
 
 # Allow builds without XEN enabled
