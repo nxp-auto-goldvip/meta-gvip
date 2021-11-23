@@ -28,6 +28,13 @@ IMAGE_INSTALL += " \
     sudo \
 "
 
+# Update hostname to v2xdomu
+update_hostname() {
+    GOLDVIP_DOMU_HOSTNAME="v2xdomu"
+    echo "${GOLDVIP_DOMU_HOSTNAME}" > ${IMAGE_ROOTFS}${sysconfdir}/hostname
+}
+ROOTFS_POSTPROCESS_COMMAND += "update_hostname; "
+
 # Add GoldVIP optional packages for domU image
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client', '', d)}"
 
