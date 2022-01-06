@@ -13,7 +13,11 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/goldvip_uas"
-RDEPENDS_${PN} += "bash libcrypto libssl"
+RDEPENDS_${PN} += " \
+    bash \
+    libcrypto \
+    libssl \
+"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
