@@ -7,21 +7,21 @@ Index: s32g274ardb2/interfaces
  iface pfe0 inet dhcp
  pre-up [ -L /sys/class/net/pfe0 ]
 +pre-up ethtool -K pfe0 tx off
- dhcpcd_opts -b
+ dhcpcd_opts -Gb
  
  auto pfe1
-@@ -17,9 +18,41 @@ dhcpcd_opts -b
+@@ -17,9 +18,41 @@ dhcpcd_opts -Gb
  auto pfe2
  iface pfe2 inet dhcp
  pre-up [ -L /sys/class/net/pfe2 ]
 +pre-up ethtool -K pfe2 tx off
- dhcpcd_opts -b
+ dhcpcd_opts -Gb
  
  auto eth0
 -iface eth0 inet dhcp
 +iface eth0 inet manual
  pre-up [ -L /sys/class/net/eth0 ]
- dhcpcd_opts -b
+ dhcpcd_opts -Gb
 +
 +auto xenbr0
 +iface xenbr0 inet dhcp
@@ -52,5 +52,5 @@ Index: s32g274ardb2/interfaces
 +auto aux0
 +iface aux0 inet dhcp
 +pre-up [ -L /sys/class/net/aux0 ]
-+dhcpcd_opts -b
++dhcpcd_opts -Gb
 +
