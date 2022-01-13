@@ -31,8 +31,8 @@ do_install() {
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
-	install -m 0755 ${S}/common/m7_core_load.py ${LOCAL_SBINDIR}
-	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${LOCAL_SBINDIR}
+	install -m 0755 ${S}/common/m7_core_load.py ${D}/${sbindir}
+	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${D}/${sbindir}
 
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${S}/can-gw/service/avtp_listener ${D}${sysconfdir}/init.d/avtp_listener
@@ -47,5 +47,6 @@ FILES_${PN} += "/home/root/can-gw/*"
 FILES_${PN} += "/home/root/eth-gw/*"
 FILES_${PN} += "${sysconfdir}/*"
 FILES_${PN} += "/usr/local/sbin/*"
+FILES_${PN} += "${sbindir}/*.py"
 FILES_${PN} += "${sysconfdir}/init.d/avtp_listener"
 FILES_${PN} += "${sysconfdir}/init.d/wifi_setup"
