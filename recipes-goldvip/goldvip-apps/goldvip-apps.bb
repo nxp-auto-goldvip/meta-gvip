@@ -31,6 +31,8 @@ do_install() {
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
+
+	install -d ${D}/${sbindir}
 	install -m 0755 ${S}/common/m7_core_load.py ${D}/${sbindir}
 	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${D}/${sbindir}
 
