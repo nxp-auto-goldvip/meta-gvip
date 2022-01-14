@@ -21,11 +21,13 @@ IMAGE_INSTALL += " \
     python3-fcntl \
     openjdk-8 \
     goldvip-apps \
-    goldvip-cloud-gw-dom0 \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
 "
+
+# Allow builds without XEN enabled
+GOLDVIP_DOMU_ROOTFS_SOURCE ?= ""
 
 do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${GOLDVIP_DOMU_ROOTFS_SOURCE}:do_image_complete', '', d)}"
 
@@ -34,6 +36,7 @@ IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'gol
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-update-agents', '', d)}"
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' goldvip-cloud-gw-dom0', '', d)}"
 
 # add additional binaries in SD-card FAT partition
 SDCARDIMAGE_BOOT_EXTRA3 = "u-boot"
