@@ -9,12 +9,12 @@ S                          = "${WORKDIR}"
 GG_BASENAME                = "greengrass/v2"
 GG_ROOT                    = "${D}/${GG_BASENAME}"
 LIC_FILES_CHKSUM           = "file://LICENSE;md5=34400b68072d710fecd0a2940a0d1658"
-SRC_URI                    = "https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-2.4.0.zip;name=payload; \
+SRC_URI                    = "https://d2s8p88vqu9w66.cloudfront.net/releases/greengrass-2.5.3.zip;name=payload; \
                               https://raw.githubusercontent.com/aws-greengrass/aws-greengrass-nucleus/main/LICENSE;name=license; \
                               file://greengrassv2-init.yaml \
                               "
-SRC_URI[payload.md5sum]    = "93402649fff948cf38da5975702ed0ee"
-SRC_URI[payload.sha256sum] = "52b0416b1fddfd63b08b9025842dd94a9d91d68cf9574470bab214b42ec429fc"
+SRC_URI[payload.md5sum]    = "2d49e1ba8811bda29189f07969bc78a2"
+SRC_URI[payload.sha256sum] = "c7172422d76f108c9d5ec520fddaa2352e47a41bfb4d074ec7b52d35f5492b7a"
 SRC_URI[license.md5sum]    = "34400b68072d710fecd0a2940a0d1658"
 SRC_URI[license.sha256sum] = "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
 
