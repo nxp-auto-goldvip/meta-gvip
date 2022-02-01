@@ -23,6 +23,7 @@ RDEPENDS_${PN} += "bash"
 do_install() {
 	install -d ${DESTDIR}
 	install -m 0755 ${S}/dom0/*.py ${DESTDIR}
+	install -m 0755 ${S}/dom0/local_server_config ${DESTDIR}
 	install -m 0755 ${S}/dom0/config.json ${DESTDIR}
 	install -m 0600 ${S}/domU/server_config ${DESTDIR}
 	install -d ${D}${sysconfdir}/init.d
