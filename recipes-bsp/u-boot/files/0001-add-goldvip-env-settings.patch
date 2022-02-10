@@ -7,12 +7,12 @@ Index: git/include/configs/s32.h
  
  #ifndef CONFIG_BOARD_EXTRA_ENV_SETTINGS
 -#define CONFIG_BOARD_EXTRA_ENV_SETTINGS	""
-+#define CONFIG_BOARD_EXTRA_ENV_SETTINGS "write_goldvip_images=echo Updating GoldVIP images; run write_uboot; run write_cangw; run write_bootloader;\0 \
++#define CONFIG_BOARD_EXTRA_ENV_SETTINGS "write_goldvip_images=echo Updating GoldVIP images; run write_uboot; run write_gateway_app; run write_bootloader;\0 \
 + 				 				 		  write_bootloader=sf probe 6:0; setenv image boot-loader; run loadimage; \
 +										  sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0 \
 +										  write_uboot=sf probe 6:0; setenv image u-boot.bin; run loadimage; sf erase 0x00100000 +${filesize}; \
 +										  sf write ${loadaddr} 0x00100000 ${filesize}; \0 \
-+										  write_cangw=sf probe 6:0; setenv image can-gw.bin; run loadimage; sf erase 0x00200000 +${filesize}; \
++										  write_gateway_app=sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00200000 +${filesize}; \
 +										  sf write ${loadaddr} 0x00200000 ${filesize};\0"
  #endif
  

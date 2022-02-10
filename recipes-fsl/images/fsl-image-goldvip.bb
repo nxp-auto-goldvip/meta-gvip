@@ -34,7 +34,7 @@ GOLDVIP_DOMU_ROOTFS_SOURCE ?= ""
 do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${GOLDVIP_DOMU_ROOTFS_SOURCE}:do_image_complete', '', d)}"
 
 # Add GoldVIP optional packages
-IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-update-agents', '', d)}"
@@ -44,8 +44,8 @@ IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' goldvip-cloud
 SDCARDIMAGE_BOOT_EXTRA3 = "u-boot"
 SDCARDIMAGE_BOOT_EXTRA3_FILE = "u-boot.bin"
 
-SDCARDIMAGE_BOOT_EXTRA4 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'goldvip-can-gw', '', d)}"
-SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-can-gw', 'can-gw.bin', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA4 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway.bin', '', d)}"
 
 SDCARDIMAGE_BOOT_EXTRA5 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA5_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'boot-loader', '', d)}"
