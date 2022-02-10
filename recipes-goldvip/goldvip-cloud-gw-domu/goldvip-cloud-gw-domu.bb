@@ -2,6 +2,8 @@ SUMMARY = "Gold VIP (Vehicle Integration Platform)"
 LICENSE = "LA_OPT_NXP_Software_License"
 LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
+inherit update-rc.d
+
 GOLDVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 
@@ -24,6 +26,13 @@ do_install() {
 	install -m 0755 ${S}/cloud-gw/sja_provision.py ${DESTDIR}/cloud-gw
 	install -m 0755 ${S}/cloud-gw/utils.py ${DESTDIR}/cloud-gw
 	install -m 0755 ${S}/cloud-gw/ggv2_deployment_configurations.json ${DESTDIR}/cloud-gw
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0755 ${S}/cloud-gw/greengrass-functions/service/greengrass ${D}${sysconfdir}/init.d/greengrass
 }
 
+# set update-rc.d parameters
+INITSCRIPT_NAME = "greengrass"
+INITSCRIPT_PARAMS = "defaults 70"
+
 FILES_${PN} += "/home/root/cloud-gw/*"
+FILES_${PN} += "/etc/init.d/greengrass"
