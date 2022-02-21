@@ -41,8 +41,8 @@ IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'go
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', ' goldvip-cloud-gw-dom0', '', d)}"
 
 # add additional binaries in SD-card FAT partition
-SDCARDIMAGE_BOOT_EXTRA3 = "u-boot"
-SDCARDIMAGE_BOOT_EXTRA3_FILE = "u-boot.bin"
+SDCARDIMAGE_BOOT_EXTRA3 = "arm-trusted-firmware"
+SDCARDIMAGE_BOOT_EXTRA3_FILE = "fip.s32-sdcard"
 
 SDCARDIMAGE_BOOT_EXTRA4 = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA4_FILE = "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway.bin', '', d)}"
