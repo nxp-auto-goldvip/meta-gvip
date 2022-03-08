@@ -17,7 +17,7 @@ LOCAL_SBINDIR = "${D}/usr/local/sbin"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN} += "bash goldvip-telemetry-packages"
 DEPENDS_append = " update-rc.d-native"
 
 do_install() {
@@ -34,7 +34,6 @@ do_install() {
 
 	install -d ${D}/${sbindir}
 	install -m 0755 ${S}/common/m7_core_load.py ${D}/${sbindir}
-	install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/dom0/m7_stats.py ${D}/${sbindir}
 
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${S}/can-gw/service/avtp_listener ${D}${sysconfdir}/init.d/avtp_listener

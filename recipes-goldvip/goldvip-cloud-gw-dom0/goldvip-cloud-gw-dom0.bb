@@ -18,13 +18,12 @@ DESTDIR = "${D}/home/root/cloud-gw/telemetry-collector"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN} += "bash goldvip-telemetry-packages"
 
 do_install() {
 	install -d ${DESTDIR}
 	install -m 0755 ${S}/dom0/*.py ${DESTDIR}
 	install -m 0755 ${S}/dom0/local_server_config ${DESTDIR}
-	install -m 0755 ${S}/dom0/config.json ${DESTDIR}
 	install -m 0600 ${S}/domU/server_config ${DESTDIR}
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${S}/dom0/service/telemetry ${D}${sysconfdir}/init.d/telemetry
