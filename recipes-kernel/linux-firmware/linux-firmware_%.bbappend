@@ -1,3 +1,5 @@
+require nxp89xx-fw.inc
+
 PACKAGES =+ "${PN}-rtlwifi"
 
 FILES_${PN}-rtlwifi = " \

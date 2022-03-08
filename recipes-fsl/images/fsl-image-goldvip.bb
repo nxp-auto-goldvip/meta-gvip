@@ -26,6 +26,9 @@ IMAGE_INSTALL += " \
     linux-firmware-rtlwifi \
     strongswan \
     iperf3 \
+    nxp-wlan-sdk \
+    kernel-module-nxp89xx \
+    linux-firmware-nxp89xx \
 "
 
 # Allow builds without XEN enabled
