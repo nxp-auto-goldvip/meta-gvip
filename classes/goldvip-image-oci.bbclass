@@ -25,8 +25,8 @@
 # We'd probably get this through the container image typdep, but just
 # to be sure, we'll repeat it here.
 ROOTFS_BOOTSTRAP_INSTALL = ""
-# we want container and tar.bz2's to be created
-IMAGE_TYPEDEP_oci = "container tar.bz2"
+# we want container to be created
+IMAGE_TYPEDEP_oci = "container"
 # sloci is the script/project that will create the oci image
 do_image_oci[depends] += "sloci-image-native:do_populate_sysroot"
 
@@ -47,12 +47,14 @@ OCI_IMAGE_ENTRYPOINT_ARGS ?= ""
 OCI_IMAGE_WORKINGDIR ?= ""
 
 # List of ports to expose from a container running this image:
-#  PORT[/PROT]  
+#  PORT[/PROT]
 #     format: <port>/tcp, <port>/udp, or <port> (same as <port>/tcp).
 OCI_IMAGE_PORTS ?= ""
 
 # key=value list of labels
 OCI_IMAGE_LABELS ?= ""
+# key=value list of annotations
+OCI_IMAGE_ANNOTATIONS ?= ""
 # key=value list of environment variables
 OCI_IMAGE_ENV_VARS ?= ""
 
@@ -87,6 +89,7 @@ IMAGE_CMD_oci() {
     bbdebug 1 "  entrypoint: ${OCI_IMAGE_ENTRYPOINT}"
     bbdebug 1 "  entrypoing args: ${OCI_IMAGE_ENTRYPOINT_ARGS}"
     bbdebug 1 "  labels: ${OCI_IMAGE_LABELS}"
+    bbdebug 1 "  annotations: ${OCI_IMAGE_ANNOTATIONS}"
     bbdebug 1 "  uid: ${OCI_IMAGE_RUNTIME_UID}"
     bbdebug 1 "  working dir: ${OCI_IMAGE_WORKINGDIR}"
     bbdebug 1 "  env vars: ${OCI_IMAGE_ENV_VARS}"
@@ -96,35 +99,51 @@ IMAGE_CMD_oci() {
     # long directories or the location.
     cd ${IMGDEPLOYDIR}
 
+    oci_image_cmd_options=""
+    if [ -n "${OCI_IMAGE_ENTRYPOINT_ARGS}" ]; then
+        for l in ${OCI_IMAGE_ENTRYPOINT_ARGS}; do
+            oci_image_cmd_options="${oci_image_cmd_options} --cmd ${l}"
+        done
+    fi
+
     oci_image_label_options=""
     if [ -n "${OCI_IMAGE_LABELS}" ]; then
-    for l in ${OCI_IMAGE_LABELS}; do
-        oci_image_label_options="${oci_image_label_options} --label ${l}"
-    done
+        for l in ${OCI_IMAGE_LABELS}; do
+            oci_image_label_options="${oci_image_label_options} --label ${l}"
+        done
     fi
+
+    oci_image_annotation_options=""
+    if [ -n "${OCI_IMAGE_ANNOTATIONS}" ]; then
+        for l in ${OCI_IMAGE_ANNOTATIONS}; do
+            oci_image_annotation_options="${oci_image_annotation_options} --annotation ${l}"
+        done
+    fi
+
     oci_image_env_options=""
     if [ -n "${OCI_IMAGE_ENV_VARS}" ]; then
-    for l in ${OCI_IMAGE_ENV_VARS}; do
-        oci_image_env_options="${oci_image_env_options} --env ${l}"
-    done
+        for l in ${OCI_IMAGE_ENV_VARS}; do
+            oci_image_env_options="${oci_image_env_options} --env ${l}"
+        done
     fi
+
     oci_image_port_options=""
     if [ -n "${OCI_IMAGE_PORTS}" ]; then
-    for l in ${OCI_IMAGE_PORTS}; do
-        oci_image_port_options="${oci_image_port_options} --port ${l}"
-    done
+        for l in ${OCI_IMAGE_PORTS}; do
+            oci_image_port_options="${oci_image_port_options} --port ${l}"
+        done
     fi
 
     if [ -n "${OCI_IMAGE_RUNTIME_UID}" ]; then
-    oci_image_user_options="--user ${OCI_IMAGE_RUNTIME_UID}"
+        oci_image_user_options="--user ${OCI_IMAGE_RUNTIME_UID}"
     fi
 
     if [ -n "${OCI_IMAGE_WORKINGDIR}" ]; then
-    oci_image_working_dir_options="--working-dir ${OCI_IMAGE_WORKINGDIR}"
+        oci_image_working_dir_options="--working-dir ${OCI_IMAGE_WORKINGDIR}"
     fi
 
     if [ -n "${OCI_IMAGE_TAR_OUTPUT}" ]; then
-    sloci_options="$sloci_options --tar"
+        sloci_options="$sloci_options --tar"
     fi
 
     # options that always appear are required for a valid oci container image
@@ -133,12 +152,21 @@ IMAGE_CMD_oci() {
         --arch ${OCI_IMAGE_ARCH} \
         --arch-variant "${OCI_IMAGE_SUBARCH}" \
         --entrypoint ${OCI_IMAGE_ENTRYPOINT} \
-        --cmd "${OCI_IMAGE_ENTRYPOINT_ARGS}" \
         --author ${OCI_IMAGE_AUTHOR_EMAIL} \
+        ${oci_image_cmd_options} \
         ${oci_image_user_options} \
         ${oci_image_label_options} \
+        ${oci_image_annotation_options} \
         ${oci_image_env_options} \
         ${oci_image_working_dir_options} \
         ${oci_image_port_options} \
         ${IMAGE_ROOTFS} ${IMAGE_NAME}${IMAGE_NAME_SUFFIX}-oci:${OCI_IMAGE_TAG}
+
+    oci_image_name="${IMAGE_NAME}${IMAGE_NAME_SUFFIX}-oci-${OCI_IMAGE_TAG}-${OCI_IMAGE_ARCH}"
+    if [ -n "${OCI_IMAGE_SUBARCH}" ]; then
+        oci_image_name="${oci_image_name}-${OCI_IMAGE_SUBARCH}"
+    fi
+    oci_image_name="${oci_image_name}-linux.oci-image.tar"
+
+    ln -sf "${oci_image_name}" "${DEPLOY_DIR_IMAGE}/${IMAGE_LINK_NAME}.oci-image.tar"
 }

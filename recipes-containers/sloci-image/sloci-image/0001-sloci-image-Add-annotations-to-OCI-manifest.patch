@@ -1,0 +1,50 @@
+From 0fb3bf4004e00b37d595d3427d08b498eb4d446b Mon Sep 17 00:00:00 2001
+From: George Mocanu <nxf65631@lsv15334.swis.ro-buh01.nxp.com>
+Date: Wed, 16 Mar 2022 14:56:49 +0200
+Subject: [PATCH] sloci-image: Add annotations to OCI manifest
+
+- include option to add annotations to the OCI image
+manifest in order to import the image with k3s ctr CLI
+
+Issue: GVIP-591
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ sloci-image | 8 +++++---
+ 1 file changed, 5 insertions(+), 3 deletions(-)
+
+diff --git a/sloci-image b/sloci-image
+index 7c0c3bd..c72bcde 100755
+--- a/sloci-image
++++ b/sloci-image
+@@ -312,9 +312,8 @@ oci_image_index() {
+ 	        ${CFG_ARCH_VARIANT:+"$(echo \"variant\"): $(json_string "$CFG_ARCH_VARIANT"),"}
+ 	        "os": "$CFG_OS"
+ 	      },
+-	      "annotations": {
+-	        "org.opencontainers.image.ref.name": "$CFG_REF_NAME"
+-	      }
++	      "annotations": $(json_string_map \
++	        "${CFG_ANNOTATIONS}${LIST_SEP}org.opencontainers.image.ref.name=${CFG_REF_NAME}")
+ 	    }
+ 	  ]
+ 	}
+@@ -326,6 +325,7 @@ oci_image_index() {
+ 
+ CFG_ARCH= CFG_ARCH_VARIANT= CFG_AUTHOR= CFG_ENTRYPOINT= CFG_CMD= CFG_ENV=
+ CFG_LABELS= CFG_OS= CFG_PORTS= CFG_USER= CFG_VOLUMES= CFG_WORKING_DIR=
++CFG_ANNOTATIONS=
+ 
+ CFG_OS='linux'
+ OUT_TYPE='dir'
+@@ -345,6 +345,8 @@ while [ $# -gt 0 ]; do
+ 		-l | --label) is_keyval "$2" || die "invalid option: $1 $2"
+ 		              CFG_LABELS="${CFG_LABELS}${LIST_SEP}$(prefix_label "$2")";;
+ 		     --os) CFG_OS="$2";;
++		     --annotation) is_keyval "$2" || die "invalid option: $1 $2"
++		                   CFG_ANNOTATIONS="${CFG_ANNOTATIONS}${LIST_SEP}$(prefix_label "$2")";;
+ 		-p | --port | --expose) CFG_PORTS="${CFG_PORTS}${LIST_SEP}$2";;
+ 		-t | --tar) OUT_TYPE='tar'; n=1;;
+ 		-u | --user) CFG_USER="$2";;
+-- 
+2.25.1
+
