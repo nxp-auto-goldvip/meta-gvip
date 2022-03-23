@@ -14,4 +14,11 @@ IMAGE_INSTALL += " \
     python-pip \
     python3-pip \
     openjdk-8 \
+    cronie \
 "
+
+update_timestamp() {
+    echo "$(date -u +%4Y%2m%2d%2H%2M%2S)" > ${IMAGE_ROOTFS}/etc/timestamp
+}
+
+ROOTFS_POSTPROCESS_COMMAND += "update_timestamp; "
