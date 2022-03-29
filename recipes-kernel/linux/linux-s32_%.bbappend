@@ -15,4 +15,5 @@ SRC_URI_append = " \
 	file://build/usb_network.cfg \
 	file://build/pcie.cfg \
 	file://0001-enable-aux-interface-in-pfe.patch;patch=1 \
+	file://0002-map-ipc-shared-memory.patch;patch=1 \
 "

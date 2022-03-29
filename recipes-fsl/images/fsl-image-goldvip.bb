@@ -21,6 +21,7 @@ IMAGE_INSTALL += " \
     python3-fcntl \
     openjdk-8 \
     goldvip-apps \
+    kernel-module-ipc-chardev \
     packagegroup-base-wifi \
     ifmetric \
     linux-firmware-rtlwifi \
