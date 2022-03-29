@@ -18,16 +18,24 @@ DESTDIR = "${D}/home/root"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS_${PN} += " \
+    bash \
+    python3-boto3 \
+    python3-scapy \
+    python3-requests \
+    aws-iot-device-sdk-python-v2 \
+    greengrass-bin \
+"
 
 do_install() {
-	install -d ${DESTDIR}/cloud-gw
-	install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
-	install -m 0755 ${S}/cloud-gw/sja_provision.py ${DESTDIR}/cloud-gw
-	install -m 0755 ${S}/cloud-gw/utils.py ${DESTDIR}/cloud-gw
-	install -m 0755 ${S}/cloud-gw/ggv2_deployment_configurations.json ${DESTDIR}/cloud-gw
-	install -d ${D}${sysconfdir}/init.d
-	install -m 0755 ${S}/cloud-gw/greengrass-functions/service/greengrass ${D}${sysconfdir}/init.d/greengrass
+    install -d ${DESTDIR}/cloud-gw
+    install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
+    install -m 0755 ${S}/cloud-gw/sja_provision.py ${DESTDIR}/cloud-gw
+    install -m 0755 ${S}/cloud-gw/utils.py ${DESTDIR}/cloud-gw
+    install -m 0755 ${S}/cloud-gw/ggv2_deployment_configurations.json ${DESTDIR}/cloud-gw
+
+    install -d ${D}${sysconfdir}/init.d
+    install -m 0755 ${S}/cloud-gw/greengrass-functions/service/greengrass ${D}${sysconfdir}/init.d/greengrass
 }
 
 # set update-rc.d parameters
