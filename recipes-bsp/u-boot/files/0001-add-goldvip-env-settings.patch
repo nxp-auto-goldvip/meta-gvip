@@ -2,18 +2,13 @@ Index: git/include/configs/s32.h
 ===================================================================
 --- git.orig/include/configs/s32.h
 +++ git/include/configs/s32.h
-@@ -271,7 +271,13 @@
- #endif
+@@ -329,6 +329,10 @@
+ 	GMAC_EXTRA_ENV_SETTINGS \
+ 	PFE_EXTRA_ENV_SETTINGS \
+ 	PCIE_EXTRA_ENV_SETTINGS \
++	"write_goldvip_images=echo Updating GoldVIP images; run write_atf; run write_gateway_app; run write_bootloader;\0 \
++    write_bootloader=sf probe 6:0; setenv image boot-loader; run loadimage; sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0 \
++    write_atf=sf probe 6:0; setenv image fip.s32-sdcard; run loadimage; sf erase 0x00100000 +${filesize}; sf write ${loadaddr} 0x00100000 ${filesize}; \0 \
++    write_gateway_app=sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00300000 +${filesize};  sf write ${loadaddr} 0x00300000 ${filesize};\0"
  
- #ifndef CONFIG_BOARD_EXTRA_ENV_SETTINGS
--#define CONFIG_BOARD_EXTRA_ENV_SETTINGS	""
-+#define CONFIG_BOARD_EXTRA_ENV_SETTINGS "write_goldvip_images=echo Updating GoldVIP images; run write_atf; run write_gateway_app; run write_bootloader;\0 \
-+ 				 				 		  write_bootloader=sf probe 6:0; setenv image boot-loader; run loadimage; \
-+										  sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0 \
-+										  write_atf=sf probe 6:0; setenv image fip.s32-sdcard; run loadimage; sf erase 0x00100000 +${filesize}; \
-+										  sf write ${loadaddr} 0x00100000 ${filesize}; \0 \
-+										  write_gateway_app=sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00300000 +${filesize}; \
-+										  sf write ${loadaddr} 0x00300000 ${filesize};\0"
- #endif
- 
- #ifndef CONFIG_DCU_EXTRA_ENV_SETTINGS
+ #undef CONFIG_BOOTCOMMAND

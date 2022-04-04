@@ -1,0 +1,13 @@
+Index: git/plat/nxp/s32/s32_common.mk
+===================================================================
+--- git.orig/plat/nxp/s32/s32_common.mk
++++ git/plat/nxp/s32/s32_common.mk
+@@ -399,7 +399,7 @@ else
+ 	echo "DATA_FILE SIZE $$T_SIZE" >> $@
+ endif
+ 
+-FIP_ALIGN := 16
++FIP_ALIGN := 64
+ all: add_to_fip
+ add_to_fip: fip ${BL2_W_DTB}
+ 	$(eval FIP_MAXIMUM_SIZE_10 = $(shell printf "%d\n" ${FIP_MAXIMUM_SIZE}))
