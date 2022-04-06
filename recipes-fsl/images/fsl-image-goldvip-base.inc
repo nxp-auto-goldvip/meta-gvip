@@ -15,6 +15,7 @@ IMAGE_INSTALL += " \
     python3-pip \
     openjdk-8 \
     cronie \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'k3s', '', d)} \
 "
 
 update_timestamp() {

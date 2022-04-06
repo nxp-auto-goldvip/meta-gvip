@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+### BEGIN INIT INFO
+# Provides:          k3s-server
+# Required-Start:    networking
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:      0 6
+# Short-Description: Start the k3s server
+# Description:       Wrapper for starting / stopping the k3s server.
+#                    Runs when domU boots / shuts down on systems using SysV.
+### END INIT INFO
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# Copyright 2022 NXP
+
+# Source function library.
+. /etc/init.d/functions
+
+K3S_SERVER_CONFIG="/etc/default/k3s-server"
+K3S_CONF_FILE="/etc/rancher/k3s/config-server.yaml"
+BINDIR_PATH="/usr/bin/"
+LOG_FILE="/var/log/k3s-server.log"
+K3S_DATA_PATH="/var/lib/rancher/k3s/data"
+
+# shellcheck disable=SC1090
+[ -f "${K3S_SERVER_CONFIG}" ] && . "${K3S_SERVER_CONFIG}"
+
+start_server() {
+    CMD_ARGS=()
+    if [ -f "${K3S_CONF_FILE}" ]; then
+        CMD_ARGS+=("--config=${K3S_CONF_FILE}")
+    fi
+
+    ${BINDIR_PATH}/k3s server "${CMD_ARGS[@]}" > "${LOG_FILE}" 2>&1 &
+}
+
+stop_server() {
+    kill -9 $(ps aux | grep '[k]3s server' | awk '{print $2}') 2> /dev/null || true
+    ${BINDIR_PATH}/k3s-killall.sh > /dev/null 2>&1
+}
+
+case "$1" in
+start)
+    echo "Starting the k3s server"
+    start_server
+    ;;
+stop)
+    echo "Stopping the k3s server"
+    stop_server
+    ;;
+restart)
+    echo "Restarting the k3s server"
+    stop_server
+    start_server
+    ;;
+status)
+    status "k3s-server"
+    exit $?
+    ;;
+*)
+    echo "Usage: /etc/init.d/k3s-server {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

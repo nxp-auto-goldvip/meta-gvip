@@ -2,19 +2,12 @@ Index: 1.0-r7/interfaces
 ===================================================================
 --- 1.0-r7.orig/interfaces
 +++ 1.0-r7/interfaces
-@@ -19,7 +19,43 @@ iface pfe2 inet dhcp
- pre-up [ -L /sys/class/net/pfe2 ]
+@@ -25,6 +25,35 @@ pre-up [ -L /sys/class/net/aux0 ]
  dhcpcd_opts -Gb
  
-+auto aux0
-+iface aux0 inet dhcp
-+pre-up [ -L /sys/class/net/aux0 ]
-+dhcpcd_opts -Gb
-+
  auto eth0
 +iface eth0 inet manual
 +pre-up [ -L /sys/class/net/eth0 ]
-+
  iface eth0 inet dhcp
  pre-up [ -L /sys/class/net/eth0 ]
 -dhcpcd_opts -Gb
@@ -46,4 +39,3 @@ Index: 1.0-r7/interfaces
 +post-down brctl delbr v2xbr
 +address 10.0.100.10
 +netmask 255.255.255.0
-+

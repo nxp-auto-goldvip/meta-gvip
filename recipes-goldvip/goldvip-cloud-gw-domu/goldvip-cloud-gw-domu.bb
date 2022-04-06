@@ -20,11 +20,16 @@ do_compile[noexec] = "1"
 
 RDEPENDS_${PN} += " \
     bash \
+    ifmetric \
+    iputils \
+    procps \
+    iproute2 \
     python3-boto3 \
     python3-scapy \
     python3-requests \
     aws-iot-device-sdk-python-v2 \
     greengrass-bin \
+    ntp ntpq \
 "
 
 do_install() {
@@ -42,5 +47,7 @@ do_install() {
 INITSCRIPT_NAME = "greengrass"
 INITSCRIPT_PARAMS = "defaults 70"
 
-FILES_${PN} += "/home/root/cloud-gw/*"
-FILES_${PN} += "/etc/init.d/greengrass"
+FILES_${PN} += " \
+    /home/root/cloud-gw/ \
+    /etc/init.d/greengrass \
+"

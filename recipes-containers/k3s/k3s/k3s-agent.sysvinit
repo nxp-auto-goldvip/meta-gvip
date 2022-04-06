@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+### BEGIN INIT INFO
+# Provides:          k3s-agent
+# Required-Start:    networking
+# Required-Stop:
+# Default-Start:     S
+# Default-Stop:      0 6
+# Short-Description: Start the k3s agent
+# Description:       Wrapper for starting / stopping the k3s agent.
+#                    Runs when dom0 boots / shuts down on systems using SysV.
+### END INIT INFO
+# SPDX-License-Identifier: BSD-3-Clause
+#
+# Copyright 2022 NXP
+
+# Source function library.
+. /etc/init.d/functions
+
+K3S_AGENT_CONFIG="/etc/default/k3s-agent"
+K3S_CONF_FILE="/etc/rancher/k3s/config-agent.yaml"
+BINDIR_PATH="/usr/bin/"
+LOG_FILE="/var/log/k3s-agent.log"
+K3S_DATA_PATH="/var/lib/rancher/k3s/data"
+
+# shellcheck disable=SC1090
+[ -f "${K3S_AGENT_CONFIG}" ] && . "${K3S_AGENT_CONFIG}"
+
+start_agent() {
+    CMD_ARGS=()
+
+    if [ -f "${K3S_CONF_FILE}" ]; then
+        CMD_ARGS+=("--config=${K3S_CONF_FILE}")
+    fi
+
+    ${BINDIR_PATH}/k3s agent "${CMD_ARGS[@]}" > "${LOG_FILE}" 2>&1 &
+}
+
+stop_agent() {
+    kill -9 $(ps aux | grep '[k]3s agent' | awk '{print $2}') 2> /dev/null || true
+    ${BINDIR_PATH}/k3s-killall.sh > /dev/null 2>&1
+}
+
+case "$1" in
+start)
+    echo "Starting the k3s agent"
+    start_agent
+    ;;
+stop)
+    echo "Stopping the k3s agent"
+    stop_agent
+    ;;
+restart)
+    echo "Restarting the k3s agent"
+    stop_agent
+    start_agent
+    ;;
+status)
+    status "k3s-agent"
+    exit $?
+    ;;
+*)
+    echo "Usage: /etc/init.d/k3s-agent {start|stop|restart|status}"
+    exit 1
+    ;;
+esac
+
+exit 0

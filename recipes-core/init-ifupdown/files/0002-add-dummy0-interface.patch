@@ -1,0 +1,19 @@
+Index: 1.0-r7/interfaces
+===================================================================
+--- 1.0-r7.orig/interfaces
++++ 1.0-r7/interfaces
+@@ -4,6 +4,14 @@
+ auto lo
+ iface lo inet loopback
+ 
++auto dummy0
++iface dummy0 inet static
++pre-up modprobe dummy
++address 10.255.255.254
++netmask 255.255.255.0
++gateway 10.255.255.1
++metric 1023
++
+ auto pfe0
+ iface pfe0 inet dhcp
+ pre-up [ -L /sys/class/net/pfe0 ]

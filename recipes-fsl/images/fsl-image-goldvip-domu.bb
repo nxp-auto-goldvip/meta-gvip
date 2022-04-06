@@ -6,12 +6,6 @@ DESCRIPTION = "GoldVIP domU image"
 
 require recipes-fsl/images/fsl-image-goldvip-base.inc
 
-# Add GoldVIP required packages
-IMAGE_INSTALL += " \
-    greengrass-bin \
-    goldvip-cloud-gw-domu \
-"
-
 # Remove some unnecessary packages added by DISTRO_FEATURES options or from
 # the fsl-image-auto image.
 IMAGE_INSTALL_remove += " \
@@ -24,8 +18,20 @@ IMAGE_INSTALL_remove += " \
    sja1110 \
 "
 
-# Add GoldVIP optional packages for domU image
-IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'goldvip-ota-client', '', d)}"
+IMAGE_INSTALL += " \
+    goldvip-cloud-gw-domu \
+    greengrass-bin \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client-demo', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-domu k3s-server', '', d)} \
+"
+
+# Select the OTA client package based on DISTRO_FEATURES.
+python() {
+    if bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', True, False, d):
+        d.appendVar('IMAGE_INSTALL', \
+                    bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
+                                      ' goldvip-ota-client-container', ' goldvip-ota-client', d))
+}
 
 # Update hostname to v2xdomu.
 update_hostname() {

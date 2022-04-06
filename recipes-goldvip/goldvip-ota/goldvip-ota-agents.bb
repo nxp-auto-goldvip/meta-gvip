@@ -3,6 +3,8 @@ LICENSE = "LA_OPT_NXP_Software_License"
 LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
 inherit update-rc.d
+inherit features_check
+REQUIRED_DISTRO_FEATURES ?= "goldvip-ota"
 
 GOLDVIP_BINARIES_DIR ?= "."
 GOLDVIP_OTA_DIR ?= "${GOLDVIP_BINARIES_DIR}"
@@ -15,8 +17,12 @@ SRC_URI = " \
 S = "${WORKDIR}/goldvip_uas"
 RDEPENDS_${PN} += " \
     bash \
+    busybox \
+    e2fsprogs-mke2fs \
+    jq \
     libcrypto \
     libssl \
+    util-linux-mkfs \
 "
 
 do_configure[noexec] = "1"
@@ -46,7 +52,7 @@ INITSCRIPT_PARAMS = "defaults 98"
 
 FILES_${PN} += " \
     /home/root/ota/ \
-    /etc/init.d/goldvip-update-agents \
-    /etc/ota \
+    ${sysconfdir}/init.d/goldvip-update-agents \
+    ${sysconfdir}/ota \
     /data \
 "
