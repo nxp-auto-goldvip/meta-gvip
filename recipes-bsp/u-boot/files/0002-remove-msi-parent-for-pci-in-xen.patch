@@ -1,0 +1,20 @@
+Index: git/include/configs/s32.h
+===================================================================
+--- git.orig/include/configs/s32.h
++++ git/include/configs/s32.h
+@@ -201,10 +201,15 @@
+ #define XEN_EXTRA_ENV_SETTINGS \
+ 	"script_addr=0x80200000\0" \
+ 	"mmcpart_ext=" __stringify(MMC_PART_EXT) "\0" \
++	"msi_parent_disable=fdt get value msi_parent0 pcie0 msi-parent && " \
++		"fdt rm pcie0 msi-parent; " \
++		"fdt get value msi_parent1 pcie1 msi-parent && " \
++		"fdt rm pcie1 msi-parent;\0" \
+ 
+ #define XEN_BOOTCMD \
+ 	"ext4load mmc ${mmcdev}:${mmcpart_ext} ${script_addr} " \
+ 		"boot/${script}; source ${script_addr}; " \
++		"run msi_parent_disable; " \
+ 		"booti ${xen_addr} - ${fdt_addr};"
+ #else
+ #define XEN_EXTRA_ENV_SETTINGS  ""
