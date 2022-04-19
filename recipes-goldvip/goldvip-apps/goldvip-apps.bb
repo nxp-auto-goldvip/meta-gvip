@@ -17,7 +17,13 @@ LOCAL_SBINDIR = "${D}/usr/local/sbin"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "bash goldvip-telemetry-packages"
+RDEPENDS_${PN} += " \
+    bash \
+    goldvip-telemetry-packages \
+    python3-mmap \
+    python3-fcntl \
+"
+
 DEPENDS_append = " update-rc.d-native"
 
 do_install() {
