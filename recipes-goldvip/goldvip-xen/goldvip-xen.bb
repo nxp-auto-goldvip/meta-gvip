@@ -18,7 +18,7 @@ RDEPENDS_${PN} += "bash"
 
 do_install() {
 	install -d ${DESTDIR}
-	install -m 644 ${S}/xen/cfg/V2Xdomu.cfg ${DESTDIR}
+	install -m 644 ${S}/xen/cfg/${MACHINE}/V2Xdomu.cfg ${DESTDIR}
 }
 
 FILES_${PN} += "/etc/xen/auto/V2Xdomu.cfg"

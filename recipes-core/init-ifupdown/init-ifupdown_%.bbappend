@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS_prepend := "${THISDIR}/files:${THISDIR}/${BPN}:"
 
 # Patch the default interfaces file depending on the content of DISTRO_FEATURES.
 SRC_URI += "\

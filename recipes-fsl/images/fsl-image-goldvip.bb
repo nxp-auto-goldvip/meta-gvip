@@ -4,7 +4,7 @@
 
 DESCRIPTION = "GoldVIP Image"
 
-include ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'conf/machine/goldvip-${MACHINE}-domu.conf', '', d)}
+include ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'conf/machine/goldvip-s32g-domu.conf', '', d)}
 
 require recipes-fsl/images/fsl-image-goldvip-base.inc
 
@@ -19,8 +19,6 @@ IMAGE_INSTALL += " \
     nxp-wlan-sdk \
     kernel-module-nxp89xx \
     linux-firmware-nxp89xx \
-    aws-iot-fleetwise-edge \
-    aws-obd-simulator \
 "
 
 # Allow builds without XEN enabled.
@@ -32,9 +30,11 @@ do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${G
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-obd-simulator', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-iot-fleetwise-edge', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \ 
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-dom0', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-agents-demo', '', d)} \
 "

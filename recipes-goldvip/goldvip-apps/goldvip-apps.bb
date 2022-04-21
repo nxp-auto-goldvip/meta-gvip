@@ -19,7 +19,7 @@ do_compile[noexec] = "1"
 
 RDEPENDS_${PN} += " \
     bash \
-    goldvip-can-setup \
+	${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-can-setup', '', d)} \
     goldvip-telemetry-packages \
     python3-mmap \
     python3-fcntl \
