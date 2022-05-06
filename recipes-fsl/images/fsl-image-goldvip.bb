@@ -32,6 +32,7 @@ IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-update-agents', '', d)}"
 IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)}"
+IMAGE_INSTALL += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', ' goldvip-ml', '', d)}"
 
 # add additional binaries in SD-card FAT partition
 SDCARDIMAGE_BOOT_EXTRA_FILES_append += "arm-trusted-firmware:fip.s32-sdcard "
