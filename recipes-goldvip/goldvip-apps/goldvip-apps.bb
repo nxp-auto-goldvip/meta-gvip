@@ -37,6 +37,10 @@ do_install() {
 	install -d ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.sh ${DESTDIR}/can-gw
 	install -m 0755 ${S}/can-gw/*.py ${DESTDIR}/can-gw
+	
+	install -d ${D}${sysconfdir}/init.d
+	install -m 0755 ${S}/can-gw/config/can_config ${D}${sysconfdir}/can_config
+	install -m 0755 ${S}/can-gw/service/can ${D}${sysconfdir}/init.d/can
 
 	install -d ${D}/${sbindir}
 	install -m 0755 ${S}/common/m7_core_load.py ${D}/${sbindir}
@@ -47,6 +51,7 @@ do_install() {
 	install -m 0644 ${S}/eth-gw/service/wifi_nxp.conf ${D}/${sysconfdir}
 
 	update-rc.d -r ${D} avtp_listener defaults 90
+	update-rc.d -r ${D} can defaults 90
 	update-rc.d -r ${D} wifi_setup defaults 91
 }
 
@@ -56,4 +61,5 @@ FILES_${PN} += "${sysconfdir}/*"
 FILES_${PN} += "/usr/local/sbin/*"
 FILES_${PN} += "${sbindir}/*.py"
 FILES_${PN} += "${sysconfdir}/init.d/avtp_listener"
+FILES_${PN} += "${sysconfdir}/init.d/can"
 FILES_${PN} += "${sysconfdir}/init.d/wifi_setup"
