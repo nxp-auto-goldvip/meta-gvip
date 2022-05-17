@@ -19,6 +19,8 @@ IMAGE_INSTALL += " \
     nxp-wlan-sdk \
     kernel-module-nxp89xx \
     linux-firmware-nxp89xx \
+    aws-iot-fleetwise-edge \
+    aws-obd-simulator \
 "
 
 # Allow builds without XEN enabled.

@@ -3,6 +3,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
 
 # add the required kernel configs for GoldVIP
 DELTA_KERNEL_DEFCONFIG_append = " \
+    fleetwise.cfg \
     greengrass.cfg \
     goldvip.cfg \
     ipsec.cfg \
@@ -11,6 +12,7 @@ DELTA_KERNEL_DEFCONFIG_append = " \
 "
 
 SRC_URI_append = " \
+    file://build/fleetwise.cfg \
     file://build/greengrass.cfg \
     file://build/goldvip.cfg \
     file://build/ipsec.cfg \
