@@ -30,7 +30,7 @@ RDEPENDS_${PN} += " \
 do_install() {
     install -d ${DESTDIR}/cloud-gw
     install -m 0755 ${S}/cloud-gw/greengrass_provision.py ${DESTDIR}/cloud-gw
-    install -m 0755 ${S}/cloud-gw/sja_provision.py ${DESTDIR}/cloud-gw
+    install -m 0755 ${S}/cloud-gw/client_device_provision.py ${DESTDIR}/cloud-gw
     install -m 0755 ${S}/cloud-gw/utils.py ${DESTDIR}/cloud-gw
     install -m 0755 ${S}/cloud-gw/ggv2_deployment_configurations.json ${DESTDIR}/cloud-gw
 
