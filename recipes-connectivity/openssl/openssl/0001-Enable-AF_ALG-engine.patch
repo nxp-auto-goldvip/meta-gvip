@@ -1,0 +1,53 @@
+From 4a333b558329107e7ac1a2ba08d8b4ca09e180a7 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Tue, 21 Jun 2022 16:47:19 +0300
+Subject: [PATCH] Enable AF_ALG engine
+
+Initialize the AF_ALG engine by default in order to
+offload some of the crypto operations to the HSE.
+
+Issue: GVIP-514
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ apps/openssl.cnf | 25 +++++++++++++++++++++++++
+ 1 file changed, 25 insertions(+)
+
+diff --git a/apps/openssl.cnf b/apps/openssl.cnf
+index 4acca4b044..56ba321e52 100644
+--- a/apps/openssl.cnf
++++ b/apps/openssl.cnf
+@@ -15,6 +15,31 @@ HOME			= .
+ #oid_file		= $ENV::HOME/.oid
+ oid_section		= new_oids
+ 
++#
++# GoldVIP-specific configuration
++#
++# Initialize the AF_ALG engine by default to offload the available cryptographic
++# operations to HSE. Comment out the following line to disable the cryptographic
++# offload capabilities and use the software implementation.
++
++openssl_conf = goldvip_openssl_def
++
++[goldvip_openssl_def]
++engines = goldvip_openssl_engines
++
++[goldvip_openssl_engines]
++af_alg = af_alg_engine
++
++[af_alg_engine]
++default_algorithms = ALL
++dynamic_path = /usr/lib/libaf_alg.so
++engine_id = af_alg
++init = 1
++
++#
++# End of the GoldVIP-specific config.
++#
++
+ # To use this configuration file with the "-extfile" option of the
+ # "openssl x509" utility, name here the section containing the
+ # X.509v3 extensions to use:
+-- 
+2.25.1
+

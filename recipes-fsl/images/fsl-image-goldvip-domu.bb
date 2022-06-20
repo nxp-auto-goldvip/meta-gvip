@@ -33,12 +33,17 @@ python() {
                                       ' goldvip-ota-client-container', ' goldvip-ota-client', d))
 }
 
+# Disable OpenSSL crypto offload for v2xdomu VM, since it doesn't have access to HSE.
+disable_crypto_offload() {
+    sed -i 's/^openssl_conf = goldvip_openssl_def/#&/' ${IMAGE_ROOTFS}${sysconfdir}/ssl/openssl.cnf
+}
+
 # Update hostname to v2xdomu.
 update_hostname() {
     GOLDVIP_DOMU_HOSTNAME="v2xdomu"
     echo "${GOLDVIP_DOMU_HOSTNAME}" > ${IMAGE_ROOTFS}${sysconfdir}/hostname
 }
-ROOTFS_POSTPROCESS_COMMAND += "update_hostname; "
+ROOTFS_POSTPROCESS_COMMAND += "update_hostname; disable_crypto_offload; "
 
 # The domU partition will be increased after the first GoldVIP image boot.
 # Allow yocto to add some extra space required for an initial boot based on
