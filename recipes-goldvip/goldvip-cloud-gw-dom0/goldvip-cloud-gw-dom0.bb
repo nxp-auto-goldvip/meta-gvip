@@ -23,13 +23,14 @@ RDEPENDS_${PN} += " \
     goldvip-telemetry-packages \
     python3-mmap \
     python3-fcntl \
+    python3-rticonnextdds-connector \
 "
 
 do_install() {
     install -d ${DESTDIR}
     install -m 0755 ${S}/dom0/*.py ${DESTDIR}
     install -m 0755 ${S}/dom0/local_server_config ${DESTDIR}
-    install -m 0600 ${S}/domU/server_config ${DESTDIR}
+    install -m 0666 ${S}/dom0/dds_telemetry.xml ${DESTDIR}
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${S}/dom0/service/telemetry ${D}${sysconfdir}/init.d/telemetry
 }

@@ -20,6 +20,7 @@ do_compile[noexec] = "1"
 
 RDEPENDS_${PN} += " \
     bash \
+    goldvip-telemetry-packages \
     ifmetric \
     iputils \
     procps \
@@ -27,6 +28,7 @@ RDEPENDS_${PN} += " \
     python3-boto3 \
     python3-scapy \
     python3-requests \
+    python3-rticonnextdds-connector \
     aws-iot-device-sdk-python-v2 \
     greengrass-bin \
     ntp ntpq \

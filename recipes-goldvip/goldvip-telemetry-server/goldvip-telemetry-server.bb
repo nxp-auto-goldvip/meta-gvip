@@ -27,8 +27,6 @@ do_install() {
     install -d ${DESTDIR}/telemetry-server
     install -d ${DESTDIR}/telemetry-server/templates
     install -m 0755 ${S}/telemetry-server/*.py ${DESTDIR}/telemetry-server
-    install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/domU/remote_client.py ${DESTDIR}/telemetry-server
-    install -m 0755 ${S}/cloud-gw/aws-lambda-functions/telemetry-function/domU/server_config ${DESTDIR}/telemetry-server
     install -m 0755 ${S}/telemetry-server/templates/index.html ${DESTDIR}/telemetry-server/templates
 
     install -d ${D}${sysconfdir}/init.d
