@@ -14,7 +14,6 @@ SRC_URI = " \
     file://${GOLDVIP_OTA_DIR}/${GOLDVIP_OTAMATIC_TARBALL} \
 "
 
-VEHIF_STATE_DIR="/home/root/ota/vehif_state"
 S = "${WORKDIR}/otamatic"
 RDEPENDS_${PN} += " \
     bash \
@@ -37,10 +36,6 @@ do_install() {
     install -d ${D}/data
     cp -R ${S}/resources/abqdata/* ${D}/data/
     cp -R ${D}/data/otamatic/factory_default_uptane ${D}/data/otamatic/uptane
-
-    # Initialize the simulated vehicle state.
-    install -d ${D}/${VEHIF_STATE_DIR}
-    cp -R ${S}/resources/vehif_state/* ${D}/${VEHIF_STATE_DIR}
 }
 
 # Set update-rc.d parameters.
@@ -48,7 +43,6 @@ INITSCRIPT_NAME = "otamatic"
 INITSCRIPT_PARAMS = "defaults 98"
 
 FILES_${PN} += " \
-    ${VEHIF_STATE_DIR} \
     /etc/init.d/otamatic \
     ${bindir}/otamatic_sample_app \
     /data \
