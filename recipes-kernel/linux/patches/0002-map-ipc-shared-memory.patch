@@ -2,11 +2,12 @@ Index: git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
 ===================================================================
 --- git.orig/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
 +++ git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
-@@ -34,6 +34,13 @@
+@@ -34,6 +34,14 @@
  		#size-cells = <2>;
  		ranges;
- 
+
 +		ipcf_shm: sram@34000000 {
++			compatible = "fsl,ipcf-shm";
 +			/* 1 MB */
 +			reg = <0x0 0x34000000 0x0 0x100000>;
 +			no-map;
