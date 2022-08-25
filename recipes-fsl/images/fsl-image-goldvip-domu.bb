@@ -23,6 +23,7 @@ IMAGE_INSTALL += " \
     greengrass-bin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client-demo', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-domu k3s-server', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-telemetry-server', 'goldvip-telemetry-server', '', d)} \
 "
 
 # Select the OTA client package based on DISTRO_FEATURES.
