@@ -30,7 +30,6 @@ do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${G
 IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-obd-simulator', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-iot-fleetwise-edge', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)} \
