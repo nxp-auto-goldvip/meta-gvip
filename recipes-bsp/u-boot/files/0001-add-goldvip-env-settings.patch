@@ -1,14 +1,16 @@
-Index: git/include/configs/s32.h
-===================================================================
---- git.orig/include/configs/s32.h
-+++ git/include/configs/s32.h
-@@ -329,6 +329,10 @@
- 	GMAC_EXTRA_ENV_SETTINGS \
- 	PFE_EXTRA_ENV_SETTINGS \
- 	PCIE_EXTRA_ENV_SETTINGS \
-+	"write_goldvip_images=echo Updating GoldVIP images; run write_atf; run write_gateway_app; run write_bootloader;\0 \
-+    write_bootloader=sf probe 6:0; setenv image boot-loader; run loadimage; sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0 \
-+    write_atf=sf probe 6:0; setenv image fip.s32-sdcard; run loadimage; sf erase 0x00100000 +${filesize}; sf write ${loadaddr} 0x00100000 ${filesize}; \0 \
-+    write_gateway_app=sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00300000 +${filesize};  sf write ${loadaddr} 0x00300000 ${filesize};\0"
- 
- #undef CONFIG_BOOTCOMMAND
+diff --git a/include/configs/s32g.h b/include/configs/s32g.h
+--- a/include/configs/s32g.h
++++ b/include/configs/s32g.h
+@@ -15,7 +15,11 @@
+ 	"pfe1addr=00:01:be:be:ef:22\0" \
+ 	"pfe2addr=00:01:be:be:ef:33\0" \
+ 	"ethact=eth_pfeng\0" \
+-	"pfengemac=" PFENG_EMAC "\0"
++	"pfengemac=" PFENG_EMAC "\0" \
++        "write_goldvip_images=echo Updating GoldVIP images; run write_atf; run write_gateway_app; run write_bootloader;\0 \
++         write_bootloader=sf probe 6:0; setenv image boot-loader; run loadimage; sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0 \
++         write_atf=sf probe 6:0; setenv image fip.s32-sdcard; run loadimage; sf erase 0x00100000 +${filesize}; sf write ${loadaddr} 0x00100000 ${filesize}; \0 \
++         write_gateway_app=sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00300000 +${filesize};  sf write ${loadaddr} 0x00300000 ${filesize};\0"
+ #  define PFE_INIT_CMD "pfeng stop; "
+ #else
+ #  define PFE_EXTRA_BOOT_ARGS

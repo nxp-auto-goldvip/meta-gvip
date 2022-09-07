@@ -2,14 +2,15 @@ Index: 1.0-r7/interfaces
 ===================================================================
 --- 1.0-r7.orig/interfaces
 +++ 1.0-r7/interfaces
-@@ -19,6 +19,11 @@ iface pfe2 inet dhcp
- pre-up [ -L /sys/class/net/pfe2 ]
- dhcpcd_opts -Gb
+@@ -23,6 +23,12 @@ pre-up [ -L /sys/class/net/pfe2 ]
+ dhcpcd_opts -LGb
+ up /sbin/ifconfig pfe2 up
  
 +auto aux0
-+iface aux0 inet dhcp
++iface aux0 inet manual
 +pre-up [ -L /sys/class/net/aux0 ]
-+dhcpcd_opts -Gb
++dhcpcd_opts -LGb
++up /sbin/ifconfig aux0 up
 +
  auto eth0
  iface eth0 inet dhcp

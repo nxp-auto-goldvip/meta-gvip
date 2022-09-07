@@ -14,6 +14,6 @@ Index: 1.0-r7/interfaces
 +gateway 10.255.255.1
 +metric 1023
 +
+ # To enable DHCP for an interface, replace "manual" with "dhcp" in iface command
  auto pfe0
- iface pfe0 inet dhcp
- pre-up [ -L /sys/class/net/pfe0 ]
+ iface pfe0 inet manual

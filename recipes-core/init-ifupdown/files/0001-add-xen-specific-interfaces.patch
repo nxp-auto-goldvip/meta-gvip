@@ -2,17 +2,19 @@ Index: 1.0-r7/interfaces
 ===================================================================
 --- 1.0-r7.orig/interfaces
 +++ 1.0-r7/interfaces
-@@ -25,6 +25,35 @@ pre-up [ -L /sys/class/net/aux0 ]
- dhcpcd_opts -Gb
+@@ -30,6 +30,37 @@ dhcpcd_opts -LGb
+ up /sbin/ifconfig aux0 up
  
  auto eth0
 +iface eth0 inet manual
++dhcpcd_opts -LGb
++up /sbin/ifconfig eth0 up
 +pre-up [ -L /sys/class/net/eth0 ]
  iface eth0 inet dhcp
  pre-up [ -L /sys/class/net/eth0 ]
--dhcpcd_opts -Gb
+-dhcpcd_opts -LGb
 +pre-up [ ! -L /sys/class/net/pfe2 ]
-+dhcpcd_opts -b
++dhcpcd_opts -Lb
 +
 +auto xenbr0
 +iface xenbr0 inet dhcp
@@ -24,7 +26,7 @@ Index: 1.0-r7/interfaces
 +pre-up ip link set dev eth0 up
 +post-down brctl delif xenbr0 eth0
 +post-down brctl delbr xenbr0
-+dhcpcd_opts -b
++dhcpcd_opts -Lb
 +
 +auto eth1
 +iface eth1 inet static

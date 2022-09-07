@@ -1,27 +1,21 @@
-Index: git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
+Index: git/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
 ===================================================================
---- git.orig/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
-+++ git/arch/arm64/boot/dts/freescale/fsl-s32g.dtsi
-@@ -152,7 +152,7 @@ pfe_hif2: hif@2 {
- 			status = "okay";
- 			interrupts = <GIC_SPI 192 IRQ_TYPE_EDGE_RISING>;
- 			reg = <2>;
--			fsl,pfeng-hif-mode = <PFENG_HIF_MODE_EXCLUSIVE>;
-+			fsl,pfeng-hif-mode = <PFENG_HIF_MODE_SHARED>;
+--- git.orig/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
++++ git/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
+@@ -152,14 +152,12 @@ pfe_netif2: ethernet@12 {
+ 			/* Network interface 'aux0' */
+ 			pfe_aux0: ethernet@13 {
+ 				compatible = "nxp,s32g-pfe-netif", "fsl,pfeng-logif";
+-				status = "disabled";
++				status = "okay";
+ 				reg = <13>;
+ 				local-mac-address = [ 00 04 9F BE EF 80 ];
+ 				nxp,pfeng-if-name = "aux0";
+ 				fsl,pfeng-if-name = "aux0";
+-				nxp,pfeng-hif-channels = <PFE_HIF_CHANNEL_0>,
+-							 <PFE_HIF_CHANNEL_1>,
+-							 <PFE_HIF_CHANNEL_2>;
++				nxp,pfeng-hif-channels = <PFE_HIF_CHANNEL_2>;
+ 				nxp,pfeng-netif-mode-aux;
+ 			};
  		};
- 
- 		/* PFE_HIF_3 */
-@@ -300,11 +300,11 @@ pfe_aux0: ethernet@3 {
- 			compatible = "fsl,pfeng-logif";
- 			#address-cells = <1>;
- 			#size-cells = <0>;
--			status = "disabled";
-+			status = "okay";
- 			local-mac-address = [ 00 04 9F BE EF 80 ];
- 			fsl,pfeng-if-name = "aux0";
- 			fsl,pfeng-logif-mode = <PFENG_LOGIF_MODE_AUX>;
--			fsl,pfeng-hif-channels = <&pfe_hif1>;
-+			fsl,pfeng-hif-channels = <&pfe_hif2>;
- 		};
- 	};
- 

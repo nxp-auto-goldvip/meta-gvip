@@ -1,0 +1,35 @@
+Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
+===================================================================
+--- git.orig/arch/arm64/boot/dts/freescale/s32g.dtsi
++++ git/arch/arm64/boot/dts/freescale/s32g.dtsi
+@@ -17,6 +17,13 @@
+ 
+ / {
+ 	reserved-memory {
++		ipcf_shm: sram@34100000 {
++			/* 1 MB */
++			reg = <0x0 0x34100000 0x0 0x100000>;
++			no-map;
++			status = "okay";
++		};
++
+ 		pfe_reserved_bmu2: pfebufs@34000000 {
+ 			compatible = "nxp,s32g-pfe-bmu2-pool";
+ 			/* BMU2: 512 KB */
+@@ -50,6 +57,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
+ 		/* ends 0x83600000 */
+ 	};
+ 
++	mc_rgm: mc_rgm@40078000 {
++		compatible = "fsl,s32gen1-rgm", "nxp,s32g-rgm", "syscon";
++		reg = <0x0 0x40078000 0x0 0x3000>;
++	};
++
++	mc_me: mc_me@40088000 {
++		compatible = "fsl,s32gen1-mc_me", "nxp,s32g-mc_me", "syscon";
++		reg = <0x0 0x40088000 0x0 0x3000>;
++	};
++
+ 	soc {
+ 		siul2@4009c000 {
+ 			compatible = "simple-mfd";
