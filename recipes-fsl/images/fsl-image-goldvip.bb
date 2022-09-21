@@ -36,7 +36,7 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-dom0', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-agents-demo', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
 "
 
 # Select the k3s and OTA Update Agents packages based on DISTRO_FEATURES content.
@@ -50,6 +50,9 @@ python() {
         d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
                                       ' goldvip-ota-agents-container', ' goldvip-ota-agents', d))
+        d.appendVar('IMAGE_INSTALL', \
+                    bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
+                                      ' goldvip-remote-ua-container', ' goldvip-remote-ua', d))
 }
 
 # add additional binaries in SD-card FAT partition
