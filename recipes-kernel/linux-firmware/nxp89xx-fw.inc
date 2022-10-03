@@ -1,4 +1,4 @@
-# Recipe pulled from https://source.codeaurora.org/external/imx/meta-imx/tree/meta-bsp/recipes-kernel/linux-firmware/
+# Recipe pulled from https://github.com/nxp-imx/meta-imx/tree/meta-bsp/recipes-kernel/linux-firmware/
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 

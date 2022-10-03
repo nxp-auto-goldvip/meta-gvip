@@ -1,7 +1,7 @@
 # Sysvinit service wrapper
 inherit update-rc.d
 
-GOLDVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/goldvip/gvip;protocol=https"
+GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 
 SRC_URI += "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH};name=gvip;destsuffix=gvip"

@@ -4,7 +4,7 @@ LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a
 
 inherit update-rc.d
 
-GOLDVIP_URL ?= "git://source.codeaurora.org/external/autobsps32/goldvip/gvip;protocol=https"
+GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 
 GOLDVIP_BINARIES_DIR ?= "."
