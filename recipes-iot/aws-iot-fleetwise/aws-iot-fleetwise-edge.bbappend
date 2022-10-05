@@ -7,6 +7,7 @@ GOLDVIP_BRANCH ?= "develop"
 SRC_URI += "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH};name=gvip;destsuffix=gvip"
 SRCREV_gvip = "${AUTOREV}"
 SRCREV_FORMAT = "fwe_gvip"
+SRCREV_fwe = "05a9d52159c78721f14aa70f641df557a4133bc8"
 
 DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
 
