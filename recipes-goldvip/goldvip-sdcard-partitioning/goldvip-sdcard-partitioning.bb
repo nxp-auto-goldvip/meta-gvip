@@ -5,7 +5,7 @@ for the Linux VM OTA use-case. Meant to be run only once."
 LICENSE = "LA_OPT_NXP_Software_License"
 LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
 
-GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/goldvip/gvip;protocol=https"
+GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 
 inherit update-rc.d
