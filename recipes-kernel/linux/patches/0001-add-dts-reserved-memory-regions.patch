@@ -2,11 +2,12 @@ Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
 ===================================================================
 --- git.orig/arch/arm64/boot/dts/freescale/s32g.dtsi
 +++ git/arch/arm64/boot/dts/freescale/s32g.dtsi
-@@ -17,6 +17,13 @@
+@@ -17,6 +17,14 @@
  
  / {
  	reserved-memory {
 +		ipcf_shm: sram@34100000 {
++			compatible = "nxp,s32g-ipcf-shm";
 +			/* 1 MB */
 +			reg = <0x0 0x34100000 0x0 0x100000>;
 +			no-map;
@@ -16,7 +17,7 @@ Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
  		pfe_reserved_bmu2: pfebufs@34000000 {
  			compatible = "nxp,s32g-pfe-bmu2-pool";
  			/* BMU2: 512 KB */
-@@ -50,6 +57,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
+@@ -50,6 +58,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
  		/* ends 0x83600000 */
  	};
  
