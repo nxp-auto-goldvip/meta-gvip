@@ -1,0 +1,7 @@
+# Copyright 2022 NXP
+# p11-kit module configuration for remote access to the HSE PKCS#11 interface
+remote: |ssh -q -oStrictHostKeyChecking=no -oUserKnownHostsFile=/dev/null root@10.0.100.10 p11-kit remote /usr/lib/libpkcs-hse.so
+critical: yes
+trust-policy: yes
+managed: yes
+log-calls: no

@@ -17,6 +17,7 @@ IMAGE_INSTALL += " \
     cronie \
     resolvconf \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'k3s', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-crypto', 'opensc p11-kit', '', d)} \
 "
 
 update_timestamp() {

@@ -1,0 +1,7 @@
+# Copyright 2022 NXP
+# p11-kit module configuration for the HSE PKCS#11 interface
+module: /usr/lib/libpkcs-hse.so
+critical: yes
+trust-policy: yes
+managed: yes
+log-calls: no
