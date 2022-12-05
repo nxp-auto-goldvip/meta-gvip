@@ -7,11 +7,12 @@ LIC_FILES_CHKSUM = "file://LICENSE.BSD;md5=f03611747c1e7d618ef405a8484ed48d"
 # Dummy entry to keep the recipe parser happy if we don't use this recipe
 NXP_FIRMWARE_LOCAL_DIR ?= "."
 
-# Choosing the HSE FW directory based on the selected device
-HSE_FWDIR_s32g2 ?= "${NXP_FIRMWARE_LOCAL_DIR}/HSE_FW_S32G2_0_1_0_5"
-HSE_FWDIR_s32g3 ?= "${NXP_FIRMWARE_LOCAL_DIR}/HSE_FW_S32G3_0_0_21_0"
+# Some default versions for each supported platform
+HSE_FW_VERSION_s32g2 = "HSE_FW_S32G2_0_1_0_5"
+HSE_FW_VERSION_s32g3 = "HSE_FW_S32G3_0_0_21_0"
+
 # Dummy entry
-HSE_FWDIR ?= "${NXP_FIRMWARE_LOCAL_DIR}/HSE_FW_S32G"
+HSE_FWDIR ?= "${NXP_FIRMWARE_LOCAL_DIR}/${HSE_FW_VERSION}"
 
 # Default variables defined via meta-alb layer configuration
 BRANCH ?= "${RELEASE_BASE}"
