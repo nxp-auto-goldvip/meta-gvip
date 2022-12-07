@@ -1,9 +1,7 @@
 # -*- mode: Conf; -*-
 SUMMARY     = "AWS IoT Greengrass Nucleus - Binary Distribution"
 DESCRIPTION = ""
-LICENSE     = "Apache-2"
-
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+LICENSE     = "Apache-2.0"
 
 S                          = "${WORKDIR}"
 GG_BASENAME                = "greengrass/v2"
@@ -13,14 +11,19 @@ SRC_URI                    = "https://d2s8p88vqu9w66.cloudfront.net/releases/gre
                               https://raw.githubusercontent.com/aws-greengrass/aws-greengrass-nucleus/main/LICENSE;name=license; \
                               file://greengrassv2-init.yaml \
                               "
-SRC_URI[payload.md5sum]    = "d7d702d2844336250c6cc325f958d7fa"
-SRC_URI[payload.sha256sum] = "fb8d6923b2c6471a8eecc1839802377e6e7df9192746508aa72ef515ea9988cc"
-SRC_URI[license.md5sum]    = "34400b68072d710fecd0a2940a0d1658"
+SRC_URI[payload.sha256sum] = "87ead77c90bbcd7877264f79074253bc82d3bb4c67b6e509c05a9aaf18d2b971"
+
 SRC_URI[license.sha256sum] = "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b"
 
+# also available in master (not kirkstone) in classes-recipe: github-releases
+UPSTREAM_CHECK_REGEX ?= "releases/tag/v?(?P<pver>\d+(\.\d+)+)"
+
+UPSTREAM_CHECK_URI = "https://github.com/aws-greengrass/aws-greengrass-nucleus/tags"
+
+
 GG_USESYSTEMD = "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'yes', 'no', d)}"
-RDEPENDS_${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'ntp-systemd', '', d)}"
-RDEPENDS_${PN} += "corretto-11-bin ca-certificates python3 python3-json python3-numbers sudo"
+RDEPENDS:${PN} += "${@bb.utils.contains('DISTRO_FEATURES', 'systemd', 'ntp-systemd', '', d)}"
+RDEPENDS:${PN} += "corretto-11-bin ca-certificates python3-core python3-json python3-numbers sudo"
 
 do_configure[noexec] = "1"
 do_compile[noexec]   = "1"
@@ -41,8 +44,7 @@ do_install() {
     install -m 0640 ${WORKDIR}/conf/recipe.yaml                ${GG_ROOT}/alts/init/distro/conf/recipe.yaml
     install -m 0740 ${WORKDIR}/lib/Greengrass.jar              ${GG_ROOT}/alts/init/distro/lib/Greengrass.jar
 
-    cd ${GG_ROOT}/alts
-    ln -s -r /${GG_ROOT}/alts/init current
+    ln -s /${GG_ROOT}/alts/init /${GG_ROOT}/alts/current
     
     # Install systemd service file
     install -d ${D}${systemd_unitdir}/system/
@@ -51,22 +53,22 @@ do_install() {
     sed -i -e "s,REPLACE_WITH_GG_LOADER_PID_FILE,/var/run/greengrass.pid,g" ${D}${systemd_unitdir}/system/greengrass.service
 }
 
-FILES_${PN} = "/${GG_BASENAME} \
+FILES:${PN} = "/${GG_BASENAME} \
                ${sysconfdir} \
                ${systemd_unitdir}"
 
-CONFFILES_${PN} += "/${GG_BASENAME}/config/config.yaml.clean"
+CONFFILES:${PN} += "/${GG_BASENAME}/config/config.yaml.clean"
 
 inherit systemd
 SYSTEMD_AUTO_ENABLE = "enable"
-SYSTEMD_SERVICE_${PN} = "greengrass.service"
+SYSTEMD_SERVICE:${PN} = "greengrass.service"
 
 inherit useradd
 
 USERADD_PACKAGES = "${PN}"
-GROUPADD_PARAM_${PN} = "-r ggc_group"
-USERADD_PARAM_${PN} = "-r -M -N -g ggc_group -s /bin/false ggc_user"
-GROUP_MEMS_PARAM_${PN} = ""
+GROUPADD_PARAM:${PN} = "-r ggc_group"
+USERADD_PARAM:${PN} = "-r -M -N -g ggc_group -s /bin/false ggc_user"
+GROUP_MEMS_PARAM:${PN} = ""
 
 #
 # Disable failing QA checks:
@@ -74,4 +76,5 @@ GROUP_MEMS_PARAM_${PN} = ""
 #   Binary was already stripped
 #   No GNU_HASH in the elf binary
 #
-INSANE_SKIP_${PN} += "already-stripped ldflags file-rdeps"
+INSANE_SKIP:${PN} += "already-stripped ldflags file-rdeps"
+
