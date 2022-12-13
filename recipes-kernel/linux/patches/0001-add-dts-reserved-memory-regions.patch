@@ -2,21 +2,37 @@ Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
 ===================================================================
 --- git.orig/arch/arm64/boot/dts/freescale/s32g.dtsi
 +++ git/arch/arm64/boot/dts/freescale/s32g.dtsi
-@@ -17,6 +17,14 @@
+@@ -17,18 +17,26 @@
  
  / {
  	reserved-memory {
-+		ipcf_shm: sram@34100000 {
+-		pfe_reserved_bmu2: pfebufs@34000000 {
++		ipcf_shm: sram@34400000 {
 +			compatible = "nxp,s32g-ipcf-shm";
 +			/* 1 MB */
-+			reg = <0x0 0x34100000 0x0 0x100000>;
++			reg = <0x0 0x34400000 0x0 0x100000>;
 +			no-map;
 +			status = "okay";
 +		};
 +
- 		pfe_reserved_bmu2: pfebufs@34000000 {
++		pfe_reserved_bmu2: pfebufs@34500000 {
  			compatible = "nxp,s32g-pfe-bmu2-pool";
  			/* BMU2: 512 KB */
+-			reg = <0 0x34000000 0 0x80000>;
++			reg = <0 0x34500000 0 0x80000>;
+ 			no-map;
+ 			status = "okay";
+ 		};
+ 
+-		pfe_reserved_rt: pfebufs@34080000 {
++		pfe_reserved_rt: pfebufs@34580000 {
+ 			compatible = "nxp,s32g-pfe-rt-pool";
+ 			/* RT: 128 KB */
+-			reg = <0 0x34080000 0 0x20000>;
++			reg = <0 0x34580000 0 0x20000>;
+ 			no-map;
+ 			status = "okay";
+ 		};
 @@ -50,6 +58,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
  		/* ends 0x83600000 */
  	};

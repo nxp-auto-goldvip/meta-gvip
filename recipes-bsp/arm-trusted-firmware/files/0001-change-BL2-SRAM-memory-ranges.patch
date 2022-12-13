@@ -1,0 +1,40 @@
+diff --git a/plat/nxp/s32/include/s32_platform_def.h b/plat/nxp/s32/include/s32_platform_def.h
+index 09a11bc4d..1d465080a 100644
+--- a/plat/nxp/s32/include/s32_platform_def.h
++++ b/plat/nxp/s32/include/s32_platform_def.h
+@@ -91,8 +91,7 @@
+  * enough to prevent overflowing onto the adjacent SRAM image. Handle with care,
+  * wear a helmet and compile with -Os.
+  */
+-#define BOOTROM_ADMA_RSRVD_BASE		(0x343ff000)
+-#define BL2_LIMIT					(BOOTROM_ADMA_RSRVD_BASE - 1)
++#define BL2_LIMIT		(0x34700000 - 1)
+ 
+ /* U-boot addresses in DDR.
+  * BL33_MAX_DTB_SIZE and BL33_ENTRYPOINT must be kept in sync
+@@ -137,7 +136,11 @@
+ #define S32_BL32_BASE		(BL31_BASE - S32_BL32_SIZE)
+ #define S32_BL32_LIMIT		(BL31_BASE)
+ 
+-#define FIP_BASE		(S32_SRAM_END - FIP_ROFFSET)
++/* FIP_BASE is used to load the FIP header in SRAM memory; while GoldVIP reserves a 1MB range in SRAM for
++  * ATF, only the BL2 is using it and the binary image is small enough (<200KB) to reuse some of that memory
++  * range for storing the (duplicated) FIP header.
++  */
++#define FIP_BASE		(0x34680000)
+ 
+ /* FIXME value randomly chosen; should probably be revisited */
+ #define PLATFORM_STACK_SIZE		0x4000
+diff --git a/plat/nxp/s32/s32_common.mk b/plat/nxp/s32/s32_common.mk
+index f2c6d3f77..8fc9393d8 100644
+--- a/plat/nxp/s32/s32_common.mk
++++ b/plat/nxp/s32/s32_common.mk
+@@ -415,7 +415,7 @@ endif
+ ifneq (${HSE_SECBOOT},)
+ BL2_BASE		:= 0x34080000
+ else
+-BL2_BASE		:= 0x34302000
++BL2_BASE		:= 0x34610000
+ endif
+ $(eval $(call add_define,BL2_BASE))
+ 
