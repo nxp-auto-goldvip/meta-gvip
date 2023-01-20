@@ -44,7 +44,7 @@ do_install() {
     install -m 0640 ${WORKDIR}/conf/recipe.yaml                ${GG_ROOT}/alts/init/distro/conf/recipe.yaml
     install -m 0740 ${WORKDIR}/lib/Greengrass.jar              ${GG_ROOT}/alts/init/distro/lib/Greengrass.jar
 
-    ln -s /${GG_ROOT}/alts/init /${GG_ROOT}/alts/current
+    ln -s /${GG_BASENAME}/alts/init /${GG_ROOT}/alts/current
     
     # Install systemd service file
     install -d ${D}${systemd_unitdir}/system/
