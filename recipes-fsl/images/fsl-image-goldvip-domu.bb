@@ -25,6 +25,7 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-crypto', 'p11-kit-hse-remote', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client-demo', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-telemetry-server', 'goldvip-telemetry-server', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-adaptive-autosar', 'eb-ara', '', d)} \
 "
 
 # Select the OTA client package based on DISTRO_FEATURES.
