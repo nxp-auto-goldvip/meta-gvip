@@ -4,7 +4,7 @@
 
 SUMMARY = "Container running the GoldVIP OTA Remote Update Agent"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=7dbfb74206189d683981a89b8912ce5d"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=173a22a8dfc7298a74c300ecbfd30c6c"
 
 require container-base-image.bb
 
