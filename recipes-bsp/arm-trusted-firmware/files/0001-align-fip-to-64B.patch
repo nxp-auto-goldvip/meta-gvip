@@ -2,9 +2,9 @@ Index: git/plat/nxp/s32/s32_common.mk
 ===================================================================
 --- git.orig/plat/nxp/s32/s32_common.mk
 +++ git/plat/nxp/s32/s32_common.mk
-@@ -399,7 +399,7 @@ else
+@@ -388,7 +388,7 @@ ${MKIMAGE_FIP_CONF_FILE}: ${BL2_W_DTB_SIZE_FILE} ${FIP_HDR_SIZE_FILE} add_to_fip
+ 	T_SIZE=0x$$($(call hexbc, $${BL2_W_DTB_SIZE}, +, $${HDR_SIZE})); \
  	echo "DATA_FILE SIZE $$T_SIZE" >> $@
- endif
  
 -FIP_ALIGN := 16
 +FIP_ALIGN := 64
