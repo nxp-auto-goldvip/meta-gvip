@@ -10,7 +10,10 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 
 inherit module-base
 
-SRC_URI = "git://github.com/eembc/coremark.git;branch=main"
+SRC_URI = " \
+    git://github.com/eembc/coremark.git;branch=main \
+    file://benchmark.sh \
+"
 SRCREV = "eefc986ebd3452d6adde22eafaff3e5c859f29e4"
 
 S = "${WORKDIR}/git"
