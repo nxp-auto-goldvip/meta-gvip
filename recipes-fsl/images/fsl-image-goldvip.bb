@@ -19,6 +19,7 @@ IMAGE_INSTALL += " \
     nxp-wlan-sdk \
     kernel-module-nxp89xx \
     linux-firmware-nxp89xx \
+    goldvip-dds \
 "
 
 # Allow builds without XEN enabled.
