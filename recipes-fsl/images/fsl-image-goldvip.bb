@@ -29,12 +29,12 @@ do_image_sdcard[depends] += "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '${G
 
 # Add GoldVIP optional packages.
 IMAGE_INSTALL += " \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-benchmark', 'goldvip-benchmark', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-crypto', 'pkcs11-hse p11-kit-hse', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-iot-fleetwise-edge', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-benchmark', 'coremark', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-dom0', '', d)} \

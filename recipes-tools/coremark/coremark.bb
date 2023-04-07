@@ -12,7 +12,6 @@ inherit module-base
 
 SRC_URI = " \
     git://github.com/eembc/coremark.git;branch=main \
-    file://benchmark.sh \
 "
 SRCREV = "eefc986ebd3452d6adde22eafaff3e5c859f29e4"
 
@@ -29,7 +28,6 @@ DESTDIR = "/home/root/benchmark"
 do_install() {
     install -d ${D}${DESTDIR}
     install -m 0755 ${S}/coremark.exe ${D}${DESTDIR}/coremark.exe
-    install -m 0755 ${WORKDIR}/benchmark.sh ${D}${DESTDIR}/benchmark.sh
 }
 
 FILES_${PN} += "${DESTDIR}"
