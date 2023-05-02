@@ -4,7 +4,7 @@
 
 SUMMARY = "Package GoldVIP  Remote Update Agent container image"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=173a22a8dfc7298a74c300ecbfd30c6c"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=5ceedb30e981c71faacf42522463f3ff"
 
 # Path where the k3s expects the air-gapped images.
 IMAGES_DIR = "/var/lib/rancher/k3s/agent/images/"
