@@ -13,12 +13,12 @@ Index: 1.0-r7/interfaces
  iface eth0 inet dhcp
  pre-up [ -L /sys/class/net/eth0 ]
 -dhcpcd_opts -LGb
-+pre-up [ ! -L /sys/class/net/pfe2 ]
++pre-up [ ! -L /sys/class/net/can0 ]
 +dhcpcd_opts -Lb
 +
 +auto xenbr0
 +iface xenbr0 inet dhcp
-+pre-up [ -L /sys/class/net/pfe2 ]
++pre-up [ -L /sys/class/net/can0 ]
 +pre-up brctl addbr xenbr0
 +pre-up echo 0 > /sys/class/net/xenbr0/bridge/default_pvid
 +pre-up brctl addif xenbr0 eth0
@@ -30,13 +30,13 @@ Index: 1.0-r7/interfaces
 +
 +auto eth1
 +iface eth1 inet static
-+pre-up [ ! -L /sys/class/net/pfe2 ]
++pre-up [ ! -L /sys/class/net/can0 ]
 +address 10.0.100.20
 +netmask 255.255.255.0
 +
 +auto v2xbr
 +iface v2xbr inet static
-+pre-up [ -L /sys/class/net/pfe2 ]
++pre-up [ -L /sys/class/net/can0 ]
 +pre-up brctl addbr v2xbr
 +post-down brctl delbr v2xbr
 +address 10.0.100.10

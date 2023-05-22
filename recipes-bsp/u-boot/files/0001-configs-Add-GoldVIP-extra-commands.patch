@@ -1,0 +1,27 @@
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 22 Jun 2023 14:58:38 +0300
+Subject: [PATCH] configs: Add GoldVIP extra commands
+
+Issue: GVIP-890
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+
+diff --git a/include/configs/s32g.h b/include/configs/s32g.h
+--- a/include/configs/s32g.h
++++ b/include/configs/s32g.h
+@@ -23,9 +23,16 @@
+ #  define PFE_INIT_CMD ""
+ #endif
+ 
++#define GOLDVIP_EXTRA_ENV_SETTINGS \
++	"write_goldvip_images=echo 'Flashing the GoldVIP images'; run write_atf; run write_gateway_app; run write_bootloader;\0" \
++	"write_bootloader=echo 'Flashing the real-time bootloader'; sf probe 6:0; setenv image boot-loader; run loadimage; sf erase 0x0 +${filesize}; sf write ${loadaddr} 0x0 ${filesize};\0" \
++	"write_atf=echo 'Flashing the ATF image'; sf probe 6:0; setenv image fip.s32-sdcard; run loadimage; sf erase 0x00200000 +${filesize}; sf write ${loadaddr} 0x00200000 ${filesize}; \0" \
++	"write_gateway_app=echo 'Flashing the real-time gateway application'; sf probe 6:0; setenv image goldvip-gateway.bin; run loadimage; sf erase 0x00400000 +${filesize};  sf write ${loadaddr} 0x00400000 ${filesize};\0"
++
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	S32CC_ENV_SETTINGS \
+ 	PFE_EXTRA_ENV_SETTINGS \
++	GOLDVIP_EXTRA_ENV_SETTINGS \
+ 
+ #define GMAC1_ENABLE_VAR_VALUE ""
+ 

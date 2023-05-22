@@ -1,0 +1,54 @@
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 22 Jun 2023 15:02:50 +0300
+Subject: [PATCH 2/2] configs: Updates required for PFE slave instance
+
+Issue: GVIP-890
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+
+diff --git a/include/configs/s32g.h b/include/configs/s32g.h
+--- a/include/configs/s32g.h
++++ b/include/configs/s32g.h
+@@ -16,7 +16,7 @@
+ 	"pfe2addr=00:01:be:be:ef:33\0" \
+ 	"ethact=eth_pfeng\0" \
+ 	"pfengemac=" PFENG_EMAC "\0"
+-#  define PFE_INIT_CMD "pfeng stop; "
++#  define PFE_INIT_CMD "pfeng stop; mw.l 0x4007ca00 0x1e; "
+ #else
+ #  define PFE_EXTRA_BOOT_ARGS
+ #  define PFE_EXTRA_ENV_SETTINGS
+diff --git a/include/configs/s32g274ardb2.h b/include/configs/s32g274ardb2.h
+index de0d1706f2..22cca3fef7 100644
+--- a/include/configs/s32g274ardb2.h
++++ b/include/configs/s32g274ardb2.h
+@@ -9,11 +9,11 @@
+ 
+ #define EXTRA_BOOTCOMMAND		PFE_INIT_CMD
+ #define EXTRA_BOOT_ARGS			PFE_EXTRA_BOOT_ARGS
+-#define FDT_FILE			"s32g274a-rdb2.dtb"
++#define FDT_FILE			"s32g274a-rdb2-pfems.dtb"
+ 
+ #ifdef CONFIG_FSL_PFENG
+ #  define PFENG_EMAC			"0"
+-#  define PFENG_MODE			"enable,sgmii,none,rgmii"
++#  define PFENG_MODE			"disable,sgmii,none,rgmii"
+ #endif
+ 
+ #endif
+diff --git a/include/configs/s32g399ardb3.h b/include/configs/s32g399ardb3.h
+index fc26b73f1b..da7dee26e7 100644
+--- a/include/configs/s32g399ardb3.h
++++ b/include/configs/s32g399ardb3.h
+@@ -9,10 +9,10 @@
+ 
+ #define EXTRA_BOOTCOMMAND		PFE_INIT_CMD
+ #define EXTRA_BOOT_ARGS			PFE_EXTRA_BOOT_ARGS
+-#define FDT_FILE			"s32g399a-rdb3.dtb"
++#define FDT_FILE			"s32g399a-rdb3-pfems.dtb"
+ 
+ #ifdef CONFIG_FSL_PFENG
+-#  define PFENG_MODE			"enable,sgmii,sgmii,rgmii"
++#  define PFENG_MODE			"disable,sgmii,sgmii,rgmii"
+ #  define PFENG_EMAC			"0"
+ #endif
+ 

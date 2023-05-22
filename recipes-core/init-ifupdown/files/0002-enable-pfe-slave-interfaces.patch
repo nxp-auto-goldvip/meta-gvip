@@ -1,0 +1,50 @@
+Index: 1.0-r7/interfaces
+===================================================================
+--- 1.0-r7.orig/interfaces
++++ 1.0-r7/interfaces
+@@ -13,29 +13,29 @@ gateway 10.255.255.1
+ metric 1023
+ 
+ # To enable DHCP for an interface, replace "manual" with "dhcp" in iface command
+-auto pfe0
+-iface pfe0 inet manual
+-pre-up [ -L /sys/class/net/pfe0 ]
++auto pfe0sl
++iface pfe0sl inet manual
++pre-up [ -L /sys/class/net/pfe0sl ]
+ dhcpcd_opts -LGb
+-up /sbin/ifconfig pfe0 up
++up /sbin/ifconfig pfe0sl up
+ 
+-auto pfe1
+-iface pfe1 inet manual
+-pre-up [ -L /sys/class/net/pfe1 ]
++auto pfe1sl
++iface pfe1sl inet manual
++pre-up [ -L /sys/class/net/pfe1sl ]
+ dhcpcd_opts -LGb
+-up /sbin/ifconfig pfe1 up
++up /sbin/ifconfig pfe1sl up
+ 
+-auto pfe2
+-iface pfe2 inet manual
+-pre-up [ -L /sys/class/net/pfe2 ]
++auto pfe2sl
++iface pfe2sl inet manual
++pre-up [ -L /sys/class/net/pfe2sl ]
+ dhcpcd_opts -LGb
+-up /sbin/ifconfig pfe2 up
++up /sbin/ifconfig pfe2sl up
+ 
+-auto aux0
+-iface aux0 inet manual
+-pre-up [ -L /sys/class/net/aux0 ]
++auto aux0sl
++iface aux0sl inet manual
++pre-up [ -L /sys/class/net/aux0sl ]
+ dhcpcd_opts -LGb
+-up /sbin/ifconfig aux0 up
++up /sbin/ifconfig aux0sl up
+ 
+ auto eth0
+ iface eth0 inet manual
