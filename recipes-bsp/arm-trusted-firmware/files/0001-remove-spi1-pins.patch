@@ -1,0 +1,13 @@
+diff --git a/fdts/s32gxxxa-rdb.dtsi b/fdts/s32gxxxa-rdb.dtsi
+index 267bc04fa..82435a61b 100644
+--- a/fdts/s32gxxxa-rdb.dtsi
++++ b/fdts/s32gxxxa-rdb.dtsi
+@@ -18,7 +18,7 @@
+ &spi1 {
+ 	pinctrl-0 = <&dspi1_pins>;
+ 	pinctrl-names = "default";
+-	status = "okay";
++	status = "disabled";
+ };
+ 
+ &spi5 {

@@ -20,6 +20,7 @@ SRC_URI_append = " \
     file://build/pcie.cfg \
     file://0001-enable-aux-interface-in-pfe.patch;patch=1 \
     file://0001-add-dts-reserved-memory-regions.patch;patch=1 \
+    file://0001-remove-spi1-pins.patch;patch=1 \
 "
 
 # Containerization configuration
