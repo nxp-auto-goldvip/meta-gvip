@@ -11,7 +11,6 @@ IMAGE_INSTALL += " \
     ifmetric \
     strongswan \
     ntp ntpq \
-    python-pip \
     python3-pip \
     openjdk-8 \
     cronie \

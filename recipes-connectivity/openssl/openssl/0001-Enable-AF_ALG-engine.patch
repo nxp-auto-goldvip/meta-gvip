@@ -16,10 +16,10 @@ diff --git a/apps/openssl.cnf b/apps/openssl.cnf
 index 4acca4b044..56ba321e52 100644
 --- a/apps/openssl.cnf
 +++ b/apps/openssl.cnf
-@@ -15,6 +15,31 @@ HOME			= .
- #oid_file		= $ENV::HOME/.oid
- oid_section		= new_oids
- 
+@@ -23,6 +23,31 @@ config_diagnostics = 1
+ # oid_file       = $ENV::HOME/.oid
+ oid_section = new_oids
+
 +#
 +# GoldVIP-specific configuration
 +#
@@ -27,7 +27,7 @@ index 4acca4b044..56ba321e52 100644
 +# operations to HSE. Comment out the following line to disable the cryptographic
 +# offload capabilities and use the software implementation.
 +
-+openssl_conf = goldvip_openssl_def
++#openssl_conf = goldvip_openssl_def
 +
 +[goldvip_openssl_def]
 +engines = goldvip_openssl_engines

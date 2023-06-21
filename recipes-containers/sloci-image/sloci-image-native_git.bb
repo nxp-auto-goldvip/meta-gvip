@@ -2,7 +2,7 @@ SUMMARY = "A simple CLI tool for packing rootfs into a single-layer OCI image"
 LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=896c8ffa3d0539d0d980d0217269969d"
 SRC_URI = " \
-    git://github.com/jirutka/sloci-image.git \
+    git://github.com/jirutka/sloci-image.git;branch=master;protocol=https \
     file://0001-sloci-image-Add-annotations-to-OCI-manifest.patch \
 "
 
