@@ -15,7 +15,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/otamatic"
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     libcrypto \
     libssl \
@@ -42,7 +42,7 @@ do_install() {
 INITSCRIPT_NAME = "otamatic"
 INITSCRIPT_PARAMS = "defaults 98"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /etc/init.d/otamatic \
     ${bindir}/otamatic_sample_app \
     /data \

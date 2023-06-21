@@ -1,8 +1,8 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/${PN}:"
-FILESEXTRAPATHS_prepend := "${THISDIR}/patches:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/patches:"
 
 # Add the required kernel configs for GoldVIP
-DELTA_KERNEL_DEFCONFIG_append = " \
+DELTA_KERNEL_DEFCONFIG:append = " \
     fleetwise.cfg \
     greengrass.cfg \
     goldvip.cfg \
@@ -11,7 +11,7 @@ DELTA_KERNEL_DEFCONFIG_append = " \
     pcie.cfg \
 "
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://build/fleetwise.cfg \
     file://build/greengrass.cfg \
     file://build/goldvip.cfg \
@@ -24,9 +24,9 @@ SRC_URI_append = " \
 "
 
 # Containerization configuration
-DELTA_KERNEL_DEFCONFIG_append = " \
+DELTA_KERNEL_DEFCONFIG:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'containerization.cfg', '', d)} \
 "
-SRC_URI_append = " \
+SRC_URI:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'file://build/containerization.cfg', '', d)} \
 "

@@ -1,6 +1,4 @@
-#
-# Copyright 2022 NXP
-#
+# Copyright 2022-2023 NXP
 
 inherit update-rc.d
 
@@ -37,7 +35,7 @@ K3S_IMAGES_DIR = "/var/lib/rancher/k3s/agent/images"
 PAUSE_CONTAINER_TAG = "rancher/mirrored-pause:3.5"
 
 # Install the pre-built binary, the pause container and the agent/server services.
-do_install_append() {
+do_install:append() {
     install -d ${D}${BIN_PREFIX}/bin
     install -m 755 ${WORKDIR}/k3s-bin ${D}${BIN_PREFIX}/bin/k3s
     install -m 755 ${WORKDIR}/k3s-killall.sh ${D}${BIN_PREFIX}/bin
@@ -65,17 +63,17 @@ do_install_append() {
 PACKAGES =+ "${PN}-airgap-images"
 
 INITSCRIPT_PACKAGES = "${PN}-server ${PN}-agent"
-INITSCRIPT_NAME_${PN}-server = "k3s-server"
-INITSCRIPT_PARAMS_${PN}-server = "defaults 90"
-INITSCRIPT_NAME_${PN}-agent = "k3s-agent"
-INITSCRIPT_PARAMS_${PN}-agent = "defaults 90"
+INITSCRIPT_NAME:${PN}-server = "k3s-server"
+INITSCRIPT_PARAMS:${PN}-server = "defaults 90"
+INITSCRIPT_NAME:${PN}-agent = "k3s-agent"
+INITSCRIPT_PARAMS:${PN}-agent = "defaults 90"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${K3S_IMAGES_DIR}/pause-container.tar \
     ${BIN_PREFIX}/bin/k3s-killall.sh \
 "
 
-FILES_${PN}-airgap-images += "${K3S_IMAGES_DIR}/k3s-airgap-images.tar.zst"
-FILES_${PN}-agent += "${sysconfdir}/init.d/k3s-agent"
-FILES_${PN}-server += "${sysconfdir}/init.d/k3s-server"
+FILES:${PN}-airgap-images += "${K3S_IMAGES_DIR}/k3s-airgap-images.tar.zst"
+FILES:${PN}-agent += "${sysconfdir}/init.d/k3s-agent"
+FILES:${PN}-server += "${sysconfdir}/init.d/k3s-server"
 

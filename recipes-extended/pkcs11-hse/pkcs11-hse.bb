@@ -21,7 +21,7 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
 
-RDEPENDS_${PN} += " openssl libp11"
+RDEPENDS:${PN} += " openssl libp11"
 
 EXTRA_OEMAKE = " \
 	CROSS_COMPILE=${TARGET_PREFIX} \
@@ -32,7 +32,7 @@ EXTRA_OEMAKE = " \
 CFLAGS = " -shared -fPIC -Wall -fno-builtin --sysroot=${STAGING_DIR_TARGET}"
 LDFLAGS = " --sysroot=${STAGING_DIR_TARGET}"
 
-INSANE_SKIP_${PN} += " ldflags"
+INSANE_SKIP:${PN} += " ldflags"
 INHIBIT_PACKAGE_STRIP = "1"
 INHIBIT_SYSROOT_STRIP = "1"
 SOLIBS = ".so"
@@ -45,7 +45,7 @@ do_install () {
     ln -sr ${D}${libdir}/libhse.so.1.0 ${D}${libdir}/libhse.so.1
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${libdir}/* \
 "
 

@@ -16,7 +16,7 @@ SRC_URI = " \
 S = "${WORKDIR}/otamatic/resources"
 DESTDIR = "/home/root/ota/demo"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     python3-requests \
     python3-rich \
@@ -31,7 +31,7 @@ do_install() {
     cp -R ${S}/demo/* ${D}${DESTDIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
 "
 

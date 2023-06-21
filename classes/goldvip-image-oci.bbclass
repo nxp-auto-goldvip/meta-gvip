@@ -26,7 +26,7 @@
 # to be sure, we'll repeat it here.
 ROOTFS_BOOTSTRAP_INSTALL = ""
 # we want container to be created
-IMAGE_TYPEDEP_oci = "container"
+IMAGE_TYPEDEP:oci = "container"
 # sloci is the script/project that will create the oci image
 do_image_oci[depends] += "sloci-image-native:do_populate_sysroot"
 
@@ -77,7 +77,7 @@ def oci_map_subarch(a, f, d):
             return ''
     return ''
 
-IMAGE_CMD_oci() {
+IMAGE_CMD:oci() {
     sloci_options=""
 
     bbdebug 1 "OCI image settings:"

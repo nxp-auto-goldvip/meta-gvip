@@ -23,9 +23,9 @@ S = "${WORKDIR}/git"
 do_install[depends] += "worker-kubeconfig-provision-image:do_image_complete"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "k3s"
+RDEPENDS:${PN} += "k3s"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${K3S_CONFIG_DIR}
     install -m 0644 ${S}/containers/conf/dom0/* ${D}/${K3S_CONFIG_DIR}
 
@@ -33,7 +33,7 @@ do_install_append() {
     install -m 0644 ${DEPLOY_DIR_IMAGE}/worker-kubeconfig-provision-image-${MACHINE}.oci-image.tar ${D}${IMAGES_DIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${IMAGES_DIR} \
     ${K3S_CONFIG_DIR} \
 "

@@ -14,11 +14,11 @@ DESTDIR = "${D}/etc/xen/auto"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += "bash"
+RDEPENDS:${PN} += "bash"
 
 do_install() {
 	install -d ${DESTDIR}
 	install -m 644 ${S}/xen/cfg/${MACHINE}/V2Xdomu.cfg ${DESTDIR}
 }
 
-FILES_${PN} += "/etc/xen/auto/V2Xdomu.cfg"
+FILES:${PN} += "/etc/xen/auto/V2Xdomu.cfg"

@@ -1,6 +1,4 @@
-#
-# Copyright 2022 NXP
-#
+# Copyright 2022-2023 NXP
 
 SUMMARY = "Container running the GoldVIP OTA Remote Update Agent"
 LICENSE = "LA_OPT_NXP_Software_License"
@@ -17,4 +15,5 @@ OCI_IMAGE_ENTRYPOINT_ARGS = " \
     /home/root/ota/goldvip_remote_ua \
 "
 
-IMAGE_INSTALL += " goldvip-remote-ua"
+IMAGE_INSTALL:append = " goldvip-remote-ua"
+

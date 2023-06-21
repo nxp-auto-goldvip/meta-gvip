@@ -15,11 +15,11 @@ S = "${WORKDIR}/rticonnextdds_connector-${PV}"
 
 inherit setuptools3
 
-do_install_append_aarch64() {
+do_install:append:aarch64() {
     # The pypi archive packages shared libraries for multiple platforms, which causes
     # problems in do_package and do_populate_sysroot steps. Keep only the shared libraries
     # meant for the current architecture. One other option would have  been to update the
-    # FILES_${PN} variable, but must account for all the other files that must be included
+    # FILES:${PN} variable, but must account for all the other files that must be included
     # in the package (setuptools3 class includes a glob on ${PYTHON_SITEPACKAGES_DIR} which
     # contains some additional directories, i.e. egg-info dir).
     for dir in $(ls -d ${D}${PYTHON_SITEPACKAGES_DIR}/rticonnextdds-connector/lib/*/); do

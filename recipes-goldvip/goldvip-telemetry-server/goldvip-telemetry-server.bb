@@ -18,7 +18,7 @@ DESTDIR = "${D}/home/root"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     python3-flask \
     javascript-plotly \
 "
@@ -37,7 +37,7 @@ do_install() {
 INITSCRIPT_NAME = "telemetry-server"
 INITSCRIPT_PARAMS = "defaults 70"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /home/root/telemetry-server/ \
     /etc/init.d/telemetry-server \
 "

@@ -9,7 +9,7 @@ S = "${WORKDIR}/git"
 
 inherit setuptools3
 
-RDEPENDS_${PN} += " python3-can \
+RDEPENDS:${PN} += " python3-can \
 	python3-cantools \
 	python3-can \
 	python3-bitstruct \

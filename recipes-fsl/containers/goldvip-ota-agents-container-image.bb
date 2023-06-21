@@ -1,6 +1,4 @@
-#
-# Copyright 2022 NXP
-#
+# Copyright 2022-2023 NXP
 
 SUMMARY = "Container running the GoldVIP OTA Update Agents"
 LICENSE = "LA_OPT_NXP_Software_License"
@@ -17,4 +15,5 @@ OCI_IMAGE_ENTRYPOINT_ARGS = " \
     /home/root/ota/goldvip_uas \
 "
 
-IMAGE_INSTALL += " goldvip-ota-agents"
+IMAGE_INSTALL:append = " goldvip-ota-agents"
+

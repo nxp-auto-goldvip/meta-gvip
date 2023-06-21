@@ -17,7 +17,7 @@ DESTDIR = "${D}/home/root"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     goldvip-can-setup \
     python3-rticonnextdds-connector \
@@ -30,4 +30,4 @@ do_install() {
     install -m 0666 ${S}/rti_dds_lights.pcap ${DESTDIR}/dds
 }
 
-FILES_${PN} += "/home/root/dds/*"
+FILES:${PN} += "/home/root/dds/*"

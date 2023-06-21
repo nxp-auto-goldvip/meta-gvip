@@ -14,7 +14,7 @@ DESTDIR = "/home/root/benchmark"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     coremark \
     kernel-module-ipc-chardev \
@@ -26,5 +26,5 @@ do_install() {
     cp -r ${S}/benchmark/* ${D}${DESTDIR}
 }
 
-FILES_${PN} += "${DESTDIR}"
+FILES:${PN} += "${DESTDIR}"
 

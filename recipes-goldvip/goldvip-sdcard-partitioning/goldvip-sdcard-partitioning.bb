@@ -20,7 +20,7 @@ SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git/sdcard-partitioning"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     e2fsprogs-resize2fs \
     parted \
@@ -51,7 +51,7 @@ do_install() {
 INITSCRIPT_NAME = "sdcard-partitioning"
 INITSCRIPT_PARAMS = "start 30 S ."
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /etc/init.d/sdcard-partitioning \
     /etc/default/sdcard-partitioning \
 "

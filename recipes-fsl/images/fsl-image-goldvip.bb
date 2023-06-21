@@ -1,6 +1,4 @@
-#
 # Copyright 2020-2023 NXP
-#
 
 DESCRIPTION = "GoldVIP Image"
 
@@ -59,9 +57,9 @@ python() {
 }
 
 # add additional binaries in SD-card FAT partition
-SDCARDIMAGE_BOOT_EXTRA_FILES_append += "arm-trusted-firmware:fip.s32-sdcard "
-SDCARDIMAGE_BOOT_EXTRA_FILES_append += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway:goldvip-gateway.bin', '', d)}"
-SDCARDIMAGE_BOOT_EXTRA_FILES_append += "${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader:boot-loader', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA_FILES:append = " arm-trusted-firmware:fip.s32-sdcard "
+SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway:goldvip-gateway.bin', '', d)}"
+SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader:boot-loader', '', d)}"
 
 # This image shall have a size of 2.5GiB with at least 700MiB of free space. To achieve that, set the
 # maximum size to 2.5GiB and define the expected extra space. IMAGE_ROOTFS_SIZE is the difference

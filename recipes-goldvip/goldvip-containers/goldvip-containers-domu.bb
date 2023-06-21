@@ -21,9 +21,9 @@ K3S_CONFIG_DIR = '${sysconfdir}/rancher/k3s'
 S = "${WORKDIR}/git"
 DESTDIR = "/home/root/containers"
 
-RDEPENDS_${PN} += "k3s"
+RDEPENDS:${PN} += "k3s"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}/${K3S_CONFIG_DIR}
     install -m 0644 ${S}/containers/conf/domu/* ${D}/${K3S_CONFIG_DIR}
 
@@ -42,7 +42,7 @@ do_install_append() {
     fi
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
     ${K3S_CONFIG_DIR} \
     ${MANIFESTS_DIR} \

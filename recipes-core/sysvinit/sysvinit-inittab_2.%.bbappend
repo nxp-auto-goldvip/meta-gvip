@@ -1,6 +1,6 @@
-# Copyright 2021-2022 NXP
+# Copyright 2021-2023 NXP
 
-do_install_append() {
+do_install:append() {
     # Uncomment lines in inittab with getty spawn on default serial consoles if Xen non-Dom0less enabled
     tmp="${SERIAL_CONSOLES}"
     for i in $tmp; do

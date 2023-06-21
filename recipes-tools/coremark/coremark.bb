@@ -6,7 +6,7 @@ SUMMARY = "Embedded Microprocessor Benchmark Consortium Coremark"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=0a18b17ae63deaa8a595035f668aebe1"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 inherit module-base
 
@@ -30,4 +30,4 @@ do_install() {
     install -m 0755 ${S}/coremark.exe ${D}${DESTDIR}/coremark.exe
 }
 
-FILES_${PN} += "${DESTDIR}"
+FILES:${PN} += "${DESTDIR}"

@@ -17,7 +17,7 @@ LOCAL_SBINDIR = "${D}/usr/local/sbin"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-can-setup', '', d)} \
     goldvip-telemetry-packages \
@@ -25,7 +25,7 @@ RDEPENDS_${PN} += " \
     python3-fcntl \
 "
 
-DEPENDS_append = " update-rc.d-native"
+DEPENDS:append = " update-rc.d-native"
 
 do_install() {
     install -d ${DESTDIR}/eth-gw
@@ -57,7 +57,7 @@ do_install() {
     fi
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /home/root/can-gw/* \
     /home/root/eth-gw/* \
     ${sysconfdir}/* \

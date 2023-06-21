@@ -34,7 +34,7 @@ do_install () {
     install -m 0644 ${S}/containers/manifests/goldvip-update-agents.yaml ${D}/${DESTDIR}/
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
     ${IMAGES_DIR} \
 "

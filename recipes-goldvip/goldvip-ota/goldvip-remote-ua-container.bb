@@ -20,6 +20,6 @@ do_install () {
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${CONTAINER_OCI_IMG} ${D}${IMAGES_DIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${IMAGES_DIR} \
 "

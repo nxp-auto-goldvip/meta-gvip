@@ -18,7 +18,7 @@ DESTDIR = "${D}/home/root/cloud-gw/telemetry-collector"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     goldvip-telemetry-packages \
     python3-mmap \
@@ -39,5 +39,5 @@ do_install() {
 INITSCRIPT_NAME = "telemetry"
 INITSCRIPT_PARAMS = "defaults 70"
 
-FILES_${PN} += "/home/root/cloud-gw/telemetry-collector/*"
-FILES_${PN} += "/etc/init.d/telemetry"
+FILES:${PN} += "/home/root/cloud-gw/telemetry-collector/*"
+FILES:${PN} += "/etc/init.d/telemetry"

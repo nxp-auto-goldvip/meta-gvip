@@ -30,7 +30,7 @@ do_install() {
     update-rc.d -r ${D} eiqa_bms defaults 80
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${sysconfdir}/init.d/ \
     /usr/lib/libonnxruntime.so.1.8.1 \
     ${DESTDIR} \

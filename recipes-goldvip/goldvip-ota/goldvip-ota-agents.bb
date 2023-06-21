@@ -15,7 +15,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/goldvip_uas"
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     busybox \
     e2fsprogs-mke2fs \
@@ -50,7 +50,7 @@ do_install() {
 INITSCRIPT_NAME = "goldvip-update-agents"
 INITSCRIPT_PARAMS = "defaults 98"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     /home/root/ota/ \
     ${sysconfdir}/init.d/goldvip-update-agents \
     ${sysconfdir}/ota \

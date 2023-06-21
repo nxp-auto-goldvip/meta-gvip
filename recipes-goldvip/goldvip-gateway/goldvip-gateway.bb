@@ -28,4 +28,4 @@ do_deploy() {
 
 addtask do_deploy after do_install
 
-FILES_${PN} += "/boot/${GOLDVIP_GATEWAY_BIN}"
+FILES:${PN} += "/boot/${GOLDVIP_GATEWAY_BIN}"

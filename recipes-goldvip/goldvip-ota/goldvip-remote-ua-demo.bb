@@ -14,7 +14,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/remote_ua"
-RDEPENDS_${PN} += " bash "
+RDEPENDS:${PN} += " bash "
 DESTDIR = "/home/root/ota/demo"
 
 do_configure[noexec] = "1"
@@ -25,7 +25,7 @@ do_install() {
     install -m 0755 ${S}/demo/* ${D}${DESTDIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
 "
 

@@ -15,7 +15,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/remote_ua"
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     busybox \
     libcrypto \
@@ -48,7 +48,7 @@ do_install() {
 INITSCRIPT_NAME = "goldvip-remote-ua"
 INITSCRIPT_PARAMS = "defaults 99"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
     ${sysconfdir}/init.d/goldvip-remote-ua \
     ${sysconfdir}/ota/remote_ua \

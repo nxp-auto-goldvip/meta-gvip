@@ -14,7 +14,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/goldvip_uas"
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
     mtd-utils \
 "
@@ -28,7 +28,7 @@ do_install() {
     install -m 0755 ${S}/demo/* ${D}${DESTDIR}
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${DESTDIR} \
 "
 

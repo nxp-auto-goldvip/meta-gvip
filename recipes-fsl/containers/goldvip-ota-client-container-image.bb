@@ -1,6 +1,4 @@
-#
-# Copyright 2022 NXP
-#
+# Copyright 2022-2023 NXP
 
 SUMMARY = "Container running the OTAmatic Client for GoldVIP"
 LICENSE = "LA_OPT_NXP_Software_License"
@@ -17,4 +15,5 @@ OCI_IMAGE_ENTRYPOINT_ARGS = " \
     otamatic_sample_app \
 "
 
-IMAGE_INSTALL += " goldvip-ota-client"
+IMAGE_INSTALL:append = " goldvip-ota-client"
+

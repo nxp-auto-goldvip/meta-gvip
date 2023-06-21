@@ -1,7 +1,7 @@
 ICEDTEA_HG_MIRROR = "http://icedtea.wildebeest.org/hg/release/${ICEDTEA_PREFIX}"
 
 # Remove the links that use the old webserver
-SRC_URI_remove = " \
+SRC_URI:remove = " \
     ${OPENJDK_URI} \
     ${HOTSPOT_URI} \
     ${CORBA_URI} \
@@ -11,7 +11,7 @@ SRC_URI_remove = " \
     ${LANGTOOLS_URI} \
 "
 
-SRC_URI_prepend = " \
+SRC_URI:prepend = " \
     ${ICEDTEA_HG_MIRROR}/archive/${OPENJDK_FILE_UPSTREAM};name=openjdk;unpack=false;downloadfilename=${OPENJDK_FILE_DOWNLOAD} \
     ${ICEDTEA_HG_MIRROR}/hotspot/archive/${HOTSPOT_FILE_UPSTREAM};name=hotspot;unpack=false;downloadfilename=${HOTSPOT_FILE_DOWNLOAD} \
     ${ICEDTEA_HG_MIRROR}/corba/archive/${CORBA_FILE_UPSTREAM};name=corba;unpack=false;downloadfilename=${CORBA_FILE_DOWNLOAD} \

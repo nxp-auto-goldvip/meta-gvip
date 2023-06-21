@@ -1,4 +1,5 @@
-# Sysvinit service wrapper
+# Copyright 2022-2023 NXP
+
 inherit update-rc.d
 
 GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
@@ -11,7 +12,8 @@ SRCREV_fwe = "05a9d52159c78721f14aa70f641df557a4133bc8"
 
 DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
 
-do_install_append () {	
+# Add SysVinit wrapper service, along with other files needed to demonstrate this use case.
+do_install:append () {	
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/gvip/fleetwise/edge/service/aws-iot-fwe ${D}${sysconfdir}/init.d/aws-iot-fwe
 	
@@ -24,6 +26,6 @@ do_install_append () {
 INITSCRIPT_NAME = "aws-iot-fwe"
 INITSCRIPT_PARAMS = "defaults 99"
 
-FILES_${PN} += "${sysconfdir}"
-FILES_${PN} += "${sysconfdir}/init.d/aws-iot-fwe"
-FILES_${PN} += "/home/root/fleetwise/*"
+FILES:${PN} += "${sysconfdir}"
+FILES:${PN} += "${sysconfdir}/init.d/aws-iot-fwe"
+FILES:${PN} += "/home/root/fleetwise/*"

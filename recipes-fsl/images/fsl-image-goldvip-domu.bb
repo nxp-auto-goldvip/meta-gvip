@@ -1,6 +1,4 @@
-#
-# Copyright 2020-2022 NXP
-#
+# Copyright 2020-2023 NXP
 
 DESCRIPTION = "GoldVIP domU image"
 
@@ -8,7 +6,7 @@ require recipes-fsl/images/fsl-image-goldvip-base.inc
 
 # Remove some unnecessary packages added by DISTRO_FEATURES options or from
 # the fsl-image-auto image.
-IMAGE_INSTALL_remove += " \
+IMAGE_INSTALL:remove = " \
    zlib-dev \
    xen-tools-xenstat \
    xen-tools-xenmon \

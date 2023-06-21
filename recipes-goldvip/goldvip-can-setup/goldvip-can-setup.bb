@@ -17,7 +17,7 @@ S = "${WORKDIR}/git"
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
 
-RDEPENDS_${PN} += " \
+RDEPENDS:${PN} += " \
     bash \
 "
 
@@ -32,5 +32,5 @@ do_install() {
 INITSCRIPT_NAME = "can"
 INITSCRIPT_PARAMS = "defaults 90"
 
-FILES_${PN} += "${sysconfdir}/can_config"
-FILES_${PN} += "${sysconfdir}/init.d/can"
+FILES:${PN} += "${sysconfdir}/can_config"
+FILES:${PN} += "${sysconfdir}/init.d/can"

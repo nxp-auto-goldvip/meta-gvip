@@ -1,4 +1,4 @@
-FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 
 # Patch the default interfaces file depending on the content of DISTRO_FEATURES.
 SRC_URI += "\

@@ -39,7 +39,7 @@ do_install () {
     ln -sr ${D}/${MANIFESTS_DIR}/otamatic.yaml ${D}/${DESTDIR}/otamatic.yaml
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${IMAGES_DIR} \
     ${MANIFESTS_DIR} \
     ${DESTDIR} \

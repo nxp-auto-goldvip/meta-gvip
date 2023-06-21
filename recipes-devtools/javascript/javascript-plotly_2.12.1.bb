@@ -13,4 +13,4 @@ do_install() {
         install -m 0777 ${S}/dist/plotly.min.js ${D}/${DESTDIR}/plotly-2.12.1.min.js
 }
 
-FILES_${PN} += "${DESTDIR}"
+FILES:${PN} += "${DESTDIR}"
