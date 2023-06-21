@@ -2,7 +2,7 @@ Index: git/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
 ===================================================================
 --- git.orig/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
 +++ git/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
-@@ -152,14 +152,12 @@ pfe_netif2: ethernet@12 {
+@@ -154,14 +154,12 @@ pfe_netif2: ethernet@12 {
  			/* Network interface 'aux0' */
  			pfe_aux0: ethernet@13 {
  				compatible = "nxp,s32g-pfe-netif", "fsl,pfeng-logif";
@@ -18,4 +18,4 @@ Index: git/arch/arm64/boot/dts/freescale/s32g-pfe.dtsi
 +				nxp,pfeng-hif-channels = <PFE_HIF_CHANNEL_2>;
  				nxp,pfeng-netif-mode-aux;
  			};
- 		};
+ 
