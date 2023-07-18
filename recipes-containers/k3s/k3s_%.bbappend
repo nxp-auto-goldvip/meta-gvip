@@ -2,8 +2,10 @@
 
 inherit update-rc.d
 
-# poky's gatesgarth branch can't be used to build the latest version of k3s, due to the old version
-# of golang package. Fortunately, the k3s rekease includes binaries for arm64 architecture that can
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
+
+# poky's kirkstone branch can't be used to build the latest version of K3s, due to the old version
+# of golang package. Fortunately, the K3s release includes binaries for arm64 architecture that can
 # be used.
 SRC_URI += " \
     https://github.com/k3s-io/k3s/releases/download/${PV}/k3s-arm64;name=k3s-bin;unpack=0;downloadfilename=k3s-bin \
@@ -13,14 +15,14 @@ SRC_URI += " \
     file://k3s-server.sysvinit \
 "
 
-SRC_URI[k3s-bin.sha256sum] = "a56631bee26c65b300094a29d3b38aadac0fa079ca4253c68bd4bebf3d2c714e"
-SRC_URI[k3s-bin.md5sum] = "84bfaaeb93102962f386be7eb7237422"
-SRC_URI[k3s-images.sha256sum] = "9f62fd7474ed32992322d0d25c215adf5122d98bc5141b5a05f57bb934f30007"
-SRC_URI[k3s-images.md5sum] = "44ac110e98a946fcc19201f4c63df39d"
+SRC_URI[k3s-bin.sha256sum] = "415aa9e1f9457b60e7727cde7eb26dd1934c7ebadf3a36ef09dab50f2050b73b"
+SRC_URI[k3s-bin.md5sum] = "2667764497bc496da7b4158ec455dd1c"
+SRC_URI[k3s-images.sha256sum] = "680e15a4a98cdc037c19daa76cf6b02d9508dce6d946025fae6b848b8801aa50"
+SRC_URI[k3s-images.md5sum] = "9f3d0664b13b92decc101a10b0b222a1"
 
 DEPENDS += "skopeo-native"
 # Overwrite the package version from the default meta-virtualization recipe.
-PV = "v1.21.11+k3s1"
+PV = "v1.25.8+k3s1"
 
 # Put the k3s executables in /usr/bin instead of /usr/local/bin.
 BIN_PREFIX = "${exec_prefix}"
@@ -34,10 +36,14 @@ K3S_IMAGES_DIR = "/var/lib/rancher/k3s/agent/images"
 # URL for pause-container image used by k3s.
 PAUSE_CONTAINER_TAG = "rancher/mirrored-pause:3.5"
 
-# Install the pre-built binary, the pause container and the agent/server services.
+# Install the pre-built K3s binary. Let the default recipe to copy it to BIN directory.
+do_install:prepend() {
+    install -d ${S}/src/import/dist/artifacts
+    install -m 755 ${WORKDIR}/k3s-bin ${S}/src/import/dist/artifacts/k3s
+}
+
+# Install the pause container and the agent/server services.
 do_install:append() {
-    install -d ${D}${BIN_PREFIX}/bin
-    install -m 755 ${WORKDIR}/k3s-bin ${D}${BIN_PREFIX}/bin/k3s
     install -m 755 ${WORKDIR}/k3s-killall.sh ${D}${BIN_PREFIX}/bin
 
     install -d ${D}/${K3S_IMAGES_DIR}
@@ -49,7 +55,7 @@ do_install:append() {
     # there is no working ethernet connection.
     rm -f ${WORKDIR}/pause-container.tar
     skopeo --override-arch arm64 copy --additional-tag="docker.io/${PAUSE_CONTAINER_TAG}" \
-	docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
+        docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
     install -m 0644 ${WORKDIR}/pause-container.tar ${D}${K3S_IMAGES_DIR}
 
     # Add sysvinit services.

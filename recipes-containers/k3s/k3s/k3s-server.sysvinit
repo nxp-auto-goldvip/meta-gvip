@@ -11,14 +11,14 @@
 ### END INIT INFO
 # SPDX-License-Identifier: BSD-3-Clause
 #
-# Copyright 2022 NXP
+# Copyright 2022-2023 NXP
 
 # Source function library.
 . /etc/init.d/functions
 
 K3S_SERVER_CONFIG="/etc/default/k3s-server"
 K3S_CONF_FILE="/etc/rancher/k3s/config-server.yaml"
-BINDIR_PATH="/usr/bin/"
+BINDIR_PATH="/usr/bin"
 LOG_FILE="/var/log/k3s-server.log"
 K3S_DATA_PATH="/var/lib/rancher/k3s/data"
 
