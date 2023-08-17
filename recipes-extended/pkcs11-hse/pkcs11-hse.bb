@@ -7,7 +7,7 @@ LIC_FILES_CHKSUM = "file://LICENSE.BSD;md5=f03611747c1e7d618ef405a8484ed48d"
 NXP_FIRMWARE_LOCAL_DIR ?= "."
 
 # Some default versions for each supported platform
-HSE_FW_VERSION_s32g2 = "HSE_FW_S32G2_0_1_0_5"
+HSE_FW_VERSION_s32g2 = "HSE_FW_S32G2XX_0_1_0_9"
 HSE_FW_VERSION_s32g3 = "HSE_FW_S32G3_0_2_16_1"
 
 # Dummy entry
