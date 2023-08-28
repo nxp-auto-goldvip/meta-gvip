@@ -24,3 +24,7 @@ update_timestamp() {
 }
 
 ROOTFS_POSTPROCESS_COMMAND += "update_timestamp; "
+
+# Use the ifup/ifdown services included in busybox.
+BAD_RECOMMENDATIONS += "ifupdown"
+
