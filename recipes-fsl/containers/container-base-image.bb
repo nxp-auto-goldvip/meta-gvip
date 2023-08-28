@@ -4,7 +4,7 @@
 #
 SUMMARY = "Base GoldVIP Application Container Image"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=978b04a44d7a38ae169a251ba7cb82d1"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=eb2d80feeaeafaa489a164e349e12342"
 
 OCI_IMAGE_WORKINGDIR ?= "/home/root"
 OCI_IMAGE_ENV_VARS ?= " \
