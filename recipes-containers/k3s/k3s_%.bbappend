@@ -36,6 +36,15 @@ K3S_IMAGES_DIR = "/var/lib/rancher/k3s/agent/images"
 # URL for pause-container image used by k3s.
 PAUSE_CONTAINER_TAG = "rancher/mirrored-pause:3.5"
 
+addtask fetch_pause_container after do_configure before do_install
+do_fetch_pause_container[network] = "1"
+
+do_fetch_pause_container() {
+    rm -f ${WORKDIR}/pause-container.tar
+    skopeo --override-arch arm64 copy --additional-tag="docker.io/${PAUSE_CONTAINER_TAG}" \
+        docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
+}
+
 # Install the pre-built K3s binary. Let the default recipe to copy it to BIN directory.
 do_install:prepend() {
     install -d ${S}/src/import/dist/artifacts
@@ -53,9 +62,6 @@ do_install:append() {
     # This is required to set up the pods / deployments on the k3s cluster; its
     # presence on the rootfs ensures that the cluster is functioning even when
     # there is no working ethernet connection.
-    rm -f ${WORKDIR}/pause-container.tar
-    skopeo --override-arch arm64 copy --additional-tag="docker.io/${PAUSE_CONTAINER_TAG}" \
-        docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
     install -m 0644 ${WORKDIR}/pause-container.tar ${D}${K3S_IMAGES_DIR}
 
     # Add sysvinit services.
