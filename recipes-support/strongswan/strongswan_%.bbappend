@@ -1,3 +1,6 @@
+# Copyright 2023 NXP
+
+PACKAGECONFIG:append = " stroke"
 
 do_install:append() {
     # Append include directives to ipsec.conf and ipsec.secrets conf files.
