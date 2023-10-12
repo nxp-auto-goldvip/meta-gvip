@@ -4,7 +4,7 @@ MEMORY_START="0x85200000"
 MEMORY_END="0xFFFFFFFF"
 
 XEN="xen"
-XEN_CMD="dom0_mem=1G dom0_max_vcpus=4 bootscrub=0"
+XEN_CMD="dom0_mem=1G dom0_max_vcpus=4 bootscrub=0 dom0_vcpus_pin"
 DOM0_KERNEL="Image"
 DOM0_CMD="console=ttyLF0,115200 earlycon=xen earlyprintk=xen root=/dev/mmcblk0p2 rootwait rw clk_ignore_unused"
 
