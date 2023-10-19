@@ -12,6 +12,9 @@ SRCREV_fwe = "05a9d52159c78721f14aa70f641df557a4133bc8"
 
 DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
 
+# Set make as designated build tool since ninja fails to build target fwe-proto
+OECMAKE_GENERATOR = "Unix Makefiles"
+
 # Add SysVinit wrapper service, along with other files needed to demonstrate this use case.
 do_install:append () {	
 	install -d ${D}${sysconfdir}/init.d
