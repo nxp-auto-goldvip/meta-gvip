@@ -11,8 +11,8 @@ Dependencies
 ============
 This layer depends on the following Yocto layers:
 
- - meta-alb: https://source.codeaurora.org/external/autobsps32/meta-alb
- - meta-aws: https://github.com/meta-aws
+ - meta-alb: https://github.com/nxp-auto-linux/meta-alb
+ - meta-aws: https://github.com/aws4embeddedlinux/meta-aws
  - meta-java: https://git.yoctoproject.org/cgit/cgit.cgi/meta-java
 
 Note: The above layers have other dependencies that are automatically handled by
