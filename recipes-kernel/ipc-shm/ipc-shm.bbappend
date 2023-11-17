@@ -2,12 +2,8 @@
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI += " \
-    file://0001-Invoke-read-write-with-memory-barries.patch \
-"
-
-BRANCH = "release/SW32G_IPCF_4.8.0_D2212"
-SRCREV = "07321f760bc248f98a1c9ef27ef068ab73640e4b"
+BRANCH = "release/SW32G_IPCF_4.9.0_D2310"
+SRCREV = "e90d0a18eb6d53f1faa09739f3d1c00f6f4eed8c"
 
 # Create DEV PKG, in order to be used in modules which depend
 # on the current package
