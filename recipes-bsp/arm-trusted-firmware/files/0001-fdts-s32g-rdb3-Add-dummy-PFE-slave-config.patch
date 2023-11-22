@@ -1,0 +1,28 @@
+From f5cc668e324a29c43d9f1f78f8409210f10f832d Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Wed, 22 Nov 2023 17:32:58 +0200
+Subject: [PATCH] fdts: s32g: rdb3: Add dummy PFE slave config
+
+Create a symbolic link to the default device tree
+sources to circumvent the build errors when PFE
+master-slave configuration is used along with
+the real-time SCP firmware.
+
+Issue: GVIP-1193
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ fdts/s32g399a-rdb3-pfems.dts | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 120000 fdts/s32g399a-rdb3-pfems.dts
+
+diff --git a/fdts/s32g399a-rdb3-pfems.dts b/fdts/s32g399a-rdb3-pfems.dts
+new file mode 120000
+index 000000000..6b7633b41
+--- /dev/null
++++ b/fdts/s32g399a-rdb3-pfems.dts
+@@ -0,0 +1 @@
++s32g399a-rdb3.dts
+\ No newline at end of file
+-- 
+2.25.1
+
