@@ -1,8 +1,27 @@
-Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
-===================================================================
---- git.orig/arch/arm64/boot/dts/freescale/s32g.dtsi
-+++ git/arch/arm64/boot/dts/freescale/s32g.dtsi
-@@ -17,18 +17,26 @@
+From cb31b22122fdf1c59ce15d8bca7135da719331dd Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Wed, 22 Nov 2023 13:29:13 +0200
+Subject: [PATCH] arm64: dts: s32g: GoldVIP-specific adaptations
+
+Different updates on the the S32G dts for GoldVIP
+usage:
+  - update reserved memory ranges for the PFE
+  buffers
+  - add the SRAM memory range used for IPC
+  - add MC_RGM and MC_ME nodes to provide support
+  to their registers from user-space
+
+Issue: GVIP-1193
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32g.dtsi | 26 +++++++++++++++++++++----
+ 1 file changed, 22 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g.dtsi b/arch/arm64/boot/dts/freescale/s32g.dtsi
+index 7b20d20e51fc..8b0372ee3cee 100644
+--- a/arch/arm64/boot/dts/freescale/s32g.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32g.dtsi
+@@ -18,18 +18,26 @@
  
  / {
  	reserved-memory {
@@ -33,7 +52,7 @@ Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
  			no-map;
  			status = "okay";
  		};
-@@ -50,6 +58,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
+@@ -51,6 +59,16 @@ pfe_reserved_bdr: pfebufs@835e0000 {
  		/* ends 0x83600000 */
  	};
  
@@ -50,3 +69,6 @@ Index: git/arch/arm64/boot/dts/freescale/s32g.dtsi
  	soc {
  		siul2@4009c000 {
  			compatible = "simple-mfd";
+-- 
+2.25.1
+

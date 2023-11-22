@@ -1,0 +1,74 @@
+From 5c262499c05fdeae73a5ac4f5c6fb2f09c94eac5 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Wed, 22 Nov 2023 13:22:54 +0200
+Subject: [PATCH] arm64: dts: s32g: GoldVIP-specific adaptations
+
+Different updates on the the S32G dts for GoldVIP
+usage:
+  - update reserved memory ranges for the PFE
+  buffers
+  - add the SRAM memory range used for IPC
+  - add MC_RGM and MC_ME nodes to provide support
+  to their registers from user-space
+
+Issue: GVIP-1193
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32g.dtsi | 26 +++++++++++++++++++++----
+ 1 file changed, 22 insertions(+), 4 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g.dtsi b/arch/arm64/boot/dts/freescale/s32g.dtsi
+index fec199043462..97f56cad0533 100644
+--- a/arch/arm64/boot/dts/freescale/s32g.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32g.dtsi
+@@ -23,18 +23,26 @@ aliases {
+ 	};
+ 
+ 	reserved-memory {
+-		pfe_reserved_bmu2: pfebufs@34000000 {
++		pfe_reserved_bmu2: pfebufs@34400000 {
+ 			compatible = "nxp,s32g-pfe-bmu2-pool";
+ 			/* BMU2: 512 KB */
+-			reg = <0 0x34000000 0 0x80000>;
++			reg = <0 0x34400000 0 0x80000>;
+ 			no-map;
+ 			status = "okay";
+ 		};
+ 
+-		pfe_reserved_rt: pfebufs@34080000 {
++		pfe_reserved_rt: pfebufs@34480000 {
+ 			compatible = "nxp,s32g-pfe-rt-pool";
+ 			/* RT: 128 KB */
+-			reg = <0 0x34080000 0 0x20000>;
++			reg = <0 0x34480000 0 0x20000>;
++			no-map;
++			status = "okay";
++		};
++
++		ipcf_shm: sram@34500000 {
++			compatible = "nxp,s32g-ipcf-shm";
++			/* 1 MB */
++			reg = <0x0 0x34500000 0x0 0x100000>;
+ 			no-map;
+ 			status = "okay";
+ 		};
+@@ -140,6 +148,16 @@ scmi_reset_cause: reset_cause@8 {
+ 		};
+ 	};
+ 
++	mc_rgm: mc_rgm@40078000 {
++		compatible = "nxp,s32g-rgm", "syscon";
++		reg = <0x0 0x40078000 0x0 0x3000>;
++	};
++
++	mc_me: mc_me@40088000 {
++		compatible = "nxp,s32g-mc_me", "syscon";
++		reg = <0x0 0x40088000 0x0 0x3000>;
++	};
++
+ 	soc {
+ 		siul2@4009c000 {
+ 			compatible = "simple-mfd";
+-- 
+2.25.1
+
