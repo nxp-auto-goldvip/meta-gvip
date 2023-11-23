@@ -21,6 +21,7 @@ SRC_URI:append = " \
     file://0001-enable-aux-interface-in-pfe.patch;patch=1 \
     file://0001-add-dts-reserved-memory-regions.patch;patch=1 \
     file://0001-remove-spi1-pins.patch;patch=1 \
+    file://0001-disable-stm7-and-can-ts-ctrl.patch \
 "
 
 # Containerization configuration
