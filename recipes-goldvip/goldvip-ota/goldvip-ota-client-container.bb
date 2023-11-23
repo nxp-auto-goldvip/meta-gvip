@@ -4,7 +4,7 @@
 
 SUMMARY = "Package GoldVIP OTAmatic Client app container image"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=eb2d80feeaeafaa489a164e349e12342"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=fafa1a4becd2f1c0df63f867ef81796a"
 
 GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
