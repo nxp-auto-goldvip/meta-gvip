@@ -4,7 +4,7 @@
 
 SUMMARY = "Container used to provision the kubeconfig on worker nodes"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=fafa1a4becd2f1c0df63f867ef81796a"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=66826a98beb097b38ac01d175f237cb4"
 
 require container-base-image.bb
 
