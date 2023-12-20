@@ -1,0 +1,46 @@
+diff --git a/os_kernel/ipc-os.c b/os_kernel/ipc-os.c
+index d639d71..1a92606 100644
+--- a/os_kernel/ipc-os.c
++++ b/os_kernel/ipc-os.c
+@@ -68,7 +68,7 @@ static DECLARE_TASKLET_OLD(ipc_shm_rx_tasklet, ipc_shm_softirq);
+ /* sotfirq routine for deferred interrupt handling */
+ static void ipc_shm_softirq(unsigned long arg)
+ {
+-	int work = 0;
++	int work_completed = 0;
+ 	unsigned long budget = IPC_SOFTIRQ_BUDGET;
+ 	uint8_t i = 0;
+ 
+@@ -76,17 +76,22 @@ static void ipc_shm_softirq(unsigned long arg)
+ 		if ((priv.id[i].state == IPC_SHM_INSTANCE_DISABLED)
+ 					|| (priv.id[i].irq_num == IPC_IRQ_NONE))
+ 			continue;
+-
+-		/* call upper layer callback until work is done */
+-		do {
+-			work = priv.rx_cb(i, budget);
+-			/* work not done, yield and wait for reschedule */
++		
++		/* Do the budgeted work */
++		work_completed = priv.rx_cb(i, budget);
++
++		/* If we used the full budget, schedule again.
++		* We don't know how much work remains until we do the work.
++		* The next tasklet will check for more work */
++		if (work_completed >= budget)
++		{
+ 			tasklet_schedule(&ipc_shm_rx_tasklet);
+-		} while (work >= budget);
+-
+-		/* work done, re-enable irq */
+-		ipc_hw_irq_enable(i);
+-		work = priv.rx_cb(i, budget);
++		}
++		else
++		{
++			/* work done, re-enable irq */
++			ipc_hw_irq_enable(i);
++		}
+ 	}
+ }
+ 
