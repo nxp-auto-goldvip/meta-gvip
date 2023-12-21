@@ -3,17 +3,16 @@ From: Dorin Saramet <saramet.constantin-dorin@nxp.com>
 Date: Thu, 23 Nov 2023 18:12:22 +0200
 Subject: [PATCH] Disable stm7 and can_ts_ctrl
 
-Issue: GVIP-1167
 Signed-off-by: Dorin Saramet <saramet.constantin-dorin@nxp.com>
 ---
  arch/arm64/boot/dts/freescale/s32g.dtsi | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/freescale/s32g.dtsi b/arch/arm64/boot/dts/freescale/s32g.dtsi
-index 7b20d20e51fc..6dd901f5479c 100644
+index 25adbf77244f..ea4f1c1b2048 100644
 --- a/arch/arm64/boot/dts/freescale/s32g.dtsi
 +++ b/arch/arm64/boot/dts/freescale/s32g.dtsi
-@@ -1198,10 +1198,10 @@ &stm1 {
+@@ -1716,12 +1716,12 @@ &stm1 {
  
  /* Used for FlexCAN and LLCE CAN timestamping */
  &stm7 {
@@ -26,6 +25,8 @@ index 7b20d20e51fc..6dd901f5479c 100644
 -	status = "okay";
 +	status = "disable";
  };
+ 
+ &gpr {
 -- 
 2.34.1
 

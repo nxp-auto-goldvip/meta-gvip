@@ -1,0 +1,30 @@
+From 1ab28c045f0f162064f46b7aaa2c353dddb4d028 Mon Sep 17 00:00:00 2001
+From: Dorin Saramet <saramet.constantin-dorin@nxp.com>
+Date: Thu, 23 Nov 2023 18:12:22 +0200
+Subject: [PATCH] Disable stm7 and can_ts_ctrl
+
+Signed-off-by: Dorin Saramet <saramet.constantin-dorin@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32g.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g.dtsi b/arch/arm64/boot/dts/freescale/s32g.dtsi
+index 7b20d20e51fc..6dd901f5479c 100644
+--- a/arch/arm64/boot/dts/freescale/s32g.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32g.dtsi
+@@ -1198,10 +1198,10 @@ &stm1 {
+ 
+ /* Used for FlexCAN and LLCE CAN timestamping */
+ &stm7 {
+-	status = "okay";
++	status = "disable";
+ };
+ 
+ &can_ts_ctrl {
+ 	idle-states = <S32G_CAN_TS_STM7>;
+-	status = "okay";
++	status = "disable";
+ };
+-- 
+2.34.1
+

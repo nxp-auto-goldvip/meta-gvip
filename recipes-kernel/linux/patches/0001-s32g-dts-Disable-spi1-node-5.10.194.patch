@@ -1,0 +1,26 @@
+From 8424758c1662750f4e23cdbe5bf2413bdac8d786 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 11 Jan 2024 14:56:44 +0200
+Subject: [PATCH] s32g: dts: Disable spi1 node
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi b/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
+index 0fd093499c5b..3009f3c9f8af 100644
+--- a/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32gxxxa-rdb.dtsi
+@@ -705,7 +705,7 @@ &spi1 {
+ 	pinctrl-0 = <&dspi1_pins>;
+ 	pinctrl-1 = <&dspi1_slave_pins>;
+ 	pinctrl-names = "default", "slave";
+-	status = "okay";
++	status = "disable";
+ };
+ 
+ &spi5 {
+-- 
+2.25.1
+

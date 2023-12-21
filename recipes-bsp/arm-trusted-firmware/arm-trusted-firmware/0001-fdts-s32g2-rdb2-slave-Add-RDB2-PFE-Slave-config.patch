@@ -1,0 +1,46 @@
+From b5d820411e6a6b24ccc0e69cc1b874fd403f4868 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 11 Jan 2024 10:44:59 +0200
+Subject: [PATCH] fdts: s32g2: rdb2: slave: Add RDB2 PFE Slave config
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ fdts/s32g274a-rdb2-pfems.dts | 26 ++++++++++++++++++++++++++
+ 1 file changed, 26 insertions(+)
+ create mode 100644 fdts/s32g274a-rdb2-pfems.dts
+
+diff --git a/fdts/s32g274a-rdb2-pfems.dts b/fdts/s32g274a-rdb2-pfems.dts
+new file mode 100644
+index 000000000..c54df5dd7
+--- /dev/null
++++ b/fdts/s32g274a-rdb2-pfems.dts
+@@ -0,0 +1,26 @@
++// SPDX-License-Identifier: (GPL-2.0+ OR BSD-3-Clause)
++/*
++ * Copyright 2023-2024 NXP
++ */
++
++/dts-v1/;
++#include "s32g.dtsi"
++#include "s32g-pfe-slave.dtsi"
++#include "s32g2.dtsi"
++#include "s32gxxxa-rdb.dtsi"
++
++/ {
++	aliases {
++		/delete-property/ ethernet1;
++		/delete-property/ ethernet2;
++		/delete-property/ ethernet3;
++	};
++
++	soc {
++		/delete-node/ pfe@46000000;
++	};
++};
++
++&pfesl_aux0 {
++	status = "disabled";
++};
+-- 
+2.25.1
+

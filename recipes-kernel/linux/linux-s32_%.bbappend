@@ -1,4 +1,4 @@
-# Copyright 2023 NXP
+# Copyright 2023-2024 NXP
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 FILESEXTRAPATHS:prepend := "${THISDIR}/patches:"
@@ -21,8 +21,8 @@ SRC_URI:append = " \
     file://build/usb_network.cfg \
     file://build/pcie.cfg \
     file://0001-goldvip-dts-adaptations-${PV}.patch \
-    file://0001-remove-spi1-pins.patch \
-    file://0001-disable-stm7-and-can-ts-ctrl.patch \
+    file://0001-s32g-dts-Disable-spi1-node-${PV}.patch \
+    file://0001-disable-stm7-and-can-ts-ctrl-${PV}.patch \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pfe', 'file://0001-enable-pfe-aux-netif-${PV}.patch', '', d)} \
 "
 

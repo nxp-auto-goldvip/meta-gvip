@@ -1,0 +1,68 @@
+From 7c48ad818b007a6bca24040e885805a6e37906a8 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 21 Dec 2023 15:02:31 +0200
+Subject: [PATCH] configs: Add GoldVIP extra commands
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ include/configs/s32-cc.h | 37 +++++++++++++++++++++++++++++++++++++
+ 1 file changed, 37 insertions(+)
+
+diff --git a/include/configs/s32-cc.h b/include/configs/s32-cc.h
+index d7b4b500fe..faf104eef5 100644
+--- a/include/configs/s32-cc.h
++++ b/include/configs/s32-cc.h
+@@ -89,6 +89,42 @@
+ #  define XEN_EXTRA_ENV_SETTINGS  ""
+ #endif
+ 
++#if !defined(GOLDVIP_BOOTLOADER_FLASH_ADDR)
++#define GOLDVIP_BOOTLOADER_FLASH_ADDR 0x00000000
++#endif
++
++#if !defined(GOLDVIP_ATF_FLASH_ADDR)
++#define GOLDVIP_ATF_FLASH_ADDR 0x00200000
++#endif
++
++#if !defined(GOLDVIP_GATEWAY_FLASH_ADDR)
++#define GOLDVIP_GATEWAY_FLASH_ADDR 0x00400000
++#endif
++
++#define GOLDVIP_EXTRA_ENV_SETTINGS \
++	"write_goldvip_images=echo 'Flashing the GoldVIP images'; " \
++		"run write_atf; " \
++		"run write_gateway_app; " \
++		"run write_bootloader; \0" \
++	"write_bootloader=echo 'Flashing the real-time bootloader'; " \
++		"sf probe 6:0; " \
++		"setenv image boot-loader; " \
++		"run loadimage; " \
++		"sf erase " __stringify(GOLDVIP_BOOTLOADER_FLASH_ADDR) " +${filesize}; " \
++		"sf write ${loadaddr} " __stringify(GOLDVIP_BOOTLOADER_FLASH_ADDR) " ${filesize}; \0" \
++	"write_atf=echo 'Flashing the ATF image'; " \
++		"sf probe 6:0; " \
++		"setenv image fip.s32-sdcard; " \
++		"run loadimage; " \
++		"sf erase " __stringify(GOLDVIP_ATF_FLASH_ADDR) " +${filesize}; " \
++		"sf write ${loadaddr} " __stringify(GOLDVIP_ATF_FLASH_ADDR) " ${filesize}; \0" \
++	"write_gateway_app=echo 'Flashing the real-time gateway application'; " \
++		"sf probe 6:0; " \
++		"setenv image goldvip-gateway.bin; " \
++		"run loadimage; " \
++		"sf erase " __stringify(GOLDVIP_GATEWAY_FLASH_ADDR) " +${filesize}; " \
++		"sf write ${loadaddr} " __stringify(GOLDVIP_GATEWAY_FLASH_ADDR) " ${filesize}; \0"
++
+ #define S32CC_ENV_SETTINGS \
+ 	BOOTENV \
+ 	"boot_mtd=booti\0" \
+@@ -172,6 +208,7 @@
+ 	"serverip=" S32CC_SERVERIP "\0" \
+ 	SERDES_EXTRA_ENV_SETTINGS \
+ 	XEN_EXTRA_ENV_SETTINGS \
++	GOLDVIP_EXTRA_ENV_SETTINGS \
+ 
+ #if defined(CONFIG_TARGET_TYPE_S32CC_EMULATOR)
+ #  define BOOTCOMMAND "${boot_mtd} ${loadaddr} - ${fdt_addr}"
+-- 
+2.25.1
+

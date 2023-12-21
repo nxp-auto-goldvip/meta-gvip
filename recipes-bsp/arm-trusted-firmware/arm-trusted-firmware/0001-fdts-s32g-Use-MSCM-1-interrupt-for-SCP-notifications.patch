@@ -1,0 +1,34 @@
+From 7b550b3141eea779adc4bb79f12d98862728132a Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Wed, 10 Jan 2024 16:17:03 +0200
+Subject: [PATCH] fdts: s32g: Use MSCM#1 interrupt for SCP notifications
+
+Use the MSCM#1 IRQ for SCP SCMI notifications to
+SRM. The GoldVIP setup is using the MSCM#0 IRQ in
+the context of the multi-core setup of the Real-time
+Gateway application, without any option to change
+it currently.
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ fdts/s32g.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fdts/s32g.dtsi b/fdts/s32g.dtsi
+index 14ba9729d..0fc26bbbf 100644
+--- a/fdts/s32g.dtsi
++++ b/fdts/s32g.dtsi
+@@ -130,8 +130,8 @@
+ 				"scp_rx_mb", "scp_rx_md",
+ 				"scmi_ospm_notif";
+ 			/* <handle, cpn, irq> */
+-			nxp,scp-irqs = <&mscm0 M7_0_CPN MSCM_C2C_IRQ_0>,
+-				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_0>;
++			nxp,scp-irqs = <&mscm0 M7_0_CPN MSCM_C2C_IRQ_1>,
++				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_1>;
+ 			nxp,scp-irq-names = "scp_tx", "scp_rx";
+ 			nxp,notif-irq = <GIC_SPI 300 IRQ_TYPE_EDGE_RISING>;
+ 
+-- 
+2.25.1
+
