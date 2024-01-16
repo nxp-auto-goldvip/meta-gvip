@@ -1,4 +1,4 @@
-From cb31b22122fdf1c59ce15d8bca7135da719331dd Mon Sep 17 00:00:00 2001
+From adc2b7eed15469faf8eb8a9937321862a927a260 Mon Sep 17 00:00:00 2001
 From: George Mocanu <george.mocanu@nxp.com>
 Date: Wed, 22 Nov 2023 13:29:13 +0200
 Subject: [PATCH] arm64: dts: s32g: GoldVIP-specific adaptations
@@ -11,14 +11,13 @@ usage:
   - add MC_RGM and MC_ME nodes to provide support
   to their registers from user-space
 
-Issue: GVIP-1193
 Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 ---
  arch/arm64/boot/dts/freescale/s32g.dtsi | 26 +++++++++++++++++++++----
  1 file changed, 22 insertions(+), 4 deletions(-)
 
 diff --git a/arch/arm64/boot/dts/freescale/s32g.dtsi b/arch/arm64/boot/dts/freescale/s32g.dtsi
-index 7b20d20e51fc..8b0372ee3cee 100644
+index 9fa70fc035c5..09a549d3f5e7 100644
 --- a/arch/arm64/boot/dts/freescale/s32g.dtsi
 +++ b/arch/arm64/boot/dts/freescale/s32g.dtsi
 @@ -18,18 +18,26 @@
@@ -26,14 +25,6 @@ index 7b20d20e51fc..8b0372ee3cee 100644
  / {
  	reserved-memory {
 -		pfe_reserved_bmu2: pfebufs@34000000 {
-+		ipcf_shm: sram@34500000 {
-+			compatible = "nxp,s32g-ipcf-shm";
-+			/* 1 MB */
-+			reg = <0x0 0x34500000 0x0 0x100000>;
-+			no-map;
-+			status = "okay";
-+		};
-+
 +		pfe_reserved_bmu2: pfebufs@34400000 {
  			compatible = "nxp,s32g-pfe-bmu2-pool";
  			/* BMU2: 512 KB */
@@ -49,6 +40,14 @@ index 7b20d20e51fc..8b0372ee3cee 100644
  			/* RT: 128 KB */
 -			reg = <0 0x34080000 0 0x20000>;
 +			reg = <0 0x34480000 0 0x20000>;
++			no-map;
++			status = "okay";
++		};
++
++		ipcf_shm: sram@34520000 {
++			compatible = "nxp,s32g-ipcf-shm";
++			/* 896 KB */
++			reg = <0x0 0x34520000 0x0 0xe0000>;
  			no-map;
  			status = "okay";
  		};

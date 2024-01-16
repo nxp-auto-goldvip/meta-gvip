@@ -11,7 +11,6 @@ usage:
   - add MC_RGM and MC_ME nodes to provide support
   to their registers from user-space
 
-Issue: GVIP-1193
 Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 ---
  arch/arm64/boot/dts/freescale/s32g.dtsi | 26 +++++++++++++++++++++----
@@ -45,10 +44,10 @@ index fec199043462..97f56cad0533 100644
 +			status = "okay";
 +		};
 +
-+		ipcf_shm: sram@34500000 {
++		ipcf_shm: sram@34520000 {
 +			compatible = "nxp,s32g-ipcf-shm";
-+			/* 1 MB */
-+			reg = <0x0 0x34500000 0x0 0x100000>;
++			/* 896 KB */
++			reg = <0x0 0x34520000 0x0 0xe0000>;
  			no-map;
  			status = "okay";
  		};
