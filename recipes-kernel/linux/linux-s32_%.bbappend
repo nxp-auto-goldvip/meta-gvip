@@ -23,6 +23,7 @@ SRC_URI:append = " \
     file://0001-goldvip-dts-adaptations-${PV}.patch \
     file://0001-s32g-dts-Disable-spi1-node-${PV}.patch \
     file://0001-disable-stm7-and-can-ts-ctrl-${PV}.patch \
+    file://0001-s32g399a-rdb3-mmc-Add-no-1-8-v-dts-node-property.patch \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pfe', 'file://0001-enable-pfe-aux-netif-${PV}.patch', '', d)} \
 "
 

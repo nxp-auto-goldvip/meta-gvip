@@ -1,0 +1,28 @@
+From 29265863d66f34c467da948bc72d14967cd33f4e Mon Sep 17 00:00:00 2001
+From: Ciprian Costea <ciprianmarian.costea@nxp.com>
+Date: Fri, 26 Jan 2024 09:53:38 +0200
+Subject: [PATCH] s32g399a-rdb3: mmc: Add 'no-1-8-v' dts node property
+
+Signed-off-by: Ciprian Costea <ciprianmarian.costea@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32g399a-rdb3.dtsi | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g399a-rdb3.dtsi b/arch/arm64/boot/dts/freescale/s32g399a-rdb3.dtsi
+index 346ed9ea399f..29ac5a4b2faa 100644
+--- a/arch/arm64/boot/dts/freescale/s32g399a-rdb3.dtsi
++++ b/arch/arm64/boot/dts/freescale/s32g399a-rdb3.dtsi
+@@ -12,6 +12,10 @@ / {
+ 	model = "NXP S32G399A-RDB3";
+ };
+ 
++&usdhc0 {
++	no-1-8-v;
++};
++
+ &gmac0_mdio {
+ 	/* AQR113C */
+ 	gmac_mdio_a_phy8: ethernet-phy@3 {
+-- 
+2.25.1
+

@@ -1,0 +1,28 @@
+From 0773f07dacb80e2c53fce0a90d84de2628b85d7b Mon Sep 17 00:00:00 2001
+From: Ciprian Costea <ciprianmarian.costea@nxp.com>
+Date: Fri, 26 Jan 2024 09:48:48 +0200
+Subject: [PATCH] s32g3-rdb3: mmc: Add 'no-1-8-v' property
+
+Signed-off-by: Ciprian Costea <ciprianmarian.costea@nxp.com>
+---
+ fdts/s32g399a-rdb3.dts | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/fdts/s32g399a-rdb3.dts b/fdts/s32g399a-rdb3.dts
+index 7d06a063c..351655387 100644
+--- a/fdts/s32g399a-rdb3.dts
++++ b/fdts/s32g399a-rdb3.dts
+@@ -12,6 +12,10 @@
+ 	model = "NXP S32G399A-RDB3";
+ };
+ 
++&usdhc0 {
++	no-1-8-v;
++};
++
+ &gmac0_mdio {
+ 	#address-cells = <1>;
+ 	#size-cells = <0>;
+-- 
+2.25.1
+
