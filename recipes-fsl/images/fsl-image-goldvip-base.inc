@@ -1,4 +1,6 @@
+#
 # Copyright 2022-2024 NXP
+#
 
 require recipes-fsl/images/fsl-image-auto.bb
 
@@ -13,6 +15,7 @@ IMAGE_INSTALL += " \
     openjdk-8 \
     cronie \
     resolvconf \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'optee', 'optee-examples-goldvip', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'k3s k3s-airgap-pause-container', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-crypto', 'opensc p11-kit', '', d)} \
 "
