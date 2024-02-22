@@ -34,7 +34,7 @@ do_compile[noexec] = "1"
 # Path where the k3s expects the airgap images.
 K3S_IMAGES_DIR = "/var/lib/rancher/k3s/agent/images"
 # URL for pause-container image used by k3s.
-PAUSE_CONTAINER_TAG = "rancher/mirrored-pause:3.5"
+PAUSE_CONTAINER_TAG = "rancher/mirrored-pause:3.6"
 
 addtask fetch_pause_container after do_configure before do_install
 do_fetch_pause_container[network] = "1"
