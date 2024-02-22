@@ -1,5 +1,9 @@
 // Copyright 2024 NXP
 // Custom environment shipped for GoldVIP, providing commands for quickly deploying binaries to the QSPI NOR flash.
+// The following macros will be automagically replaced when building the binary environment:
+//       $KERNEL_DEVICETREE         Basename of KERNEL_DEVICETREE
+
+fdt_file=$KERNEL_DEVICETREE
 
 write_flash_image=sf probe 6:0 && \
   run loadimage && \
