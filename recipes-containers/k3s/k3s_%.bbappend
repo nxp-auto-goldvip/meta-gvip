@@ -1,4 +1,4 @@
-# Copyright 2022-2023 NXP
+# Copyright 2022-2024 NXP
 
 inherit update-rc.d
 
@@ -45,7 +45,7 @@ do_fetch_pause_container() {
         docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
 }
 
-# Install the pre-built K3s binary. Let the default recipe to copy it to BIN directory.
+# Install the pre-built k3s binary. Let the default recipe to copy it to BIN directory.
 do_install:prepend() {
     install -d ${S}/src/import/dist/artifacts
     install -m 755 ${WORKDIR}/k3s-bin ${S}/src/import/dist/artifacts/k3s
@@ -72,7 +72,7 @@ do_install:append() {
    fi
 }
 
-PACKAGES =+ "${PN}-airgap-images"
+PACKAGES =+ "${PN}-airgap-images ${PN}-airgap-pause-container"
 
 INITSCRIPT_PACKAGES = "${PN}-server ${PN}-agent"
 INITSCRIPT_NAME:${PN}-server = "k3s-server"
@@ -81,11 +81,22 @@ INITSCRIPT_NAME:${PN}-agent = "k3s-agent"
 INITSCRIPT_PARAMS:${PN}-agent = "defaults 90"
 
 FILES:${PN} += " \
-    ${K3S_IMAGES_DIR}/pause-container.tar \
     ${BIN_PREFIX}/bin/k3s-killall.sh \
 "
 
-FILES:${PN}-airgap-images += "${K3S_IMAGES_DIR}/k3s-airgap-images.tar.zst"
-FILES:${PN}-agent += "${sysconfdir}/init.d/k3s-agent"
-FILES:${PN}-server += "${sysconfdir}/init.d/k3s-server"
+FILES:${PN}-agent += " \
+    ${sysconfdir}/init.d/k3s-agent \
+"
+
+FILES:${PN}-server += " \
+    ${sysconfdir}/init.d/k3s-server \
+"
+
+FILES:${PN}-airgap-pause-container = " \
+    ${K3S_IMAGES_DIR}/pause-container.tar \
+"
+
+FILES:${PN}-airgap-images = " \
+    ${K3S_IMAGES_DIR}/k3s-airgap-images.tar.zst \
+"
 
