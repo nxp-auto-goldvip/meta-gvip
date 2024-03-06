@@ -3,6 +3,7 @@
 require recipes-security/optee/optee-nxp.inc
 require recipes-security/optee/optee-examples.inc
 
+GOLDVIP_BRANCH ?= "develop"
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
