@@ -3,6 +3,7 @@
 require recipes-security/optee/optee-nxp.inc
 require recipes-security/optee/optee-examples.inc
 
+GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
