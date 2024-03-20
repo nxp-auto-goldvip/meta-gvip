@@ -1,4 +1,4 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2024 NXP
 
 DESCRIPTION = "GoldVIP Image"
 
@@ -18,6 +18,7 @@ IMAGE_INSTALL += " \
     kernel-module-nxp89xx \
     linux-firmware-nxp89xx \
     libfci-cli \
+    goldvip-cloud-gw-dom0 \
 "
 
 # Allow builds without XEN enabled.
@@ -34,26 +35,35 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-iot-fleetwise-edge', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway goldvip-dds', 'goldvip-dds', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-cloud-gw-dom0', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-dom0', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'goldvip-containers-dom0', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', '', 'goldvip-cloud-gw-domu greengrass-bin', d)} \
 "
 
-# Select the k3s and OTA Update Agents packages based on DISTRO_FEATURES content.
 python() {
+    # Select the k3s and OTA Update Agents packages based on DISTRO_FEATURES content.
     # Choose the k3s node type based on virtualization usage (if xen is enabled, then v2xdomu
     # acts as a master node and dom0 can start an agent)
     if bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', True, False, d):
         d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'xen',
                                                        ' k3s-agent', ' k3s-server', d))
-    if bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', True, False, d):
+    if bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', True, False, d):
         d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
-                                      ' goldvip-ota-agents-container', ' goldvip-ota-agents', d))
-        d.appendVar('IMAGE_INSTALL', \
+                                      ' goldvip-remote-ua-container goldvip-ota-agents-container' , 
+                                      ' goldvip-remote-ua goldvip-ota-agents', d))
+
+
+    # If virtualization is missing add the optional packages that are supposed to be on domU
+    if bb.utils.contains('DISTRO_FEATURES', 'xen', False, True, d):
+        d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-adaptive-autosar', ' eb-ara', '', d))
+        d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-telemetry-server', ' goldvip-telemetry-server', '', d))
+        d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', ' goldvip-ota-client-demo', '', d))
+        if bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', True, False, d):
+            d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
-                                      ' goldvip-remote-ua-container', ' goldvip-remote-ua', d))
+                                      ' goldvip-ota-client-container', ' goldvip-ota-client', d))
 }
 
 # add additional binaries in SD-card FAT partition

@@ -1,10 +1,7 @@
 require conf/distro/fsl-auto.conf
 
 # Required features for goldvip
-DISTRO_FEATURES:append = " xen"
 DISTRO_FEATURES:append = " pfe-slave"
-DISTRO_FEATURES:append = " bridge_utils"
-XEN_EXAMPLE = "xen-examples-goldvip"
 
 # Optional features for goldvip
 DISTRO_FEATURES:append = " goldvip-bootloader"
