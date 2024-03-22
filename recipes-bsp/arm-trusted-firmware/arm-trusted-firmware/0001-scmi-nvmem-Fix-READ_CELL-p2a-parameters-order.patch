@@ -1,0 +1,39 @@
+From 6c8bb985460fe5fd0f304b5eb22e8cc2642bb721 Mon Sep 17 00:00:00 2001
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+Date: Mon, 12 Feb 2024 16:58:37 +0200
+Subject: [PATCH] scmi: nvmem: Fix READ_CELL p2a parameters order
+
+Fixed the order of the READ_CELL p2a parameters to fit the
+NVMEM SCMI protocol specification.
+
+Issue: ALB-11077
+Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+---
+ drivers/scmi-msg/nvmem.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/scmi-msg/nvmem.h b/drivers/scmi-msg/nvmem.h
+index db6dccdb0..a27474baa 100644
+--- a/drivers/scmi-msg/nvmem.h
++++ b/drivers/scmi-msg/nvmem.h
+@@ -1,6 +1,6 @@
+ // SPDX-License-Identifier: BSD-3-Clause
+ /*
+- * Copyright 2023 NXP
++ * Copyright 2023-2024 NXP
+  */
+ 
+ #ifndef SCMI_MSG_NVMEM_H
+@@ -28,8 +28,8 @@ struct scmi_nvmem_read_cell_a2p {
+ 
+ struct scmi_nvmem_read_cell_p2a {
+ 	int32_t status;
+-	uint32_t value;
+ 	uint32_t bytes;
++	uint32_t value;
+ };
+ 
+ /*
+-- 
+2.25.1
+

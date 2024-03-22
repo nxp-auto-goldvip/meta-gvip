@@ -1,0 +1,40 @@
+From 5493ea77aa5757b8fcd8e1c37b72723243fcdadb Mon Sep 17 00:00:00 2001
+From: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+Date: Mon, 12 Feb 2024 16:52:59 +0200
+Subject: [PATCH] arm_scmi: nvmem: Fix READ_CELL p2a parameters order
+
+Fixed the order of the READ_CELL p2a parameters to fit the
+NVMEM SCMI protocol specification.
+
+Issue: ALB-11077
+Signed-off-by: Andrei Cherechesu <andrei.cherechesu@nxp.com>
+---
+ drivers/firmware/arm_scmi/nvmem.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/drivers/firmware/arm_scmi/nvmem.c b/drivers/firmware/arm_scmi/nvmem.c
+index d74b3880d4c3..a5dedb92518e 100644
+--- a/drivers/firmware/arm_scmi/nvmem.c
++++ b/drivers/firmware/arm_scmi/nvmem.c
+@@ -2,7 +2,7 @@
+ /*
+  * SCMI NVMEM Protocol - NXP Vendor Extension
+  *
+- * Copyright 2023 NXP
++ * Copyright 2023-2024 NXP
+  */
+ 
+ #define pr_fmt(fmt) "scmi:nvmem:proto: " fmt
+@@ -27,8 +27,8 @@ struct scmi_nvmem_read_cell_a2p {
+ };
+ 
+ struct scmi_nvmem_read_cell_p2a {
+-	__le32 value;
+ 	__le32 bytes;
++	__le32 value;
+ };
+ 
+ struct scmi_nvmem_write_cell_a2p {
+-- 
+2.25.1
+

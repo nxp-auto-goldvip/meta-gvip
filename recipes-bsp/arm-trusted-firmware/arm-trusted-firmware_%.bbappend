@@ -7,6 +7,7 @@ SRC_URI:append= " \
         file://0001-s32g3-rdb3-mmc-Add-no-1-8-v-property.patch \
         ${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'file://0001-fdts-s32g2-rdb2-slave-Add-RDB2-PFE-Slave-config.patch', '', d)} \
         ${@bb.utils.contains('DISTRO_FEATURES', 'scprt', 'file://0001-fdts-s32g-Use-MSCM-1-interrupt-for-SCP-notifications.patch', '', d)} \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'scprt', 'file://0001-scmi-nvmem-Fix-READ_CELL-p2a-parameters-order.patch' , '', d)} \
 "
 
 EXTRA_OEMAKE:append = " \
