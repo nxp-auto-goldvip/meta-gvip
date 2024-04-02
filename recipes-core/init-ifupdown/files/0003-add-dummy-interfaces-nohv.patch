@@ -1,0 +1,29 @@
+Index: 1.0-r7/interfaces
+===================================================================
+--- 1.0-r7.orig/interfaces
++++ 1.0-r7/interfaces
+@@ -4,6 +4,24 @@
+ auto lo
+ iface lo inet loopback
+
++auto dummy1
++iface dummy1 inet static
++pre-up modprobe dummy
++pre-up ip link add dummy1 type dummy
++address 10.0.100.10
++netmask 255.255.255.0
++gateway 10.255.255.1
++metric 1023
++
++auto dummy2
++iface dummy2 inet static
++pre-up modprobe dummy
++pre-up ip link add dummy2 type dummy
++address 10.0.100.20
++netmask 255.255.255.0
++gateway 10.255.255.1
++metric 1023
++
+ # To enable DHCP for an interface, replace "manual" with "dhcp" in iface command
+ auto pfe0
+ iface pfe0 inet manual

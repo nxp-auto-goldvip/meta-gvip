@@ -73,8 +73,9 @@ SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 
 # This image shall have a size of 2.5GiB with at least 700MiB of free space. To achieve that, set the
 # maximum size to 2.5GiB and define the expected extra space. IMAGE_ROOTFS_SIZE is the difference
 # between the aforementioned values. The build fails if the image will exceed the 2.5GiB limit.
-IMAGE_ROOTFS_MAXSIZE = "2621440"
-IMAGE_ROOTFS_EXTRA_SPACE = "716800"
+# For the ota use case in a non virtualized image, add an extra 1400MiB of free space.
+IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2621440', '4055040', d)}"
+IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '716800', '2150400', d)}"
 
 # Set image overhead factor to 1, as extra space is guaranteeed by the IMAGE_ROOTFS_EXTRA_SPACE variable
 IMAGE_OVERHEAD_FACTOR = "1"

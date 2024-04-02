@@ -44,6 +44,10 @@ do_install() {
     for ua_defaults in ${D}/data/*_ua/factory_defaults; do
         cp -R ${ua_defaults}/* $(dirname ${ua_defaults})/.
     done
+
+    # Select flavor of the config file, with or without hypervizor.
+    # In the no hypervizor flavor, the linux vm update agent does nothing.
+    ln -rs ${D}${sysconfdir}/ota/linuxvm_ua_${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'hv', 'nohv', d)}.conf ${D}${sysconfdir}/ota/linuxvm_ua.conf
 }
 
 # set update-rc.d parameters
