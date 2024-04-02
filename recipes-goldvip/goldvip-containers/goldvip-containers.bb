@@ -6,18 +6,17 @@ require include/goldvip-containers.inc
 
 S = "${WORKDIR}/git"
 
-do_install[depends] += "worker-kubeconfig-provision-image:do_image_complete"
-do_compile[noexec] = "1"
-
 do_install:append() {
     install -d ${D}/${K3S_CONFIG_DIR}
-    install -m 0644 ${S}/containers/conf/hv/config-agent.yaml ${D}/${K3S_CONFIG_DIR}
+    install -m 0644 ${S}/containers/conf/no-hv/config-server.yaml ${D}/${K3S_CONFIG_DIR}
 
-    install -d ${D}/${IMAGES_DIR}
-    install -m 0644 ${DEPLOY_DIR_IMAGE}/worker-kubeconfig-provision-image-${MACHINE}.oci-image.tar ${D}${IMAGES_DIR}
+    install -d ${D}/${DESTDIR}
+
+    # Example manifest, deployed by user.
+    install -m 0644 ${S}/containers/manifests/no-hv/nginx.yaml ${D}/${DESTDIR}/
 }
 
 FILES:${PN} += " \
-    ${IMAGES_DIR} \
+    ${DESTDIR} \
     ${K3S_CONFIG_DIR} \
 "

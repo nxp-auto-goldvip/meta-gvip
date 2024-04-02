@@ -36,7 +36,6 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway goldvip-dds', 'goldvip-dds', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'goldvip-containers-dom0', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', '', 'goldvip-cloud-gw-domu greengrass-bin', d)} \
 "
@@ -47,7 +46,7 @@ python() {
     # acts as a master node and dom0 can start an agent)
     if bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', True, False, d):
         d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'xen',
-                                                       ' k3s-agent', ' k3s-server', d))
+                                                       ' k3s-agent goldvip-containers-dom0', ' k3s-server goldvip-containers', d))
     if bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', True, False, d):
         d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \

@@ -11,6 +11,8 @@ GOLDVIP_BRANCH ?= "develop"
 
 # Path where the k3s expects the air-gapped images.
 IMAGES_DIR = "/var/lib/rancher/k3s/agent/images/"
+# Path for auto-deploying manifests.
+MANIFESTS_DIR = "/var/lib/rancher/k3s/server/manifests"
 
 # Basename of the OTA client OCI image.
 CONTAINER_OCI_IMG = "${PN}-image-${MACHINE}.oci-image.tar"
@@ -31,10 +33,14 @@ do_install () {
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${CONTAINER_OCI_IMG} ${D}${IMAGES_DIR}
 
     install -d ${D}/${DESTDIR}
-    install -m 0644 ${S}/containers/manifests/goldvip-update-agents.yaml ${D}/${DESTDIR}/
+    install -d ${D}/${MANIFESTS_DIR}
+
+    install -m 0644 ${S}/containers/manifests/${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'hv', 'no-hv', d)}/goldvip-update-agents.yaml ${D}/${MANIFESTS_DIR}/
+    ln -sr ${D}/${MANIFESTS_DIR}/goldvip-update-agents.yaml ${D}/${DESTDIR}/goldvip-update-agents.yaml
 }
 
 FILES:${PN} += " \
     ${DESTDIR} \
     ${IMAGES_DIR} \
+    ${MANIFESTS_DIR} \
 "

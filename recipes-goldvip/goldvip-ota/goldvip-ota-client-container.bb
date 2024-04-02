@@ -33,7 +33,7 @@ do_install () {
     install -m 0644 ${DEPLOY_DIR_IMAGE}/${CONTAINER_OCI_IMG} ${D}${IMAGES_DIR}
 
     install -d ${D}/${MANIFESTS_DIR}
-    install -m 0644 ${S}/containers/manifests/otamatic.yaml ${D}/${MANIFESTS_DIR}/
+    install -m 0644 ${S}/containers/manifests/${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'hv', 'no-hv', d)}/otamatic.yaml ${D}/${MANIFESTS_DIR}/
 
     install -d ${D}/${DESTDIR}
     ln -sr ${D}/${MANIFESTS_DIR}/otamatic.yaml ${D}/${DESTDIR}/otamatic.yaml
