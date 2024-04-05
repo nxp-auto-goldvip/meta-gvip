@@ -1,6 +1,6 @@
-From 7b550b3141eea779adc4bb79f12d98862728132a Mon Sep 17 00:00:00 2001
+From 26bbb267dee9de1e583f679cac8faeee49e58641 Mon Sep 17 00:00:00 2001
 From: George Mocanu <george.mocanu@nxp.com>
-Date: Wed, 10 Jan 2024 16:17:03 +0200
+Date: Fri, 19 Apr 2024 09:54:29 +0300
 Subject: [PATCH] fdts: s32g: Use MSCM#1 interrupt for SCP notifications
 
 Use the MSCM#1 IRQ for SCP SCMI notifications to
@@ -11,24 +11,29 @@ it currently.
 
 Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 ---
- fdts/s32g.dtsi | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ fdts/s32g.dtsi | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/fdts/s32g.dtsi b/fdts/s32g.dtsi
-index 14ba9729d..0fc26bbbf 100644
+index beb306ffa..e804ba8d8 100644
 --- a/fdts/s32g.dtsi
 +++ b/fdts/s32g.dtsi
-@@ -130,8 +130,8 @@
+@@ -130,11 +130,11 @@
  				"scp_rx_mb", "scp_rx_md",
  				"scmi_ospm_notif";
  			/* <handle, cpn, irq> */
 -			nxp,scp-irqs = <&mscm0 M7_0_CPN MSCM_C2C_IRQ_0>,
--				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_0>;
+-				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_0>,
+-				<&mscm0 M7_0_CPN MSCM_C2C_IRQ_0>,
 +			nxp,scp-irqs = <&mscm0 M7_0_CPN MSCM_C2C_IRQ_1>,
-+				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_1>;
- 			nxp,scp-irq-names = "scp_tx", "scp_rx";
++				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_1>,
+ 				<&mscm0 M7_0_CPN MSCM_C2C_IRQ_1>,
+-				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_1>;
++				<&mscm0 M7_0_CPN MSCM_C2C_IRQ_2>,
++				<&mscm0 A53_0_CPN MSCM_C2C_IRQ_2>;
+ 			nxp,scp-irq-names = "scp_tx", "scp_rx", "scp_psci", "scp_ospm",
+ 				"scp_ospm_rx";
  			nxp,notif-irq = <GIC_SPI 300 IRQ_TYPE_EDGE_RISING>;
- 
 -- 
 2.25.1
 
