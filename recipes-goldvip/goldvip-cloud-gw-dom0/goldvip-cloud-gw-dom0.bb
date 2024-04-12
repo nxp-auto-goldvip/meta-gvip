@@ -24,6 +24,7 @@ RDEPENDS:${PN} += " \
     python3-mmap \
     python3-fcntl \
     python3-rticonnextdds-connector \
+    python3-pysensors \
 "
 
 do_install() {
