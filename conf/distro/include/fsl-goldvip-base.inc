@@ -1,9 +1,10 @@
 require conf/distro/fsl-auto.conf
 
-# Required features for goldvip
-DISTRO_FEATURES:append = " pfe-slave"
+DISTRO_NAME = "GoldVIP"
+DISTRO_VERSION = "${GOLDVIP_RELEASE} (based on Auto Linux BSP ${ALB_RELEASE})"
 
-# Optional features for goldvip
+# Features specific to the GoldVIP distros
+DISTRO_FEATURES:append = " pfe-slave"
 DISTRO_FEATURES:append = " goldvip-bootloader"
 DISTRO_FEATURES:append = " goldvip-crypto"
 DISTRO_FEATURES:append = " goldvip-containerization seccomp"
@@ -23,3 +24,15 @@ DISTRO_FEATURES:remove = " systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED:remove = " sysvinit"
 VIRTUAL-RUNTIME_init_manager = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = "initscripts"
+
+PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
+PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
+PREFERRED_VERSION_cacao-native = "git"
+
+PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
+PREFERRED_VERSION_python3-boto3 ?= "1.28.77"
+PREFERRED_VERSION_python3-botocore ?= "1.31.77"
+PREFERRED_VERSION_greengrass-bin ?= "2.9.1"
+PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
+PREFERRED_VERSION_sloci-image ?= "v1.0.2+git%"
+
