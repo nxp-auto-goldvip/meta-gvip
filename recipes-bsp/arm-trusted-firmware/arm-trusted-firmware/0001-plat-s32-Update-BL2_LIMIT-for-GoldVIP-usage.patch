@@ -1,19 +1,18 @@
-From e0c72f6852cc7cc7621ad97067591c92933ea834 Mon Sep 17 00:00:00 2001
+From 6d3692506fcb32cf725138782b5e79d6e555e9c1 Mon Sep 17 00:00:00 2001
 From: George Mocanu <george.mocanu@nxp.com>
-Date: Wed, 22 Nov 2023 16:53:55 +0200
-Subject: [PATCH] s32: Update BL2_LIMIT for GoldVIP usage
+Date: Wed, 15 May 2024 10:24:18 +0300
+Subject: [PATCH] plat: s32: Update BL2_LIMIT for GoldVIP usage
 
-Issue: GVIP-1167
 Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 ---
- plat/nxp/s32/include/s32_platform_def.h | 3 +--
+ plat/nxp/s32/s32cc/include/s32cc_platform_def.h | 3 +--
  1 file changed, 1 insertion(+), 2 deletions(-)
 
-diff --git a/plat/nxp/s32/include/s32_platform_def.h b/plat/nxp/s32/include/s32_platform_def.h
-index c7a8cdf27..47fdfdbd4 100644
---- a/plat/nxp/s32/include/s32_platform_def.h
-+++ b/plat/nxp/s32/include/s32_platform_def.h
-@@ -104,8 +104,7 @@
+diff --git a/plat/nxp/s32/s32cc/include/s32cc_platform_def.h b/plat/nxp/s32/s32cc/include/s32cc_platform_def.h
+index 0f5a18dc6..9ac60e0f6 100644
+--- a/plat/nxp/s32/s32cc/include/s32cc_platform_def.h
++++ b/plat/nxp/s32/s32cc/include/s32cc_platform_def.h
+@@ -100,8 +100,7 @@
   * enough to prevent overflowing onto the adjacent SRAM image. Handle with care,
   * wear a helmet and compile with -Os.
   */
