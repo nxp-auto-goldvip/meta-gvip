@@ -1,0 +1,80 @@
+From de995c0d26ed47aab616f476bc3cde06c9709d74 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Mon, 20 May 2024 13:33:42 +0300
+Subject: [PATCH] mxm_wifiex: Fix build errors with kernel 5.15.153-rt
+
+Change the minimum kernel version check to 5.15.0 to use the new
+format of the sockaddr struct.
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ mxm_wifiex/wlan_src/mlinux/moal_eth_ioctl.c | 2 +-
+ mxm_wifiex/wlan_src/mlinux/moal_shim.c      | 2 +-
+ mxm_wifiex/wlan_src/mlinux/moal_uap_wext.c  | 2 +-
+ mxm_wifiex/wlan_src/mlinux/moal_wext.c      | 4 ++--
+ 4 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/mxm_wifiex/wlan_src/mlinux/moal_eth_ioctl.c b/mxm_wifiex/wlan_src/mlinux/moal_eth_ioctl.c
+index b899631..884ed93 100644
+--- a/mxm_wifiex/wlan_src/mlinux/moal_eth_ioctl.c
++++ b/mxm_wifiex/wlan_src/mlinux/moal_eth_ioctl.c
+@@ -6183,7 +6183,7 @@ static int woal_priv_get_ap(moal_private *priv, t_u8 *respbuf, t_u32 respbuflen)
+ 	if (bss_info.media_connected == MTRUE) {
+ 		moal_memcpy_ext(priv->phandle, mwr->u.ap_addr.sa_data,
+ 				&bss_info.bssid, MLAN_MAC_ADDR_LENGTH,
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+ 				sizeof(mwr->u.ap_addr.sa_data_min));
+ #else
+ 				sizeof(mwr->u.ap_addr.sa_data));
+diff --git a/mxm_wifiex/wlan_src/mlinux/moal_shim.c b/mxm_wifiex/wlan_src/mlinux/moal_shim.c
+index 23289c7..f9d6606 100644
+--- a/mxm_wifiex/wlan_src/mlinux/moal_shim.c
++++ b/mxm_wifiex/wlan_src/mlinux/moal_shim.c
+@@ -2844,7 +2844,7 @@ mlan_status moal_recv_event(t_void *pmoal, pmlan_event pmevent)
+ 			memset(wrqu.ap_addr.sa_data, 0x00, ETH_ALEN);
+ 			moal_memcpy_ext(priv->phandle, wrqu.ap_addr.sa_data,
+ 					pmevent->event_buf, ETH_ALEN,
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+ 					sizeof(wrqu.ap_addr.sa_data_min));
+ #else
+ 					sizeof(wrqu.ap_addr.sa_data));
+diff --git a/mxm_wifiex/wlan_src/mlinux/moal_uap_wext.c b/mxm_wifiex/wlan_src/mlinux/moal_uap_wext.c
+index 5fe4926..35b86af 100644
+--- a/mxm_wifiex/wlan_src/mlinux/moal_uap_wext.c
++++ b/mxm_wifiex/wlan_src/mlinux/moal_uap_wext.c
+@@ -228,7 +228,7 @@ static int woal_get_wap(struct net_device *dev, struct iw_request_info *info,
+ 	if (priv->bss_started)
+ 		moal_memcpy_ext(priv->phandle, awrq->sa_data,
+ 				priv->current_addr, MLAN_MAC_ADDR_LENGTH,
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+ 				sizeof(awrq->sa_data_min));
+ #else
+ 				sizeof(awrq->sa_data));
+diff --git a/mxm_wifiex/wlan_src/mlinux/moal_wext.c b/mxm_wifiex/wlan_src/mlinux/moal_wext.c
+index 06f6651..f419798 100644
+--- a/mxm_wifiex/wlan_src/mlinux/moal_wext.c
++++ b/mxm_wifiex/wlan_src/mlinux/moal_wext.c
+@@ -584,7 +584,7 @@ static int woal_get_wap(struct net_device *dev, struct iw_request_info *info,
+ 
+ 	if (bss_info.media_connected == MTRUE)
+ 		moal_memcpy_ext(priv->phandle, awrq->sa_data, &bss_info.bssid,
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+ 				MLAN_MAC_ADDR_LENGTH,
+ 				sizeof(awrq->sa_data_min));
+ #else
+@@ -3032,7 +3032,7 @@ static int woal_get_scan(struct net_device *dev, struct iw_request_info *info,
+ 		iwe.u.ap_addr.sa_family = ARPHRD_ETHER;
+ 		moal_memcpy_ext(priv->phandle, iwe.u.ap_addr.sa_data,
+ 				&scan_table[i].mac_address, ETH_ALEN,
+-#if LINUX_VERSION_CODE >= KERNEL_VERSION(6, 2, 0)
++#if LINUX_VERSION_CODE >= KERNEL_VERSION(5, 15, 0)
+ 				sizeof(iwe.u.ap_addr.sa_data_min));
+ #else
+ 				sizeof(iwe.u.ap_addr.sa_data));
+-- 
+2.25.1
+

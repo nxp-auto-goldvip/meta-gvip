@@ -1,5 +1,3 @@
-# Provides the mlan kernel module and the nxp wlan sdk
-
 require nxp-wlan-sdk_git.inc
 
 SUMMARY = "NXP Wi-Fi SDK"
@@ -22,5 +20,4 @@ do_install () {
 
 FILES:${PN} = "${datadir}/nxp_wireless"
 
-COMPATIBLE_MACHINE = "s32g"
-
+COMPATIBLE_MACHINE = "(imx-nxp-bsp)"
