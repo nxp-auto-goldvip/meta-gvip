@@ -18,7 +18,7 @@ do_compile[noexec] = "1"
 
 do_install() {
 	install -d ${D}/boot
-	install -m 0644 "${GOLDVIP_GATEWAY_DIR}/${GOLDVIP_GATEWAY_BIN}" ${D}/boot
+	install -m 0644 "${WORKDIR}/${GOLDVIP_GATEWAY_DIR}/${GOLDVIP_GATEWAY_BIN}" ${D}/boot
 }
 
 do_deploy() {

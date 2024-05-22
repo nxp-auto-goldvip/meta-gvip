@@ -69,6 +69,11 @@ python() {
 SDCARDIMAGE_BOOT_EXTRA_FILES:append = " arm-trusted-firmware:fip.s32-sdcard "
 SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway:goldvip-gateway.bin', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader:boot-loader', '', d)}"
+python() {
+    if (bb.utils.contains('ENABLE_DYNAMIC_BOOT_CONFIG', 'true', True, False, d) and 
+        bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', True, False, d)):
+        d.appendVar('SDCARDIMAGE_BOOT_EXTRA_FILES', 'goldvip-bootloader:Bootloader_Configuration.bin')
+}
 
 # This image shall have a size of 2.5GiB with at least 700MiB of free space. To achieve that, set the
 # maximum size to 2.5GiB and define the expected extra space. IMAGE_ROOTFS_SIZE is the difference

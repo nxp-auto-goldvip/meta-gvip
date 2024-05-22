@@ -15,6 +15,10 @@ write_bootloader=echo "Flashing the GoldVIP real-time bootloader..."; \
   setenv image boot-loader && \
   setenv flash_addr 0x00000000 && \
   run write_flash_image
+write_bootconfig=echo "Flashing the configuration for the GoldVip real-time bootloader..."; \
+  setenv image Bootloader_Configuration.bin && \
+  setenv flash_addr 0x001F0000 && \
+  run write_flash_image
 write_atf=echo "Flashing the ARM Trusted Firmware binary..."; \
   setenv image fip.s32-sdcard && \
   setenv flash_addr 0x00200000 && \
@@ -24,5 +28,5 @@ write_gateway_app=echo "Flashing the GoldVIP real-time gateway application..."; 
   setenv flash_addr 0x00400000 && \
   run write_flash_image
 
-write_goldvip_images=echo 'Flashing the GoldVIP images...'; run write_bootloader write_atf write_gateway_app
+write_goldvip_images=echo 'Flashing the GoldVIP images...'; run write_bootloader write_bootconfig write_atf write_gateway_app
 
