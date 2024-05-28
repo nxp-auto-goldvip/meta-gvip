@@ -47,9 +47,12 @@ do_install() {
     install -m 0755 ${S}/can-gw/service/avtp_listener ${D}${sysconfdir}/init.d/avtp_listener
     update-rc.d -r ${D} avtp_listener defaults 90
 
-    install -m 0755 ${S}/eth-gw/service/wifi_setup ${D}${sysconfdir}/init.d/wifi_setup
+    install -m 0755 ${S}/eth-gw/service/wifi_service ${D}${sysconfdir}/init.d/wifi_service
     install -m 0644 ${S}/eth-gw/service/wifi_nxp.conf ${D}/${sysconfdir}
-    update-rc.d -r ${D} wifi_setup defaults 91
+    update-rc.d -r ${D} wifi_service defaults 91
+
+    install -d ${D}${exec_prefix}/bin
+    install -m 0755 ${S}/eth-gw/setup_scripts/wifi_setup ${D}${exec_prefix}/bin/wifi_setup
 
     if ${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'true', 'false', d)}; then
         install -m 0755 ${S}/eth-gw/service/pfe-slave-setup ${D}${sysconfdir}/init.d/pfe-slave-setup
@@ -64,5 +67,6 @@ FILES:${PN} += " \
     /usr/local/sbin/* \
     ${sbindir}/*.py \
     ${sysconfdir}/init.d/avtp_listener \
-    ${sysconfdir}/init.d/wifi_setup \
+    ${sysconfdir}/init.d/wifi_service \
+    ${exec_prefix}/bin/wifi_service \
 "
