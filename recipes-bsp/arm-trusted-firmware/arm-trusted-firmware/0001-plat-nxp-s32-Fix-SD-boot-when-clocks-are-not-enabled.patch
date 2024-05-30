@@ -1,0 +1,150 @@
+From e35e4c0721c45fcbc14538ded89a0b5bb8a60e00 Mon Sep 17 00:00:00 2001
+From: Florin Buica <florin.buica@nxp.com>
+Date: Thu, 30 May 2024 12:23:20 +0300
+Subject: [PATCH] plat/nxp/s32: Fix SD boot when clocks are not enabled in BL2
+
+Move BL2 peripheral clocks enable before SDHC setup
+and before enabling the MMU
+
+Issue: ALB-11457
+Signed-off-by: Florin Buica <florin.buica@nxp.com>
+---
+ drivers/nxp/s32/mmc/s32_mmc.c              | 11 -----------
+ plat/nxp/s32/s32cc/include/s32cc_bl2_el3.h |  1 -
+ plat/nxp/s32/s32cc/s32_bl2_el3.c           | 19 ++-----------------
+ plat/nxp/s32/s32cc/s32g/s32g_bl2_el3.c     |  7 ++++++-
+ plat/nxp/s32/s32cc/s32r/s32r_bl2_el3.c     |  8 +++++++-
+ 5 files changed, 15 insertions(+), 31 deletions(-)
+
+diff --git a/drivers/nxp/s32/mmc/s32_mmc.c b/drivers/nxp/s32/mmc/s32_mmc.c
+index 010771ecc..f855144a5 100644
+--- a/drivers/nxp/s32/mmc/s32_mmc.c
++++ b/drivers/nxp/s32/mmc/s32_mmc.c
+@@ -407,18 +407,7 @@ static bool s32_is_card_emmc(void)
+ 
+ int s32_mmc_register(void)
+ {
+-	size_t reg_size = round_up(USDHC_SIZE, PAGE_SIZE);
+ 	unsigned int clk, bus_width;
+-	int ret;
+-
+-	ret = mmap_add_dynamic_region(USDHC_BASE_ADDR, USDHC_BASE_ADDR,
+-				      reg_size, MT_DEVICE | MT_RW);
+-
+-	if (ret) {
+-		ERROR("Failed to map MMC bus region. base_pa: 0x%llx, size: %ld, error: %d\n",
+-		      USDHC_BASE_ADDR, reg_size, ret);
+-		return ret;
+-	}
+ 
+ 	s32_mmc_init();
+ 
+diff --git a/plat/nxp/s32/s32cc/include/s32cc_bl2_el3.h b/plat/nxp/s32/s32cc/include/s32cc_bl2_el3.h
+index 81212149f..a7649f4ea 100644
+--- a/plat/nxp/s32/s32cc/include/s32cc_bl2_el3.h
++++ b/plat/nxp/s32/s32cc/include/s32cc_bl2_el3.h
+@@ -29,6 +29,5 @@ int s32_el3_mmu_fixup(const struct s32_mmu_filter *filters, size_t n_filters);
+ void clear_swt_faults(void);
+ void clear_reset_cause(void);
+ const char *get_reset_cause_str(enum reset_cause reset_cause);
+-int s32_bl2_el3_early_plat_arch_setup(void);
+ 
+ #endif /* S32CC_BL2_EL3_H */
+diff --git a/plat/nxp/s32/s32cc/s32_bl2_el3.c b/plat/nxp/s32/s32cc/s32_bl2_el3.c
+index 83478382e..5f7afba78 100644
+--- a/plat/nxp/s32/s32cc/s32_bl2_el3.c
++++ b/plat/nxp/s32/s32cc/s32_bl2_el3.c
+@@ -278,6 +278,8 @@ static mmap_region_t dyn_regions[] = {
+ 	MAP_REGION_FLAT(S32_FXOSC_BASE_ADDR,
+ 			MMU_ROUND_UP_TO_PAGE(S32_FXOSC_SIZE),
+ 			MT_DEVICE | MT_RW),
++	MAP_REGION_FLAT(USDHC_BASE_ADDR, MMU_ROUND_UP_TO_PAGE(USDHC_SIZE),
++			MT_DEVICE | MT_RW),
+ 	MAP_REGION2(S32_BL32_BASE, S32_BL32_BASE,
+ 			MMU_ROUND_UP_TO_PAGE(S32_BL32_SIZE),
+ 			MT_MEMORY | MT_RW, PAGE_SIZE),
+@@ -497,23 +499,6 @@ int s32_el3_mmu_fixup(const struct s32_mmu_filter *filters, size_t n_filters)
+ 	return 0;
+ }
+ 
+-int s32_bl2_el3_early_plat_arch_setup(void)
+-{
+-	int ret;
+-
+-	ret = s32_el3_mmu_fixup(NULL, 0);
+-	if (ret) {
+-		return ret;
+-	}
+-
+-	ret = s32_periph_clock_init();
+-	if (ret) {
+-		ERROR("Failed to enable BL2 periph clocks\n");
+-	}
+-
+-	return ret;
+-}
+-
+ struct bl_load_info *plat_get_bl_image_load_info(void)
+ {
+ 	return get_bl_load_info_from_mem_params_desc();
+diff --git a/plat/nxp/s32/s32cc/s32g/s32g_bl2_el3.c b/plat/nxp/s32/s32cc/s32g/s32g_bl2_el3.c
+index f0a7a50a0..c6ce93013 100644
+--- a/plat/nxp/s32/s32cc/s32g/s32g_bl2_el3.c
++++ b/plat/nxp/s32/s32cc/s32g/s32g_bl2_el3.c
+@@ -248,6 +248,11 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
+ 
+ 	s32_early_plat_init();
+ 
++	if (s32_periph_clock_init()) {
++		ERROR("Failed to enable BL2 periph clocks\n");
++		panic();
++	}
++
+ #ifdef HSE_SUPPORT
+ 	wait_hse_init();
+ #endif
+@@ -276,7 +281,7 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
+ 
+ void bl2_el3_plat_arch_setup(void)
+ {
+-	if (s32_bl2_el3_early_plat_arch_setup())
++	if (s32_el3_mmu_fixup(NULL, 0))
+ 		panic();
+ 
+ 	console_s32_register();
+diff --git a/plat/nxp/s32/s32cc/s32r/s32r_bl2_el3.c b/plat/nxp/s32/s32cc/s32r/s32r_bl2_el3.c
+index fad29ed80..74784dc8a 100644
+--- a/plat/nxp/s32/s32cc/s32r/s32r_bl2_el3.c
++++ b/plat/nxp/s32/s32cc/s32r/s32r_bl2_el3.c
+@@ -18,6 +18,7 @@
+ #include "s32cc_pinctrl.h"
+ #include "s32cc_storage.h"
+ #include "s32cc_sramc.h"
++#include "s32cc_clocks.h"
+ 
+ static bl_mem_params_node_t s32r_bl2_mem_params_descs[6];
+ REGISTER_BL_IMAGE_DESCS(s32r_bl2_mem_params_descs)
+@@ -62,6 +63,11 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
+ 
+ 	s32_early_plat_init();
+ 
++	if (s32_periph_clock_init()) {
++		ERROR("Failed to enable BL2 periph clocks\n");
++		panic();
++	}
++
+ #ifdef HSE_SUPPORT
+ 	wait_hse_init();
+ #endif
+@@ -84,7 +90,7 @@ void bl2_el3_early_platform_setup(u_register_t arg0, u_register_t arg1,
+ 
+ void bl2_el3_plat_arch_setup(void)
+ {
+-	if (s32_bl2_el3_early_plat_arch_setup())
++	if (s32_el3_mmu_fixup(NULL, 0))
+ 		panic();
+ 
+ 	console_s32_register();
+-- 
+2.25.1
+
