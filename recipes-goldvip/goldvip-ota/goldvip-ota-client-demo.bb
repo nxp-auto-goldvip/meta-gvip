@@ -1,6 +1,6 @@
 SUMMARY = "Gold VIP (Vehicle Integration Platform) OTAmatic Client demo scripts"
 LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=66826a98beb097b38ac01d175f237cb4"
+LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=1239b5ec13378bbe9b56958556340101"
 
 inherit features_check
 REQUIRED_DISTRO_FEATURES ?= "goldvip-ota"
