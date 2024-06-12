@@ -75,16 +75,20 @@ python() {
         d.appendVar('SDCARDIMAGE_BOOT_EXTRA_FILES', ' goldvip-bootloader:Bootloader_Configuration.bin')
 }
 
-# This image shall have a size of 2.5GiB with at least 700MiB of free space. To achieve that, set the
-# maximum size to 2.5GiB and define the expected extra space. IMAGE_ROOTFS_SIZE is the difference
-# between the aforementioned values. The build fails if the image will exceed the 2.5GiB limit.
-# For the ota use case in a non virtualized image, add an extra 1400MiB of free space.
-IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2621440', '4055040', d)}"
-IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '716800', '2150400', d)}"
+# Set the size of the free space allocated in this image:
+# - in environments with hypervisor (Xen is enabled), add 800 MiB of free space. This means that the
+#   rootfs image for dom0 shall have a size of around 2.6 GiB.
+# - in environments without hypervisor (standalone Linux), add 2200 MiB of free space. This leads to
+#   a rootfs image of 4 GiB.
+# The builds will fail if the rootfs size exceeds the configured sizes (either 2.6 GiB or 4 GiB).
+# Note: All the sizes are aligned to 4096 (check the value of the IMAGE_ROOTFS_ALIGNMENT).
+IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2727936', '4194304', d)}"
+IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '819200', '2252800', d)}"
+
+# Only IMAGE_ROOTFS_EXTRA_SPACE is evaluated in image bbclass, so this must be calculated
+# statically (IMAGE_ROOTFS_SIZE = IMAGE_ROOTFS_MAXSIZE - IMAGE_ROOTFS_EXTRA_SPACE).
+IMAGE_ROOTFS_SIZE = "1908736"
 
 # Set image overhead factor to 1, as extra space is guaranteeed by the IMAGE_ROOTFS_EXTRA_SPACE variable
 IMAGE_OVERHEAD_FACTOR = "1"
 
-# Unfortunately, only IMAGE_ROOTFS_EXTRA_SPACE is evaluated in image.bbclass, so this must be
-# calculated statically.
-IMAGE_ROOTFS_SIZE = "1904640"
