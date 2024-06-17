@@ -1,7 +1,10 @@
 # Copyright 2023-2024 NXP
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
-FILESEXTRAPATHS:prepend := "${THISDIR}/patches:"
+
+SRC_URI:append = " \
+    file://0001-Remove-ipc-shm-xen-module.patch \
+"
 
 BRANCH = "release/SW32G_IPCF_4.10.0_D2405"
 SRCREV = "2419b87af860faac9f46a63536b0bbf906b31053"
