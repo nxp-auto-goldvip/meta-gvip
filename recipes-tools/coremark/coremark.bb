@@ -1,7 +1,4 @@
-#
-# Copyright 2023 NXP
-#
-
+# Copyright 2023-2024 NXP
 SUMMARY = "Embedded Microprocessor Benchmark Consortium Coremark"
 LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE.md;md5=0a18b17ae63deaa8a595035f668aebe1"
@@ -11,7 +8,7 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/files:"
 inherit module-base
 
 SRC_URI = " \
-    git://github.com/eembc/coremark.git;branch=main \
+    git://github.com/eembc/coremark.git;branch=main;protocol=https \
 "
 SRCREV = "eefc986ebd3452d6adde22eafaff3e5c859f29e4"
 
