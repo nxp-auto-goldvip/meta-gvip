@@ -37,3 +37,4 @@ PREFERRED_VERSION_greengrass-bin ?= "2.9.1"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 PREFERRED_VERSION_sloci-image ?= "v1.0.2+git%"
 
+PREFERRED_VERSION_linux-s32 = "5.15.158"
