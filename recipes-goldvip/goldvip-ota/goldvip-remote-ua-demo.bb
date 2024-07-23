@@ -28,4 +28,3 @@ do_install() {
 FILES:${PN} += " \
     ${DESTDIR} \
 "
-
