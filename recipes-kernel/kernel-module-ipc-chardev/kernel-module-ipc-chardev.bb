@@ -13,7 +13,7 @@ inherit module
 S = "${WORKDIR}/git/ipcf"
 DESTDIR="${D}"
 
-RDEPENDS:{PN} = "ipc-shm"
+RDEPENDS:${PN} = "ipc-shm"
 DEPENDS = "ipc-shm"
 
 EXTRA_OEMAKE:append = " -C . INSTALL_DIR=${DESTDIR} IPC_SHM_DEV_PATH=${STAGING_INCDIR}/ipc-shm KERNELDIR=${KBUILD_OUTPUT} "
@@ -29,4 +29,4 @@ RPROVIDES:${PN} += "kernel-module-ipc-chdev${KERNEL_MODULE_PACKAGE_SUFFIX}"
 KERNEL_MODULE_AUTOLOAD += " ipc-chdev"
 
 FILES:${PN} += "${base_libdir}/*"
-FILES:${PN} += "${sysconfdir}/modules-load.d/*" 
+FILES:${PN} += "${sysconfdir}/modules-load.d/*"

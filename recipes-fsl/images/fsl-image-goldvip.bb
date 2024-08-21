@@ -12,7 +12,6 @@ IMAGE_INSTALL += " \
     goldvip-sdcard-partitioning \
     goldvip-apps \
     kernel-module-ipc-chardev \
-    ipc-shm \
     packagegroup-base-wifi \
     linux-firmware-rtlwifi \
     nxp-wlan-sdk \
