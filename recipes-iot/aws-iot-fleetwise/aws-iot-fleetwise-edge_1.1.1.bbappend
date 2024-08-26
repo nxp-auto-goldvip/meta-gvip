@@ -1,4 +1,4 @@
-# Copyright 2022-2023 NXP
+# Copyright 2022-2024 NXP
 
 inherit update-rc.d
 
@@ -8,7 +8,7 @@ GOLDVIP_BRANCH ?= "develop"
 SRC_URI += "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH};name=gvip;destsuffix=gvip"
 SRCREV_gvip = "${AUTOREV}"
 SRCREV_FORMAT = "fwe_gvip"
-SRCREV_fwe = "0a882bde6ad75c143f96a89fa88c22932c244e5e"
+SRCREV_fwe = "f4e85953bac2f99ed428ad69379e6c788ca10f78"
 
 DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
 
