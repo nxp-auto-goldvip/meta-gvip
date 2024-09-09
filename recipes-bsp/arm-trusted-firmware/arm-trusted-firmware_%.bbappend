@@ -10,5 +10,6 @@ EXTRA_OEMAKE:append = " \
         FIP_ALIGN=64 \
         BL2_BASE=0x34610000 \
         BL2_LIMIT=0x346FFFFF \
+        ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'ERRATA_ERR052269=0', '', d)} \
 "
 
