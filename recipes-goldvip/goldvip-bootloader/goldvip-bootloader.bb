@@ -6,6 +6,7 @@ inherit logging
 inherit deploy
 
 DEPENDS += "xxd-native"
+DEPENDS += "python3-pycryptodome-native"
 
 GOLDVIP_BINARIES_DIR ?= "."
 GOLDVIP_BOOTLOADER_DIR ?= "${GOLDVIP_BINARIES_DIR}"
@@ -21,6 +22,8 @@ SRC_URI = " \
     ${@bb.utils.contains('ENABLE_DYNAMIC_BOOT_CONFIG', 'true', 'file://${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN}', '', d)} \
     ${@bb.utils.contains('ENABLE_DYNAMIC_BOOT_CONFIG', 'true', 'file://${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_JSON}', '', d)} \
     file://boot_config.py \
+    file://image_signer.py \
+    file://rsa_2048_key.pem \
 "
 
 # tell yocto not to strip our binaries
@@ -40,6 +43,11 @@ do_update_bootloader_cfg() {
         python3 ${WORKDIR}/boot_config.py \
             -g ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR} \
             -v "Core-0 Image-0 RamAddress=${NEW_LOAD_ADDRESS}"
+
+        python3 ${WORKDIR}/image_signer.py \
+            -i ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Bootloader_Configuration.bin \
+            -o ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Bootloader_Configuration.bin \
+            -a RSA -k ${WORKDIR}/rsa_2048_key.pem
 
         diff ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Original_${GOLDVIP_BOOTLOADER_CFG_BIN} ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} || \
             bbwarn "Bootloader_Configuration.bin has changed, new A53 Load Address: ${NEW_LOAD_ADDRESS}"
