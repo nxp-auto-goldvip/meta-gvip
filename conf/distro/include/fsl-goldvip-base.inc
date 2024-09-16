@@ -31,8 +31,6 @@ PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
 PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
-PREFERRED_VERSION_python3-boto3 ?= "1.28.77"
-PREFERRED_VERSION_python3-botocore ?= "1.31.77"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 PREFERRED_VERSION_sloci-image ?= "v1.0.2+git%"
 
