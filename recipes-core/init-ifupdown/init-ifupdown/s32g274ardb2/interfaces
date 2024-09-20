@@ -1,0 +1,8 @@
+# Base /etc/network/interfaces file for s32g274ardb2 board.
+
+# The loopback interface
+auto lo
+iface lo inet loopback
+
+# Include files from /etc/network/interfaces.d:
+source-directory /etc/network/interfaces.d

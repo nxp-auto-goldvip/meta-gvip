@@ -1,4 +1,4 @@
-# Copyright 2020-2023 NXP
+# Copyright 2020-2024 NXP
 
 DESCRIPTION = "GoldVIP domU image"
 
@@ -17,6 +17,7 @@ IMAGE_INSTALL:remove = " \
 "
 
 IMAGE_INSTALL += " \
+    init-ifupdown-domu \
     goldvip-cloud-gw-domu \
     greengrass-bin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-v2xdomu k3s-server', '', d)} \

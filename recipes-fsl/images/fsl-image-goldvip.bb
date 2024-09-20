@@ -18,6 +18,7 @@ IMAGE_INSTALL += " \
     kernel-module-nxp89xx \
     linux-firmware-nxp89xx \
     libfci-cli \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'init-ifupdown-dom0', 'init-ifupdown-linux', d)} \
     goldvip-cloud-gw-dom0 \
 "
 
