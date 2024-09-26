@@ -19,6 +19,7 @@ do_install() {
     install -d ${D}${DESTDIR}
     cp -R ${S}/pred_maintain ${D}${DESTDIR}
     cp -R ${S}/bms ${D}${DESTDIR}
+    cp -R ${S}/speech_classification ${D}${DESTDIR}
 
     install -d ${D}${sysconfdir}/init.d
     install -m 0755 ${S}/service/* ${D}${sysconfdir}/init.d
@@ -28,6 +29,7 @@ do_install() {
 
     update-rc.d -r ${D} eiqa_pd defaults 80
     update-rc.d -r ${D} eiqa_bms defaults 80
+    update-rc.d -r ${D} eiqa_sc defaults 80
 }
 
 FILES:${PN} += " \
