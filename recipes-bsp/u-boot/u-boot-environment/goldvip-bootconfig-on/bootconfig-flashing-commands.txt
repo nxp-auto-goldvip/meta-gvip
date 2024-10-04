@@ -1,0 +1,7 @@
+// Copyright 2024 NXP
+
+// Macro for flashing the configuration for the GoldVIP real-time bootloader
+write_bootconfig=echo "Flashing the configuration for the GoldVIP real-time bootloader..."; \
+  setenv image Bootloader_Configuration.bin && \
+  setenv flash_addr 0x001F0000 && \
+  run write_flash_image

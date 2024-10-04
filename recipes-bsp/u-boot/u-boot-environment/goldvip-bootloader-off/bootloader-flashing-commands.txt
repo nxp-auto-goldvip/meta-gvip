@@ -1,0 +1,3 @@
+// Copyright 2024 NXP
+
+write_bootloader=echo "GoldVIP real-time bootloader is not available. Skipping...";

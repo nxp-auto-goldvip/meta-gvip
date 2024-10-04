@@ -3,6 +3,10 @@
 // The following macros will be automagically replaced when building the binary environment:
 //       $KERNEL_DEVICETREE         Basename of KERNEL_DEVICETREE
 
+#include "bootconfig-flashing-commands.txt"
+#include "bootloader-flashing-commands.txt"
+#include "gateway-app-flashing-commands.txt"
+
 fdt_file=$KERNEL_DEVICETREE
 
 write_flash_image=sf probe 6:0 && \
@@ -11,21 +15,9 @@ write_flash_image=sf probe 6:0 && \
   sf write ${loadaddr} ${flash_addr} ${filesize}; \
   env default image flash_addr
 
-write_bootloader=echo "Flashing the GoldVIP real-time bootloader..."; \
-  setenv image boot-loader && \
-  setenv flash_addr 0x00000000 && \
-  run write_flash_image
-write_bootconfig=echo "Flashing the configuration for the GoldVip real-time bootloader..."; \
-  setenv image Bootloader_Configuration.bin && \
-  setenv flash_addr 0x001F0000 && \
-  run write_flash_image
 write_atf=echo "Flashing the ARM Trusted Firmware binary..."; \
   setenv image fip.s32-sdcard && \
   setenv flash_addr 0x00200000 && \
-  run write_flash_image
-write_gateway_app=echo "Flashing the GoldVIP real-time gateway application..."; \
-  setenv image goldvip-gateway.bin && \
-  setenv flash_addr 0x00400000 && \
   run write_flash_image
 
 write_goldvip_images=echo 'Flashing the GoldVIP images...'; run write_bootloader write_bootconfig write_atf write_gateway_app

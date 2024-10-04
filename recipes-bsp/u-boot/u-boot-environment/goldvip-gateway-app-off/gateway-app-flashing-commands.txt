@@ -1,0 +1,3 @@
+// Copyright 2024 NXP
+
+write_gateway_app=echo "GoldVIP real-time gateway application is not available. Skipping...";
