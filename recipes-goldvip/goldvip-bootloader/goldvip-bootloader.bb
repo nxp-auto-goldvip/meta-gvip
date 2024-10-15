@@ -2,11 +2,9 @@ SUMMARY = "Gold VIP (Vehicle Integration Platform) Bootloader"
 LICENSE = "LA_OPT_NXP_Software_License"
 LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=1239b5ec13378bbe9b56958556340101"
 
-inherit logging
-inherit deploy
+inherit logging deploy python3native
 
-DEPENDS += "xxd-native"
-DEPENDS += "python3-pycryptodome-native"
+DEPENDS += "xxd-native python3-pycryptodome-native"
 
 GOLDVIP_BINARIES_DIR ?= "."
 GOLDVIP_BOOTLOADER_DIR ?= "${GOLDVIP_BINARIES_DIR}"
