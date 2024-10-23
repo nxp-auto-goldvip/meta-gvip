@@ -2,8 +2,8 @@ SUMMARY = "Gold VIP (Vehicle Integration Platform) SD-card partitioning post ins
 DESCRIPTION = "First-boot only service that alters the partition table of the GoldVIP \
 .sdcard image in order to increase the v2xdomu rootfs and create the slot B partition \
 for the Linux VM OTA use-case. Meant to be run only once."
-LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=1239b5ec13378bbe9b56958556340101"
+LICENSE = "Proprietary"
+LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=${FSL_EULA_FILE_MD5SUM}"
 
 GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"

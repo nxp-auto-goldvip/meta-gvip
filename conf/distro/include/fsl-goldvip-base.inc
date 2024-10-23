@@ -32,6 +32,5 @@ PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
-PREFERRED_VERSION_sloci-image ?= "v1.0.2+git%"
 
 UBOOT_ENV_INC_NAME = "bootconfig-flashing-commands bootloader-flashing-commands gateway-app-flashing-commands"

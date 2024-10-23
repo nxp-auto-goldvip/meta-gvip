@@ -1,10 +1,10 @@
-# Copyright 2022-2023 NXP
+# Copyright 2022-2024 NXP
+
+require recipes-fsl/containers/container-base-image.inc
 
 SUMMARY = "Container running the OTAmatic Client for GoldVIP"
-LICENSE = "LA_OPT_NXP_Software_License"
-LIC_FILES_CHKSUM = "file://${GOLDVIP_SOFTWARE_LICENSE};md5=1239b5ec13378bbe9b56958556340101"
-
-require container-base-image.bb
+LICENSE = "Proprietary"
+LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=${FSL_EULA_FILE_MD5SUM}"
 
 # This should match the name of the image used in k3s manifest files.
 OCI_IMAGE_ANNOTATIONS = "io.containerd.image.name=docker.io/library/goldvip-ota-client:local"
