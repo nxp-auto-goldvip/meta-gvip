@@ -1,4 +1,4 @@
-From fcb0b9bc289f20fbd4ba7c0e7e682c3036720546 Mon Sep 17 00:00:00 2001
+From cbf58e59cb7d790221938aba4b434e1265707a0f Mon Sep 17 00:00:00 2001
 From: George Mocanu <george.mocanu@nxp.com>
 Date: Tue, 16 Apr 2024 11:22:49 +0300
 Subject: [PATCH] arm64: dts: s32g: Add GoldVIP-specific specs
@@ -91,7 +91,7 @@ index 000000000000..6bef2397423a
 +};
 +
 diff --git a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
-index c012875f7339..06126db2c3e2 100644
+index 21a626dc27e4..825578870ce4 100644
 --- a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
 +++ b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
 @@ -9,6 +9,7 @@
@@ -100,7 +100,7 @@ index c012875f7339..06126db2c3e2 100644
  #include "s32g-pfe-slave.dtsi"
 +#include "s32g-goldvip.dtsi"
  
- &pfe_aux0 {
+ &serdes0 {
  	status = "okay";
 diff --git a/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dts b/arch/arm64/boot/dts/freescale/s32g274a-rdb2.dts
 index fa579134532a..b9eeff299e91 100644
