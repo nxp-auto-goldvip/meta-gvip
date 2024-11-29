@@ -18,7 +18,6 @@ DISTRO_FEATURES:append = " optee"
 
 SJA1110_UC_FW ?= "${GOLDVIP_BINARIES_DIR}/sja1110_uc.bin"
 SJA1110_SWITCH_FW ?= "${GOLDVIP_BINARIES_DIR}/sja1110_switch.bin"
-ENABLE_DYNAMIC_BOOT_CONFIG ?= "true"
 
 DISTRO_FEATURES:remove = " systemd"
 DISTRO_FEATURES_BACKFILL_CONSIDERED:remove = " sysvinit"
@@ -31,5 +30,7 @@ PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
+
+GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
 
 UBOOT_ENV_INC_NAME = "bootconfig-flashing-commands bootloader-flashing-commands gateway-app-flashing-commands"
