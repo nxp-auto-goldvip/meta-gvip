@@ -32,3 +32,5 @@ PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
+# By default, Serdes1 is configured from the RT apps, and any attempt of configuring it from Linux domain should be skipped.
+GOLDVIP_SKIP_SERDES1_CONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'true', 'false', d)}"

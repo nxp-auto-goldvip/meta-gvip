@@ -15,20 +15,38 @@ configured/used by the real-time domain
 
 Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 ---
- .../boot/dts/freescale/s32g-goldvip.dtsi      | 61 +++++++++++++++++++
+ .../dts/freescale/s32g-goldvip-pfe-slave.dtsi | 10 ++++
+ .../boot/dts/freescale/s32g-goldvip.dtsi      | 60 +++++++++++++++++++
  .../dts/freescale/s32g274a-rdb2-pfems.dts     |  1 +
  .../boot/dts/freescale/s32g274a-rdb2.dts      |  1 +
  .../dts/freescale/s32g399a-rdb3-pfems.dts     |  1 +
  .../boot/dts/freescale/s32g399a-rdb3.dts      |  1 +
- 5 files changed, 65 insertions(+)
+ 6 files changed, 74 insertions(+)
+ create mode 100644 arch/arm64/boot/dts/freescale/s32g-goldvip-pfe-slave.dtsi
  create mode 100644 arch/arm64/boot/dts/freescale/s32g-goldvip.dtsi
 
+diff --git a/arch/arm64/boot/dts/freescale/s32g-goldvip-pfe-slave.dtsi b/arch/arm64/boot/dts/freescale/s32g-goldvip-pfe-slave.dtsi
+new file mode 100644
+index 000000000000..af99bc6ae340
+--- /dev/null
++++ b/arch/arm64/boot/dts/freescale/s32g-goldvip-pfe-slave.dtsi
+@@ -0,0 +1,10 @@
++// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
++/*
++ * Copyright 2024 NXP
++ *
++ */
++#include "s32g-goldvip.dtsi"
++
++&serdes1 {
++	status = "disabled";
++};
 diff --git a/arch/arm64/boot/dts/freescale/s32g-goldvip.dtsi b/arch/arm64/boot/dts/freescale/s32g-goldvip.dtsi
 new file mode 100644
-index 000000000000..6bef2397423a
+index 000000000000..4822b1f84348
 --- /dev/null
 +++ b/arch/arm64/boot/dts/freescale/s32g-goldvip.dtsi
-@@ -0,0 +1,61 @@
+@@ -0,0 +1,60 @@
 +// SPDX-License-Identifier: GPL-2.0-or-later OR MIT
 +/*
 + * Copyright 2024 NXP
@@ -89,16 +107,15 @@ index 000000000000..6bef2397423a
 +&spi1 {
 +	status = "disabled";
 +};
-+
 diff --git a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
-index c012875f7339..06126db2c3e2 100644
+index c012875f7339..760172ebfcc2 100644
 --- a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
 +++ b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
 @@ -9,6 +9,7 @@
  
  #include "s32g274a-rdb2.dtsi"
  #include "s32g-pfe-slave.dtsi"
-+#include "s32g-goldvip.dtsi"
++#include "s32g-goldvip-pfe-slave.dtsi"
  
  &pfe_aux0 {
  	status = "okay";
@@ -112,14 +129,14 @@ index fa579134532a..b9eeff299e91 100644
  #include "s32g274a-rdb2.dtsi"
 +#include "s32g-goldvip.dtsi"
 diff --git a/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts b/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
-index dfe036bc5afe..64715dcf91a1 100644
+index dfe036bc5afe..97dc62eb1f1d 100644
 --- a/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
 +++ b/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
 @@ -9,6 +9,7 @@
  
  #include "s32g399a-rdb3.dtsi"
  #include "s32g-pfe-slave.dtsi"
-+#include "s32g-goldvip.dtsi"
++#include "s32g-goldvip-pfe-slave.dtsi"
  
  &qspi {
  	status = "okay";
@@ -134,3 +151,4 @@ index af80bed4a200..88928e758579 100644
 +#include "s32g-goldvip.dtsi"
 -- 
 2.25.1
+
