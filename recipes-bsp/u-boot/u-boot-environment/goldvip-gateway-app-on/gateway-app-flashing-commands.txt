@@ -1,7 +1,0 @@
-// Copyright 2024 NXP
-
-// Macro for flashing the GoldVIP real-time gateway application
-write_gateway_app=echo "Flashing the GoldVIP real-time gateway application..."; \
-  setenv image goldvip-gateway.bin && \
-  setenv flash_addr 0x00400000 && \
-  run write_flash_image

@@ -32,5 +32,3 @@ PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
-
-UBOOT_ENV_INC_NAME = "bootconfig-flashing-commands bootloader-flashing-commands gateway-app-flashing-commands"
