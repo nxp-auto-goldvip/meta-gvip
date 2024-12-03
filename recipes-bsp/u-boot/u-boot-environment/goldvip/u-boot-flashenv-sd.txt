@@ -53,7 +53,7 @@ BOOTCONFIG_DEPLOYMENT_CMD=echo "Flashing the configuration for the GoldVip real-
 #define ATF_DEPLOYMENT_CMD write_atf
 // MACRO for flashing the ATF binary
 ATF_DEPLOYMENT_CMD=echo "Flashing the ARM Trusted Firmware binary..."; \
-  setenv image fip.s32-sdcard && \
+  setenv image bl2_w_dtb.s32-sdcard && \
   setenv flash_addr 0x00200000 && \
   run write_flash_image
 

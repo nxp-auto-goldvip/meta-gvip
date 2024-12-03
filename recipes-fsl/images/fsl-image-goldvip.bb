@@ -67,7 +67,7 @@ python() {
 }
 
 # add additional binaries in SD-card FAT partition
-SDCARDIMAGE_BOOT_EXTRA_FILES:append = " arm-trusted-firmware:fip.s32-sdcard "
+SDCARDIMAGE_BOOT_EXTRA_FILES:append = " arm-trusted-firmware:bl2_w_dtb.s32-sdcard "
 SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway:goldvip-gateway.bin', '', d)}"
 SDCARDIMAGE_BOOT_EXTRA_FILES:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', 'goldvip-bootloader:boot-loader', '', d)}"
 python() {

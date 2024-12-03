@@ -12,7 +12,7 @@ GOLDVIP_BOOTLOADER_BIN ?= "boot-loader"
 GOLDVIP_BOOTLOADER_CFG_BIN ?= "Bootloader_Configuration.bin"
 
 GOLDVIP_BOOTLOADER_CFG_JSON ?= "Bootloader_Configuration.json"
-FIP_BIN ?= "fip.s32-sdcard"
+BL2_BIN ?= "bl2_w_dtb.s32-sdcard"
 IVT_APP_LOAD_ENTRY_OFFSET ?= "4612"
 
 SRC_URI = " \
@@ -36,7 +36,7 @@ do_update_bootloader_cfg() {
     if [ "${@oe.utils.vartrue('GOLDVIP_DYNAMIC_BOOTCONFIG', 'true', 'false', d)}" = "true" ]; then
         mv ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Original_${GOLDVIP_BOOTLOADER_CFG_BIN}
 
-        NEW_LOAD_ADDRESS=0x$(xxd -plain -e -s ${IVT_APP_LOAD_ENTRY_OFFSET} -l 4 ${DEPLOY_DIR_IMAGE}/${FIP_BIN} | cut -d' ' -f2)
+        NEW_LOAD_ADDRESS=0x$(xxd -plain -e -s ${IVT_APP_LOAD_ENTRY_OFFSET} -l 4 ${DEPLOY_DIR_IMAGE}/${BL2_BIN} | cut -d' ' -f2)
 
         python3 ${WORKDIR}/boot_config.py \
             -g ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR} \

@@ -38,12 +38,12 @@ do_install() {
 
     # Update the SD-card partitioning configuration based on the enabled features.
     if ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'true', 'false', d)}; then
-        printf "RESIZE_V2XDOMU=\"true\"\n" \
-            >> ${D}${sysconfdir}/default/sdcard-partitioning
-        printf "V2XDOMU_PARTITION_END=\"${GOLDVIP_DOMU_PARTITION_END}\"\n" \
-            >> ${D}${sysconfdir}/default/sdcard-partitioning
-        printf "CREATE_OTA_PARTITION=\"${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'true', 'false', d)}\"\n" \
-            >> ${D}${sysconfdir}/default/sdcard-partitioning
+        sed -i -e 's|^\#\(RESIZE_V2XDOMU\)=.*|\1="true"|' ${D}${sysconfdir}/default/sdcard-partitioning
+        sed -i -e 's|^\#\(V2XDOMU_PARTITION_END\)=.*|\1='"${GOLDVIP_DOMU_PARTITION_END}"'|' ${D}${sysconfdir}/default/sdcard-partitioning
+
+        if ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'true', 'false', d)}; then
+            sed -i -e 's|^\#\(CREATE_OTA_PARTITION\)=.*|\1="true"|' ${D}${sysconfdir}/default/sdcard-partitioning
+        fi
     fi
 }
 
