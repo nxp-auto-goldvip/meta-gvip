@@ -9,7 +9,7 @@ do_compile[depends] += " u-boot-environment:do_create_distro_env_inc_fragment"
 do_create_distro_env_inc_fragment[vardeps] += "\
     DISTRO_FEATURES \
     GOLDVIP_DYNAMIC_BOOTCONFIG \
-    GOLDVIP_SKIP_SERDES1_CONFIG \
+    GOLDVIP_DISABLE_SERDES1_CONFIG \
 "
 
 do_create_distro_env_inc_fragment() {
@@ -18,6 +18,6 @@ do_create_distro_env_inc_fragment() {
 #define GOLDVIP_BOOTLOADER_ENABLED (${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-bootloader', '1', '0', d)})
 #define GOLDVIP_GATEWAY_ENABLED (${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', '1', '0', d)})
 #define GOLDVIP_BOOTCONFIG_ENABLED (${@oe.utils.vartrue('GOLDVIP_DYNAMIC_BOOTCONFIG', '1', '0', d)})
-#define GOLDVIP_SKIP_SERDES1_CONFIG (${@oe.utils.vartrue('GOLDVIP_SKIP_SERDES1_CONFIG', '1', '0', d)})
+#define GOLDVIP_DISABLE_SERDES1_CONFIG (${@oe.utils.vartrue('GOLDVIP_DISABLE_SERDES1_CONFIG', '1', '0', d)})
 " >> ${DISTRO_ENV_INC_FILENAME}
 }

@@ -7,12 +7,12 @@
 
 fdt_file=$KERNEL_DEVICETREE
 
-#if GOLDVIP_SKIP_SERDES1_CONFIG
+#if GOLDVIP_DISABLE_SERDES1_CONFIG
 #define SERDES0_CONFIG serdes0:mode=pcie,clock=ext;pcie0:mode=rc
-#define SERDES1_CONFIG serdes1:skip=1
+#define SERDES1_CONFIG serdes1:mode=disabled
 
 hwconfig=SERDES0_CONFIG;SERDES1_CONFIG
-#endif /* GOLDVIP_SKIP_SERDES1_CONFIG */
+#endif /* GOLDVIP_DISABLE_SERDES1_CONFIG */
 
 #if GOLDVIP_GATEWAY_ENABLED
 #define GATEWAY_DEPLOYMENT_CMD write_gateway_app
