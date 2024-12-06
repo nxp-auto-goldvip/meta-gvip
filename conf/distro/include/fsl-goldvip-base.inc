@@ -35,3 +35,14 @@ PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
 # By default, Serdes1 is configured from the RT apps, so the Linux domain should not configure it.
 GOLDVIP_DISABLE_SERDES1_CONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'true', 'false', d)}"
+
+# TF-A secure-boot variables. The same RSA2048 private key used to authenticate the boot table is
+# also used to auth the TF-A BL2 and subsequent images.
+RSA_PRIV_BL2 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
+BL2_HANDLE ?= "0x010700"
+RSA_PRIV_BL31 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
+BL31_HANDLE ?= "${BL2_HANDLE}"
+RSA_PRIV_BL32 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
+BL32_HANDLE ?= "${BL2_HANDLE}"
+RSA_PRIV_BL33 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
+BL33_HANDLE ?= "${BL2_HANDLE}"

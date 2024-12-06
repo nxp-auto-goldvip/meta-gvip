@@ -1,0 +1,42 @@
+From eab70e926ae5ad4f98963bf0b42eebca147167d3 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Thu, 10 Dec 2024 16:13:00 +0200
+Subject: [PATCH] fdts: s32g: Use HSE MU0 for ATF Crypto
+
+Only HSE MU0 and MU1 are assigned to the Linux domain in the
+GoldVIP setup. Considering the GoldVIP resource allocation,
+change the MU used by TF-A to HSE MU0.
+
+Note: It conflicts with the messaging units used by Linux
+world.
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ fdts/s32cc-crypto.dtsi | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/fdts/s32cc-crypto.dtsi b/fdts/s32cc-crypto.dtsi
+index eb1960a32..3f9f89c52 100644
+--- a/fdts/s32cc-crypto.dtsi
++++ b/fdts/s32cc-crypto.dtsi
+@@ -27,7 +27,7 @@
+ 				interrupt-names = "hse-ack",
+ 						  "hse-rx",
+ 						  "hse-err";
+-				status = "disabled";
++				status = "okay";
+ 			};
+ 
+ 			mu1b@40211000 {
+@@ -57,7 +57,7 @@
+ 				interrupt-names = "hse-ack",
+ 						  "hse-rx",
+ 						  "hse-err";
+-				status = "okay";
++				status = "disabled";
+ 			};
+ 
+ 			mu3b@40213000 {
+-- 
+2.25.1
+
