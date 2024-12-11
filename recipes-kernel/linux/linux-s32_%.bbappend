@@ -14,6 +14,7 @@ DELTA_KERNEL_DEFCONFIG:append = " \
 "
 
 SRC_URI:append = " \
+    file://patches/0001-arm64-dts-s32g-Disable-hif0sl-node-${PV}.patch \
     file://patches/0001-arm64-dts-s32g-Add-GoldVIP-specific-specs-${PV}.patch \
     file://build/fleetwise.cfg \
     file://build/greengrass.cfg \

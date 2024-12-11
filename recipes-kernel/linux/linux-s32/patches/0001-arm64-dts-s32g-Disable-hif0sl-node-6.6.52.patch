@@ -1,0 +1,36 @@
+From 10155814bdbf28c854f782f90253d0d261146c02 Mon Sep 17 00:00:00 2001
+From: George Mocanu <george.mocanu@nxp.com>
+Date: Tue, 17 Dec 2024 17:47:22 +0200
+Subject: [PATCH] arm64: dts: s32g: Disable hif0sl node
+
+Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+---
+ arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts | 2 +-
+ arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
+index c012875f7339..f512227e3f9c 100644
+--- a/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
++++ b/arch/arm64/boot/dts/freescale/s32g274a-rdb2-pfems.dts
+@@ -23,5 +23,5 @@ &pfe_hif3 {
+ };
+ 
+ &pfesl_hif0 {
+-	status = "okay";
++	status = "disabled";
+ };
+diff --git a/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts b/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
+index dfe036bc5afe..97149df002f2 100644
+--- a/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
++++ b/arch/arm64/boot/dts/freescale/s32g399a-rdb3-pfems.dts
+@@ -35,5 +35,5 @@ &pfe_hif3 {
+ };
+ 
+ &pfesl_hif0 {
+-	status = "okay";
++	status = "disabled";
+ };
+-- 
+2.25.1
+
