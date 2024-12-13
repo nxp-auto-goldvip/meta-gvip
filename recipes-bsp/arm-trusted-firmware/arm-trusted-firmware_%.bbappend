@@ -11,7 +11,8 @@ python() {
 
 SRC_URI:append= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'file://0001-fdts-s32g2-rdb2-slave-Add-RDB2-PFE-Slave-config.patch', '', d)} \
-    ${@oe.utils.vartrue('DISABLE_SERDES1_FLAG', 'file://0002-fdts-s32g-Disable-serdes1-node-in-PFE-Slave-DT.patch', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'pfe-slave', 'file://0002-fdts-s32g-Enable-qspi-node-in-PFE-Slave-config.patch', '', d)} \
+    ${@oe.utils.vartrue('DISABLE_SERDES1_FLAG', 'file://0003-fdts-s32g-Disable-serdes1-node-in-PFE-Slave-DT.patch', '', d)} \
 "
 
 EXTRA_OEMAKE:append = " \

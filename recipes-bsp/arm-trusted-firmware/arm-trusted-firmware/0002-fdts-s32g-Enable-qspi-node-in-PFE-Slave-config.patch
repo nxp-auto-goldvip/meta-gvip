@@ -1,12 +1,9 @@
-From b8a90ce4a62f35bdb7325ad2b64e7dcc1f09c73e Mon Sep 17 00:00:00 2001
-From: George Mocanu <george.mocanu@nxp.com>
-Date: Fri, 6 Dec 2024 14:15:46 +0200
-Subject: [PATCH] fdts: s32g: Disable serdes1 node in PFE Slave DT
+From 3ea40d338c6585b43e8d5116e9827a6e6cd91981 Mon Sep 17 00:00:00 2001
+From: Octavian Mihaila <octavian.mihaila@nxp.com>
+Date: Thu, 12 Dec 2024 16:44:12 +0200
+Subject: [PATCH 2/3] fdts: s32g: Enable qspi node in PFE Slave config
 
-Serdes1 is managed/configured by the real-time applications
-when the Linux domain acts as the PFE Slave.
-
-Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+Signed-off-by: Octavian Mihaila <octavian.mihaila@nxp.com>
 ---
  fdts/s32g-goldvip-pfe-slave.dtsi | 8 ++++++++
  fdts/s32g274a-rdb2-pfems.dts     | 1 +
@@ -16,7 +13,7 @@ Signed-off-by: George Mocanu <george.mocanu@nxp.com>
 
 diff --git a/fdts/s32g-goldvip-pfe-slave.dtsi b/fdts/s32g-goldvip-pfe-slave.dtsi
 new file mode 100644
-index 000000000..3367643fc
+index 000000000..deba12b65
 --- /dev/null
 +++ b/fdts/s32g-goldvip-pfe-slave.dtsi
 @@ -0,0 +1,8 @@
@@ -25,8 +22,8 @@ index 000000000..3367643fc
 + * Copyright 2024 NXP
 + */
 +
-+&serdes1 {
-+	status = "disabled";
++&qspi {
++	status = "okay";
 +};
 diff --git a/fdts/s32g274a-rdb2-pfems.dts b/fdts/s32g274a-rdb2-pfems.dts
 index c54df5dd7..72f7d0c2e 100644
@@ -53,5 +50,5 @@ index 9af566b16..cb89e8340 100644
  / {
  	aliases {
 -- 
-2.25.1
+2.34.1
 
