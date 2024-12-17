@@ -3,11 +3,12 @@ LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=${FSL_EULA_FILE_MD5SUM}"
 
 inherit update-rc.d 
+inherit features_check
+
+REQUIRED_DISTRO_FEATURES += " goldvip-dds goldvip-cloud"
 
 GOLDVIP_URL ?= "git://github.com/nxp-auto-goldvip/gvip;protocol=https"
 GOLDVIP_BRANCH ?= "develop"
-
-GOLDVIP_BINARIES_DIR ?= "."
 
 SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"

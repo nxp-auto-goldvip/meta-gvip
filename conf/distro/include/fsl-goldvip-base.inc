@@ -6,6 +6,7 @@ DISTRO_VERSION = "${GOLDVIP_RELEASE} (based on Auto Linux BSP ${ALB_RELEASE})"
 # Features specific to the GoldVIP distros
 DISTRO_FEATURES:append = " pfe-slave"
 DISTRO_FEATURES:append = " goldvip-bootloader"
+DISTRO_FEATURES:append = " goldvip-cloud"
 DISTRO_FEATURES:append = " goldvip-crypto"
 DISTRO_FEATURES:append = " goldvip-containerization seccomp"
 DISTRO_FEATURES:append = " goldvip-dds"

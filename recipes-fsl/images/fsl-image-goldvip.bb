@@ -19,7 +19,7 @@ IMAGE_INSTALL += " \
     linux-firmware-nxp89xx \
     libfci-cli \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'init-ifupdown-dom0', 'init-ifupdown-linux', d)} \
-    goldvip-cloud-gw-dom0 \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-cloud', 'goldvip-cloud-gw-dom0', '', d)} \
 "
 
 # Allow builds without XEN enabled.
@@ -38,7 +38,6 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'xen', '', 'goldvip-cloud-gw-domu greengrass-bin', d)} \
 "
 
 python() {
@@ -51,15 +50,15 @@ python() {
     if bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', True, False, d):
         d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \
-                                      ' goldvip-remote-ua-container goldvip-ota-agents-container' , 
+                                      ' goldvip-remote-ua-container goldvip-ota-agents-container' ,
                                       ' goldvip-remote-ua goldvip-ota-agents', d))
-
 
     # If virtualization is missing add the optional packages that are supposed to be on domU
     if bb.utils.contains('DISTRO_FEATURES', 'xen', False, True, d):
         d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-adaptive-autosar', ' eb-ara', '', d))
         d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-telemetry-server', ' goldvip-telemetry-server', '', d))
         d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', ' goldvip-ota-client-demo', '', d))
+        d.appendVar('IMAGE_INSTALL', bb.utils.contains('DISTRO_FEATURES', 'goldvip-cloud', ' goldvip-cloud-gw-domu', '', d))
         if bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', True, False, d):
             d.appendVar('IMAGE_INSTALL', \
                     bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', \

@@ -18,13 +18,12 @@ IMAGE_INSTALL:remove = " \
 
 IMAGE_INSTALL += " \
     init-ifupdown-domu \
-    goldvip-cloud-gw-domu \
-    greengrass-bin \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-containerization', 'goldvip-containers-v2xdomu k3s-server', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-crypto', 'p11-kit-hse-remote', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-ota', 'goldvip-ota-client-demo', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-telemetry-server', 'goldvip-telemetry-server', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen goldvip-adaptive-autosar', 'eb-ara', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-cloud', 'goldvip-cloud-gw-domu greengrass-bin', '', d)} \
 "
 
 # Select the OTA client package based on DISTRO_FEATURES.
