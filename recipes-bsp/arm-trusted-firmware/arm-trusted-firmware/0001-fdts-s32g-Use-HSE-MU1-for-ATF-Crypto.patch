@@ -1,25 +1,27 @@
-From eab70e926ae5ad4f98963bf0b42eebca147167d3 Mon Sep 17 00:00:00 2001
-From: George Mocanu <george.mocanu@nxp.com>
-Date: Thu, 10 Dec 2024 16:13:00 +0200
-Subject: [PATCH] fdts: s32g: Use HSE MU0 for ATF Crypto
+From 8ec7af22f11207438c721d53dc1aaf038f49ee3f Mon Sep 17 00:00:00 2001
+From: Silviu Andrei <silviu.andrei_1@nxp.com>
+Date: Thu, 23 Jan 2025 10:53:01 +0200
+Subject: [PATCH] fdts: s32g: Use HSE MU1 for ATF Crypto
 
 Only HSE MU0 and MU1 are assigned to the Linux domain in the
 GoldVIP setup. Considering the GoldVIP resource allocation,
-change the MU used by TF-A to HSE MU0.
+and a current limitation with BSP43 which makes HSE MU0
+unusable by Arm Trusted Firmware, change the MU used by
+TF-A to HSE MU1.
 
 Note: It conflicts with the messaging units used by Linux
 world.
 
-Signed-off-by: George Mocanu <george.mocanu@nxp.com>
+Signed-off-by: Silviu Andrei <silviu.andrei_1@nxp.com>
 ---
  fdts/s32cc-crypto.dtsi | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/fdts/s32cc-crypto.dtsi b/fdts/s32cc-crypto.dtsi
-index eb1960a32..3f9f89c52 100644
+index eb1960a32..a01b19de1 100644
 --- a/fdts/s32cc-crypto.dtsi
 +++ b/fdts/s32cc-crypto.dtsi
-@@ -27,7 +27,7 @@
+@@ -42,7 +42,7 @@
  				interrupt-names = "hse-ack",
  						  "hse-rx",
  						  "hse-err";
@@ -27,7 +29,7 @@ index eb1960a32..3f9f89c52 100644
 +				status = "okay";
  			};
  
- 			mu1b@40211000 {
+ 			mu2b@40212000 {
 @@ -57,7 +57,7 @@
  				interrupt-names = "hse-ack",
  						  "hse-rx",
