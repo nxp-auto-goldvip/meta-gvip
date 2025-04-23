@@ -49,6 +49,7 @@ inherit systemd useradd ptest pkgconfig
 FILES:${PN} += "\
     /${GG_BASENAME} \
     ${systemd_unitdir} \
+    /usr \
     "
 
 RDEPENDS:${PN} += "\

@@ -2,7 +2,7 @@ SUMMARY = "Gold VIP (Vehicle Integration Platform) Bootloader"
 LICENSE = "Proprietary"
 LIC_FILES_CHKSUM = "file://${FSL_EULA_FILE};md5=${FSL_EULA_FILE_MD5SUM}"
 
-inherit logging deploy python3native
+inherit deploy python3native
 
 DEPENDS += "xxd-native python3-pycryptodome-native"
 
@@ -36,19 +36,20 @@ do_update_bootloader_cfg() {
     if [ "${@oe.utils.vartrue('GOLDVIP_DYNAMIC_BOOTCONFIG', 'true', 'false', d)}" = "true" ]; then
         mv ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Original_${GOLDVIP_BOOTLOADER_CFG_BIN}
 
-        NEW_LOAD_ADDRESS=0x$(xxd -plain -e -s ${IVT_APP_LOAD_ENTRY_OFFSET} -l 4 ${DEPLOY_DIR_IMAGE}/${BL2_BIN} | cut -d' ' -f2)
+        NEW_LOAD_ADDRESS=0x$(xxd -e -s ${IVT_APP_LOAD_ENTRY_OFFSET} -l 4 ${DEPLOY_DIR_IMAGE}/${BL2_BIN} | cut -d' ' -f2)
 
         python3 ${WORKDIR}/boot_config.py \
             -g ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR} \
             -v "Core-0 Image-0 RamAddress=${NEW_LOAD_ADDRESS}"
 
         python3 ${WORKDIR}/image_signer.py \
-            -i ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Bootloader_Configuration.bin \
-            -o ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Bootloader_Configuration.bin \
-            -a RSA -k ${WORKDIR}/rsa_2048_key.pem
+            -i ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} \
+            -o ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} \
+            -a RSA \
+            -k ${WORKDIR}/rsa_2048_key.pem
 
         diff ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/Original_${GOLDVIP_BOOTLOADER_CFG_BIN} ${WORKDIR}/${GOLDVIP_BOOTLOADER_DIR}/${GOLDVIP_BOOTLOADER_CFG_BIN} || \
-            bbwarn "Bootloader_Configuration.bin has changed, new A53 Load Address: ${NEW_LOAD_ADDRESS}"
+            bbwarn "${GOLDVIP_BOOTLOADER_CFG_BIN} has changed, new A53 Load Address: ${NEW_LOAD_ADDRESS}"
     fi
 }
 

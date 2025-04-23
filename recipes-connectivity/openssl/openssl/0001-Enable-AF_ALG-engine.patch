@@ -2,6 +2,7 @@ From 4a333b558329107e7ac1a2ba08d8b4ca09e180a7 Mon Sep 17 00:00:00 2001
 From: George Mocanu <george.mocanu@nxp.com>
 Date: Tue, 21 Jun 2022 16:47:19 +0300
 Subject: [PATCH] Enable AF_ALG engine
+Upstream-Status: Inappropriate [enable feature]
 
 Initialize the AF_ALG engine by default in order to
 offload some of the crypto operations to the HSE.

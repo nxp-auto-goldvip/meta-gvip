@@ -7,7 +7,8 @@ GOLDVIP_ML_DIR ?= "${GOLDVIP_BINARIES_DIR}"
 GOLDVIP_ML_TARBALL ?= "eiqa_ml_apps.tgz"
 
 SRC_URI = " \
-    file://${GOLDVIP_ML_DIR}/${GOLDVIP_ML_TARBALL} \
+    ${@f"""file://{d.getVar('GOLDVIP_ML_DIR')}/{d.getVar('GOLDVIP_ML_TARBALL')}""" \
+        if os.path.exists(f"""{d.getVar('GOLDVIP_ML_DIR')}/{d.getVar('GOLDVIP_ML_TARBALL')}""") else ''} \
 "
 
 DEPENDS += " update-rc.d-native"

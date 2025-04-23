@@ -7,7 +7,8 @@ GOLDVIP_OTA_DIR ?= "${GOLDVIP_BINARIES_DIR}"
 GOLDVIP_OTAMATIC_TARBALL ?= "otamatic.tgz"
 
 SRC_URI = " \
-    file://${GOLDVIP_OTA_DIR}/${GOLDVIP_OTAMATIC_TARBALL} \
+    ${@f"""file://{d.getVar('GOLDVIP_OTA_DIR')}/{d.getVar('GOLDVIP_OTAMATIC_TARBALL')}""" \
+        if os.path.exists(f"""{d.getVar('GOLDVIP_OTA_DIR')}/{d.getVar('GOLDVIP_OTAMATIC_TARBALL')}""") else ''} \
 "
 
 do_configure[noexec] = "1"
