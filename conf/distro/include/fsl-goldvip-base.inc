@@ -31,6 +31,8 @@ PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
+PREFERRED_VERSION_greengrass-bin = "2.12.6"
+PREFERRED_VERSION_aws-iot-fleetwise-edge = "1.1.1"
 
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
 # By default, Serdes1 is configured from the RT apps, so the Linux domain should not configure it.
