@@ -39,6 +39,7 @@ GOLDVIP_DISABLE_SERDES1_CONFIG ?= "${@bb.utils.contains('DISTRO_FEATURES', 'pfe-
 
 # TF-A secure-boot variables. The same RSA2048 private key used to authenticate the boot table is
 # also used to auth the TF-A BL2 and subsequent images.
+# The same RSA2048 private key is also used to authenticate the DDR FW.
 RSA_PRIV_BL2 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
 BL2_HANDLE ?= "0x010700"
 RSA_PRIV_BL31 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
@@ -47,3 +48,5 @@ RSA_PRIV_BL32 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
 BL32_HANDLE ?= "${BL2_HANDLE}"
 RSA_PRIV_BL33 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
 BL33_HANDLE ?= "${BL2_HANDLE}"
+RSA_PRIV_DDRFW ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
+DDRFW_HANDLE ?= "${BL2_HANDLE}"
