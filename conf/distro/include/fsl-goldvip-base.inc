@@ -14,7 +14,6 @@ DISTRO_FEATURES:append = " goldvip-gateway"
 DISTRO_FEATURES:append = " goldvip-ota"
 DISTRO_FEATURES:append = " goldvip-benchmark"
 DISTRO_FEATURES:append = " goldvip-telemetry-server"
-DISTRO_FEATURES:append = " goldvip-adaptive-autosar"
 DISTRO_FEATURES:append = " optee"
 
 SJA1110_UC_FW ?= "${GOLDVIP_BINARIES_DIR}/sja1110_uc.bin"
