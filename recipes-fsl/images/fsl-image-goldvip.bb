@@ -1,4 +1,4 @@
-# Copyright 2020-2024 NXP
+# Copyright 2020-2025 NXP
 
 DESCRIPTION = "GoldVIP Image"
 
@@ -76,14 +76,14 @@ python() {
 }
 
 # Set the size of the free space allocated in this image:
-# - in environments with hypervisor (Xen is enabled), add 800 MiB of free space. This means that the
-#   rootfs image for dom0 shall have a size of around 2.6 GiB.
+# - in environments with hypervisor (Xen is enabled), add 1 GiB of free space. This means that the
+#   rootfs image for dom0 shall have a size of around 2.8 GiB.
 # - in environments without hypervisor (standalone Linux), add 2200 MiB of free space. This leads to
 #   a rootfs image of 4 GiB.
-# The builds will fail if the rootfs size exceeds the configured sizes (either 2.6 GiB or 4 GiB).
+# The builds will fail if the rootfs size exceeds the configured sizes (either 2.8 GiB or 4 GiB).
 # Note: All the sizes are aligned to 4096 (check the value of the IMAGE_ROOTFS_ALIGNMENT).
-IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2727936', '4194304', d)}"
-IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '819200', '2252800', d)}"
+IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2957312', '4194304', d)}"
+IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '1048576', '2252800', d)}"
 
 # Only IMAGE_ROOTFS_EXTRA_SPACE is evaluated in image bbclass, so this must be calculated
 # statically (IMAGE_ROOTFS_SIZE = IMAGE_ROOTFS_MAXSIZE - IMAGE_ROOTFS_EXTRA_SPACE).
