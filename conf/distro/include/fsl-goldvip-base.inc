@@ -29,7 +29,6 @@ PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
 PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
-PREFERRED_VERSION_k3s ?= "v1.25.8+k3s1"
 PREFERRED_VERSION_greengrass-bin = "2.12.6"
 PREFERRED_VERSION_aws-iot-fleetwise-edge = "1.1.1"
 

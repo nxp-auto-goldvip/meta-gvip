@@ -4,32 +4,20 @@ inherit update-rc.d
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-# poky's kirkstone branch can't be used to build the latest version of K3s, due to the old version
-# of golang package. Fortunately, the K3s release includes binaries for arm64 architecture that can
-# be used.
 SRC_URI += " \
-    https://github.com/k3s-io/k3s/releases/download/${PV}/k3s-arm64;name=k3s-bin;unpack=0;downloadfilename=k3s-bin \
-    https://github.com/k3s-io/k3s/releases/download/${PV}/k3s-airgap-images-arm64.tar.zst;name=k3s-images;unpack=0;downloadfilename=k3s-airgap-images.tar.zst \
+    https://github.com/k3s-io/k3s/releases/download/${@d.getVar("PV").split("+git")[0]}/k3s-airgap-images-arm64.tar.zst;name=k3s-images;unpack=0;downloadfilename=k3s-airgap-images.tar.zst \
     file://k3s-killall.sh \
     file://k3s-agent.sysvinit \
     file://k3s-server.sysvinit \
 "
 
-SRC_URI[k3s-bin.sha256sum] = "415aa9e1f9457b60e7727cde7eb26dd1934c7ebadf3a36ef09dab50f2050b73b"
-SRC_URI[k3s-bin.md5sum] = "2667764497bc496da7b4158ec455dd1c"
-SRC_URI[k3s-images.sha256sum] = "680e15a4a98cdc037c19daa76cf6b02d9508dce6d946025fae6b848b8801aa50"
-SRC_URI[k3s-images.md5sum] = "9f3d0664b13b92decc101a10b0b222a1"
+SRC_URI[k3s-images.sha256sum] = "2332d50a57cacd2c3e4794491d76c99e8dd21be56d691b999db12fa9cdf320bd"
+SRC_URI[k3s-images.md5sum] = "43864527a697136584ef3051a048ad78"
 
 DEPENDS += "skopeo-native"
-# Overwrite the package version from the default meta-virtualization recipe.
-PV = "v1.25.8+k3s1"
 
 # Put the k3s executables in /usr/bin instead of /usr/local/bin.
 BIN_PREFIX = "${exec_prefix}"
-
-# Skip the compilation step defined in the default recipe, since a pre-build binary
-# is installed.
-do_compile[noexec] = "1"
 
 # Path where the k3s expects the airgap images.
 K3S_IMAGES_DIR = "/var/lib/rancher/k3s/agent/images"
@@ -43,12 +31,6 @@ do_fetch_pause_container() {
     rm -f ${WORKDIR}/pause-container.tar
     skopeo --override-arch arm64 copy --additional-tag="docker.io/${PAUSE_CONTAINER_TAG}" \
         docker://${PAUSE_CONTAINER_TAG} docker-archive:${WORKDIR}/pause-container.tar
-}
-
-# Install the pre-built k3s binary. Let the default recipe to copy it to BIN directory.
-do_install:prepend() {
-    install -d ${S}/src/import/dist/artifacts
-    install -m 755 ${WORKDIR}/k3s-bin ${S}/src/import/dist/artifacts/k3s
 }
 
 # Install the pause container and the agent/server services.
