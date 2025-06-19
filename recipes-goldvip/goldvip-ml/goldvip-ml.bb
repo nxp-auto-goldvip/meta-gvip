@@ -14,7 +14,7 @@ SRC_URI = " \
 DEPENDS += " update-rc.d-native"
 S = "${WORKDIR}"
 
-DESTDIR = "/home/root/ml"
+DESTDIR = "/root/ml"
 
 do_install() {
     install -d ${D}${DESTDIR}

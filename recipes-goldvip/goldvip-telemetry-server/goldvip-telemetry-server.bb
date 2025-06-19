@@ -13,7 +13,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
-DESTDIR = "${D}/home/root"
+DESTDIR = "${D}/root"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
@@ -38,6 +38,6 @@ INITSCRIPT_NAME = "telemetry-server"
 INITSCRIPT_PARAMS = "defaults 70"
 
 FILES:${PN} += " \
-    /home/root/telemetry-server/ \
+    /root/telemetry-server/ \
     /etc/init.d/telemetry-server \
 "

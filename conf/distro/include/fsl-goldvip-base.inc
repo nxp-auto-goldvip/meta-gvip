@@ -47,7 +47,3 @@ RSA_PRIV_BL33 ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
 BL33_HANDLE ?= "${BL2_HANDLE}"
 RSA_PRIV_DDRFW ?= "${GOLDVIP_RSA_PRIVKEY_FILE}"
 DDRFW_HANDLE ?= "${BL2_HANDLE}"
-
-# With Yocto5.0 "Scarthgap", the value of ROOT_HOME is now set to /root and not
-# to /home/root. We set this variable here to maintain the current GoldVIP file system.
-ROOT_HOME ?= "/home/root"

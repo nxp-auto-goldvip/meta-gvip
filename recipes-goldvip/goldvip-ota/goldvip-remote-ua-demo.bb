@@ -16,7 +16,7 @@ SRC_URI = " \
 
 S = "${WORKDIR}/remote_ua"
 RDEPENDS:${PN} += " bash "
-DESTDIR = "/home/root/ota/demo"
+DESTDIR = "/root/ota/demo"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"

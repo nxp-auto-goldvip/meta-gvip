@@ -14,7 +14,7 @@ RDEPENDS:${PN} += " \
     libssl \
 "
 
-DESTDIR = "/home/root/ota"
+DESTDIR = "/root/ota"
 
 do_install() {
     install -d ${D}${DESTDIR}

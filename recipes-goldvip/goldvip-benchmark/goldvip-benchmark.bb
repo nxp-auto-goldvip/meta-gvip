@@ -9,7 +9,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
-DESTDIR = "/home/root/benchmark"
+DESTDIR = "/root/benchmark"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"

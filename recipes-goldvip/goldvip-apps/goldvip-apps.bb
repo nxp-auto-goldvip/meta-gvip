@@ -11,7 +11,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
-DESTDIR = "${D}/home/root"
+DESTDIR = "${D}/root"
 LOCAL_SBINDIR = "${D}/usr/local/sbin"
 
 do_configure[noexec] = "1"
@@ -61,8 +61,8 @@ do_install() {
 }
 
 FILES:${PN} += " \
-    /home/root/can-gw/* \
-    /home/root/eth-gw/* \
+    /root/can-gw/* \
+    /root/eth-gw/* \
     ${sysconfdir}/* \
     /usr/local/sbin/* \
     ${sbindir}/*.py \

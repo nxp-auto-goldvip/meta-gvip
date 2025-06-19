@@ -12,7 +12,7 @@ OCI_IMAGE_TAG = "local"
 OCI_IMAGE_ENTRYPOINT = "sh"
 OCI_IMAGE_ENTRYPOINT_ARGS = " \
     -c \
-    /home/root/ota/goldvip_remote_ua \
+    /root/ota/goldvip_remote_ua \
 "
 
 IMAGE_INSTALL:append = " goldvip-remote-ua"

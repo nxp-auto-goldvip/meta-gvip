@@ -1,5 +1,5 @@
 #
-# Copyright 2022-2024 NXP
+# Copyright 2022-2025 NXP
 #
 
 SUMMARY = "Package GoldVIP OTAmatic Client app container image"
@@ -22,7 +22,7 @@ SRC_URI = " \
 "
 SRCREV = "${AUTOREV}"
 
-DESTDIR = "/home/root/containers"
+DESTDIR = "/root/containers"
 S = "${WORKDIR}/git"
 
 do_install[depends] += "${PN}-image:do_image_complete"

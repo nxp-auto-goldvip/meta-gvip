@@ -19,7 +19,7 @@ RDEPENDS:${PN} += " \
     bash \
     mtd-utils \
 "
-DESTDIR = "/home/root/ota/demo/"
+DESTDIR = "/root/ota/demo/"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"

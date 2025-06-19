@@ -14,7 +14,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git/cloud-gw/aws-lambda-functions/telemetry-function"
-DESTDIR = "${D}/home/root/cloud-gw/telemetry-collector"
+DESTDIR = "${D}/root/cloud-gw/telemetry-collector"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
@@ -41,5 +41,5 @@ do_install() {
 INITSCRIPT_NAME = "telemetry"
 INITSCRIPT_PARAMS = "defaults 70"
 
-FILES:${PN} += "/home/root/cloud-gw/telemetry-collector/*"
+FILES:${PN} += "/root/cloud-gw/telemetry-collector/*"
 FILES:${PN} += "/etc/init.d/telemetry"

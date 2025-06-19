@@ -10,7 +10,7 @@ SRCREV_gvip = "${AUTOREV}"
 SRCREV_FORMAT = "fwe_gvip"
 SRCREV_fwe = "e650426256718fe446a65fd751a577ce0774598f"
 
-DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
+DESTDIR_GVIP_SCRIPTS = "${D}/root/fleetwise/"
 
 # Set make as designated build tool since ninja fails to build target fwe-proto
 OECMAKE_GENERATOR = "Unix Makefiles"
@@ -31,4 +31,4 @@ INITSCRIPT_PARAMS = "defaults 99"
 
 FILES:${PN} += "${sysconfdir}"
 FILES:${PN} += "${sysconfdir}/init.d/aws-iot-fwe"
-FILES:${PN} += "/home/root/fleetwise/*"
+FILES:${PN} += "/root/fleetwise/*"

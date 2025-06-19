@@ -15,7 +15,7 @@ SRC_URI = " \
 "
 
 S = "${WORKDIR}/otamatic/resources"
-DESTDIR = "/home/root/ota/demo"
+DESTDIR = "/root/ota/demo"
 
 RDEPENDS:${PN} += " \
     bash \

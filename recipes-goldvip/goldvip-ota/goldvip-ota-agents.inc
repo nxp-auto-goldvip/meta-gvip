@@ -16,7 +16,7 @@ RDEPENDS:${PN} += " \
     util-linux-mkfs \
 "
 
-DESTDIR = "/home/root/ota"
+DESTDIR = "/root/ota"
 
 do_install() {
     install -d ${D}${DESTDIR}
@@ -45,7 +45,7 @@ INITSCRIPT_NAME = "goldvip-update-agents"
 INITSCRIPT_PARAMS = "defaults 98"
 
 FILES:${PN} += " \
-    /home/root/ota/ \
+    /root/ota/ \
     ${sysconfdir}/init.d/goldvip-update-agents \
     ${sysconfdir}/ota \
     /data \

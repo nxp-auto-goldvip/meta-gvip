@@ -17,6 +17,6 @@ K3S_CONFIG_DIR = '${sysconfdir}/rancher/k3s'
 MANIFESTS_DIR = "/var/lib/rancher/k3s/server/manifests"
 
 S = "${WORKDIR}/git"
-DESTDIR = "/home/root/containers"
+DESTDIR = "/root/containers"
 
 RDEPENDS:${PN} += "k3s"

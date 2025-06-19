@@ -14,7 +14,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git"
-DESTDIR = "${D}/home/root"
+DESTDIR = "${D}/root"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
@@ -51,6 +51,6 @@ INITSCRIPT_NAME = "greengrass"
 INITSCRIPT_PARAMS = "defaults 70"
 
 FILES:${PN} += " \
-    /home/root/cloud-gw/ \
+    /root/cloud-gw/ \
     /etc/init.d/greengrass \
 "

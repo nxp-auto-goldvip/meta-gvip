@@ -12,7 +12,7 @@ SRC_URI = "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH}"
 SRCREV = "${AUTOREV}"
 
 S = "${WORKDIR}/git/dds"
-DESTDIR = "${D}/home/root"
+DESTDIR = "${D}/root"
 
 do_configure[noexec] = "1"
 do_compile[noexec] = "1"
@@ -30,4 +30,4 @@ do_install() {
     install -m 0666 ${S}/rti_dds_lights.pcap ${DESTDIR}/dds
 }
 
-FILES:${PN} += "/home/root/dds/*"
+FILES:${PN} += "/root/dds/*"
