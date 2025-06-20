@@ -6,7 +6,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${PN}:"
 DELTA_KERNEL_DEFCONFIG:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'containerization.cfg', '', d)} \
     goldvip.cfg \
-    xen.cfg \
 "
 
 SRC_URI:append = " \
@@ -14,6 +13,5 @@ SRC_URI:append = " \
     file://patches/0001-arm64-dts-s32g-Add-GoldVIP-specific-specs-${PV}.patch \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-containerization', 'file://build/containerization.cfg', '', d)} \
     file://build/goldvip.cfg \
-    file://build/xen.cfg \
 "
 
