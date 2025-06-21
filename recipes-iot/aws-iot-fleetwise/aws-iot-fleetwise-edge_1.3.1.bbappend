@@ -1,4 +1,4 @@
-# Copyright 2022-2024 NXP
+# Copyright 2022-2025 NXP
 
 inherit update-rc.d
 
@@ -8,7 +8,7 @@ GOLDVIP_BRANCH ?= "develop"
 SRC_URI += "${GOLDVIP_URL};branch=${GOLDVIP_BRANCH};name=gvip;destsuffix=gvip"
 SRCREV_gvip = "${AUTOREV}"
 SRCREV_FORMAT = "fwe_gvip"
-SRCREV_fwe = "f4e85953bac2f99ed428ad69379e6c788ca10f78"
+SRCREV_fwe = "e650426256718fe446a65fd751a577ce0774598f"
 
 DESTDIR_GVIP_SCRIPTS = "${D}/home/root/fleetwise/"
 
@@ -19,7 +19,7 @@ OECMAKE_GENERATOR = "Unix Makefiles"
 do_install:append () {	
 	install -d ${D}${sysconfdir}/init.d
 	install -m 0755 ${WORKDIR}/gvip/fleetwise/edge/service/aws-iot-fwe ${D}${sysconfdir}/init.d/aws-iot-fwe
-	
+
 	install -d ${DESTDIR_GVIP_SCRIPTS}
 	install -m 0755 ${WORKDIR}/gvip/fleetwise/deploy/*.py ${DESTDIR_GVIP_SCRIPTS}
 	install -m 0644 ${WORKDIR}/gvip/cloud-gw/utils.py ${DESTDIR_GVIP_SCRIPTS}
