@@ -29,7 +29,6 @@ PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
 PREFERRED_VERSION_cacao-native = "git"
 
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
-PREFERRED_VERSION_greengrass-bin = "2.12.6"
 
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
 # By default, Serdes1 is configured from the RT apps, so the Linux domain should not configure it.
