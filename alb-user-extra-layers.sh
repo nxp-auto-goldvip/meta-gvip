@@ -3,7 +3,6 @@
 
 alb_user_extra_layers="\
     meta-aws \
-    meta-java \
     meta-gvip \
     meta-vip \
 "

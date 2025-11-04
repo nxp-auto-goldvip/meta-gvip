@@ -24,10 +24,6 @@ DISTRO_FEATURES_BACKFILL_CONSIDERED:remove = " sysvinit"
 VIRTUAL-RUNTIME_init_manager = "sysvinit"
 VIRTUAL-RUNTIME_initscripts = "initscripts"
 
-PREFERRED_PROVIDER_virtual/java-initial-native = "cacao-initial-native"
-PREFERRED_PROVIDER_virtual/java-native = "cacao-native"
-PREFERRED_VERSION_cacao-native = "git"
-
 PREFERRED_PROVIDER_virtual/runc = "runc-opencontainers"
 
 GOLDVIP_DYNAMIC_BOOTCONFIG ?= "true"
