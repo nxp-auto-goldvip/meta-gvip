@@ -77,17 +77,17 @@ python() {
 
 # Set the size of the free space allocated in this image:
 # - in environments with hypervisor (Xen is enabled), add 1 GiB of free space. This means that the
-#   rootfs image for dom0 shall have a size of around 2.8 GiB.
+#   rootfs image for dom0 shall have a size of around 3 GiB.
 # - in environments without hypervisor (standalone Linux), add 2200 MiB of free space. This leads to
 #   a rootfs image of 4 GiB.
-# The builds will fail if the rootfs size exceeds the configured sizes (either 2.8 GiB or 4 GiB).
+# The builds will fail if the rootfs size exceeds the configured sizes (either 3 GiB or 4 GiB).
 # Note: All the sizes are aligned to 4096 (check the value of the IMAGE_ROOTFS_ALIGNMENT).
-IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '2957312', '4194304', d)}"
+IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '3145728', '4194304', d)}"
 IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '1048576', '2252800', d)}"
 
 # Only IMAGE_ROOTFS_EXTRA_SPACE is evaluated in image bbclass, so this must be calculated
 # statically (IMAGE_ROOTFS_SIZE = IMAGE_ROOTFS_MAXSIZE - IMAGE_ROOTFS_EXTRA_SPACE).
-IMAGE_ROOTFS_SIZE = "1908736"
+IMAGE_ROOTFS_SIZE = "2097152"
 
 # Set image overhead factor to 1, as extra space is guaranteeed by the IMAGE_ROOTFS_EXTRA_SPACE variable
 IMAGE_OVERHEAD_FACTOR = "1"
