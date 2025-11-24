@@ -83,7 +83,7 @@ python() {
 # The builds will fail if the rootfs size exceeds the configured sizes (either 3 GiB or 4 GiB).
 # Note: All the sizes are aligned to 4096 (check the value of the IMAGE_ROOTFS_ALIGNMENT).
 IMAGE_ROOTFS_MAXSIZE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '3145728', '4194304', d)}"
-IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '1048576', '2252800', d)}"
+IMAGE_ROOTFS_EXTRA_SPACE = "${@bb.utils.contains('DISTRO_FEATURES', 'xen', '1048576', '2097152', d)}"
 
 # Only IMAGE_ROOTFS_EXTRA_SPACE is evaluated in image bbclass, so this must be calculated
 # statically (IMAGE_ROOTFS_SIZE = IMAGE_ROOTFS_MAXSIZE - IMAGE_ROOTFS_EXTRA_SPACE).
