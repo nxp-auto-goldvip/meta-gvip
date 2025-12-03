@@ -16,6 +16,9 @@ DISTRO_FEATURES:append = " goldvip-benchmark"
 DISTRO_FEATURES:append = " goldvip-telemetry-server"
 DISTRO_FEATURES:append = " optee"
 
+PREFERRED_VERSION_python3-boto3 = "1.38.12"
+PREFERRED_VERSION_python3-botocore = "1.38.12"
+
 SJA1110_UC_FW ?= "${GOLDVIP_BINARIES_DIR}/sja1110_uc.bin"
 SJA1110_SWITCH_FW ?= "${GOLDVIP_BINARIES_DIR}/sja1110_switch.bin"
 
