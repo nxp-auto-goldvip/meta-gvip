@@ -35,6 +35,7 @@ IMAGE_INSTALL += " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'goldvip-gateway', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway', 'aws-iot-fleetwise-edge', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-gateway goldvip-dds', 'goldvip-dds', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-motion-wise', 'goldvip-motion-wise goldvip-motion-wise-staticdev', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ml', 'goldvip-ml', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'xen', 'goldvip-xen', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'goldvip-ota', 'goldvip-ota-agents-demo goldvip-remote-ua-demo', '', d)} \
