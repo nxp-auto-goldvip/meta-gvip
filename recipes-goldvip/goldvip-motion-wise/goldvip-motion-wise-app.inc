@@ -18,6 +18,7 @@ do_install() {
     install -m 0755 ${MOTION_WISE_APP_DIR}/motion-wise-mpu-app ${D}/root/motion-wise/
     install -m 0755 ${MOTION_WISE_APP_DIR}/run_dds_subscriber.sh ${D}/root/motion-wise/
     install -m 0644 ${MOTION_WISE_APP_DIR}/config_aux0sl.xml ${D}/root/motion-wise/
+    install -m 0644 ${MOTION_WISE_APP_DIR}/dds_lights.pcap ${D}/root/motion-wise/
 }
 
 FILES:${PN} += "/root/motion-wise"

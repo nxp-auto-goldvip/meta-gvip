@@ -14,8 +14,9 @@ INSANE_SKIP:${PN} += "already-stripped ldflags file-rdeps"
 do_install() {
     # Libraries
     install -d ${D}${libdir}/motion-wise
-    install -m 0755 ${MOTION_WISE_LIB_DIR}/*.so* ${D}${libdir}/motion-wise/ || true
     install -m 0644 ${MOTION_WISE_LIB_DIR}/*.a ${D}${libdir}/motion-wise/ || true
+    find ${MOTION_WISE_LIB_DIR} -maxdepth 1 -name "*.so*" ! -name "libcycloneddsidl*" \
+        -exec install -m 0755 {} ${D}${libdir}/motion-wise/ \;
 
     # pkgconfig
     install -d ${D}${libdir}/motion-wise/pkgconfig
